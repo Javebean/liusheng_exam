@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+html,body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+.hidden{
+	display: none;
+}
+.msg{
+	color: red;
+}
+#loginbody{
+	background-color: #eee;
+	border: 1px solid transparent;
+}
+
+#loginIn{
+	margin: 56px auto 0 auto;
+	width:300px;
+	height: 216px;
+}
+#loginIn table{
+	width:100%;
+}
+#loginIn .form-control{
+	height:44px;
+}
+#login{
+	margin-top: 20px;
+}
+#loginIn img{
+	margin: 20px auto;
+	display: block;
+}
+
+/* #loginIn table{
+	width:100%;
+} */

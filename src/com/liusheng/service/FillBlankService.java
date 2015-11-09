@@ -2,24 +2,24 @@ package com.liusheng.service;
 
 import java.util.List;
 
-import com.liusheng.entities.fillBlank;
+import com.liusheng.entities.FillBlank;
 
 public class FillBlankService {
 
-	public void addOneFillBlank(fillBlank fb) {
+	public void addOneFillBlank(FillBlank fb) {
 	}
 
 	public void deleteOneFillBlank(int id) {
 	}
 
-	public void updataOneFillBlank(fillBlank fb) {
+	public void updataOneFillBlank(FillBlank fb) {
 	}
 
-	public fillBlank getOneFillBlank(int id) {
+	public FillBlank getOneFillBlank(int id) {
 		return null;
 	}
 
-	public List<fillBlank> getAllFillBlank(int start, int itemNums) {
+	public List<FillBlank> getAllFillBlank(int start, int itemNums) {
 		return null;
 	}
 
