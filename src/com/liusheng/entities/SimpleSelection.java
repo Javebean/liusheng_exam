@@ -97,4 +97,20 @@ public class SimpleSelection {
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
 	}
+	public SimpleSelection(String problem, String optionA, String optionB,
+			String optionC, String optionD, int checkStatus) {
+		super();
+		this.problem = problem;
+		this.optionA = optionA;
+		this.optionB = optionB;
+		this.optionC = optionC;
+		this.optionD = optionD;
+		this.checkStatus = checkStatus;
+	}
+	public SimpleSelection() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 }

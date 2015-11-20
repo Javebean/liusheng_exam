@@ -34,7 +34,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public void deleteOneSimpleSelection(int id) {
 		try {
-			String hql = "delete from simpleSelection where id = ?";
+			String hql = "delete from SimpleSelection where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public SimpleSelection getOneSimpleSelection(int id) {
 		try {
-			String hql = "from simpleSelection where id = ?";
+			String hql = "from SimpleSelection where id = ?";
 			return (SimpleSelection) getSession().createQuery(hql).setInteger(0, id)
 					.uniqueResult();
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public List<SimpleSelection> getAllSimpleSelection(int start, int itemNums) {
 		try {
-			String hql = "from simpleSelection where id = ?";
+			String hql = "from SimpleSelection";
 			List<SimpleSelection> list = getSession().createQuery(hql)
 					.setFirstResult(start).setMaxResults(itemNums).list();
 			return list;
@@ -83,7 +83,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public boolean checkOneSimpleSelection(int id) {
 		try {
-			String hql = "update simpleSelection set checkStatus =? where id = ?";
+			String hql = "update SimpleSelection set checkStatus =? where id = ?";
 			getSession().createQuery(hql).setInteger(0, Constant.CHECKSUCCESS)
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {

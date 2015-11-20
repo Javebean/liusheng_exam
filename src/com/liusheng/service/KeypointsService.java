@@ -2,8 +2,10 @@ package com.liusheng.service;
 
 import java.util.List;
 
-import com.liusheng.entities.Keypoints;
+import org.springframework.stereotype.Service;
 
+import com.liusheng.entities.Keypoints;
+@Service
 public class KeypointsService {
 	public void addKeypoints(Keypoints kp) {
 

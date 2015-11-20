@@ -13,11 +13,10 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 public class AnalyzeExcel {
-	public static List<List<String>> analyzeExcel(int sheetAt) {
+	public static List<List<String>> analyzeExcel(int sheetAt, String filepath) {
 		List<List<String>> result = null;
 		try {
-			FileInputStream fileInputStream = new FileInputStream(
-					"E:\\netexam.xls");
+			FileInputStream fileInputStream = new FileInputStream(filepath);
 			// Get the workbook instance for XLS file
 			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 
@@ -40,18 +39,14 @@ public class AnalyzeExcel {
 					Cell cell = cellIterator.next();
 					switch (cell.getCellType()) {
 					case Cell.CELL_TYPE_BOOLEAN:
-						System.out.print(cell.getBooleanCellValue() + "\t");
 						break;
 					case Cell.CELL_TYPE_NUMERIC:
-						System.out.print(cell.getNumericCellValue() + "\t");
 						break;
 					case Cell.CELL_TYPE_STRING:
-						System.out.print(cell.getStringCellValue() + "\t");
 						rowData.add(cell.getStringCellValue());
 						break;
 					}
 				}
-				System.out.println();
 				result.add(rowData);
 			}
 			fileInputStream.close();

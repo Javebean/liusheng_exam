@@ -77,4 +77,18 @@ public class Interlocution {
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
 	}
+
+	public Interlocution(String problem, String imgUrl, int checkStatus) {
+		super();
+		this.problem = problem;
+		this.imgUrl = imgUrl;
+		this.checkStatus = checkStatus;
+	}
+
+	public Interlocution() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 }

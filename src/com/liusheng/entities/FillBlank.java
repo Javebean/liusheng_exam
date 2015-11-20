@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import sun.misc.Perf.GetPerfAction;
 @Entity
 @Table(name="FILL_BLANK")
 public class FillBlank {
@@ -44,8 +42,6 @@ public class FillBlank {
 		this.keypointId = keypointId;
 	}
 	
-	
-	
 	@Column(name="CHECK_STATUS")
 	public int getCheckStatus() {
 		return checkStatus;
@@ -53,6 +49,15 @@ public class FillBlank {
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
 	}
+	public FillBlank(String problem, int checkStatus) {
+		super();
+		this.problem = problem;
+		this.checkStatus = checkStatus;
+	}
+	public FillBlank() {
+		super();
+	}
 	
+
 	
 }

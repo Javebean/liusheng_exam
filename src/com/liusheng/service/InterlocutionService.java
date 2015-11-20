@@ -2,11 +2,18 @@ package com.liusheng.service;
 
 import java.util.List;
 
-import com.liusheng.entities.Interlocution;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.liusheng.dao.InterlocutionDao;
+import com.liusheng.entities.Interlocution;
+@Service
 public class InterlocutionService {
 
+	@Autowired
+	private InterlocutionDao iDao;
 	public void addOneInterlocution(Interlocution il) {
+		iDao.addOneInterlocution(il);
 	}
 
 	public void deleteOneInterlocution(int id) {
