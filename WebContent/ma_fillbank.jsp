@@ -45,14 +45,13 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">出卷系统控制台</h1>
 
-				<h2 class="sub-header">单选题审核</h2>
+				<h2 class="sub-header">填空题审核</h2>
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
-								<th>选项</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -87,18 +86,41 @@
 				<tr>
 					<td colspan="4">
 						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重选择答案，该答案将作为该题的标准（参考）答案！
+		   					<strong>注意！</strong>请慎重填写答案，该答案将作为该题的标准（参考）答案！
 						</div>
 					</td>
 				</tr>
-				<tr><td>选项：</td></tr>
+				<tr><td>填空：</td></tr>
 				<tr>
-					<td colspan="2"><input type="radio" name="answer" id="A" /><label for="A">A：选项选项1</label></td>
-					<td colspan="2"><input type="radio" name="answer" id="B" /><label for="B">B：选项选项2</label></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="radio" name="answer" id="C" /><label for="C">C：选项选项3</label></td>
-					<td colspan="2"><input type="radio" name="answer" id="D" /><label for="D">D：选项选项4</label></td>
+					<td colspan="2">
+						 <div class="form-group">
+						    <label class="sr-only" for="exampleInputName2">填空1</label>
+	    					<input type="text" class="form-control"  placeholder="填 空 1">
+	  					 </div>
+					</td>
+					
+					
+					<td colspan="2">
+						 <div class="form-group">
+						    <label class="sr-only" for="exampleInputName2">填空2</label>
+	    					<input type="text" class="form-control"  placeholder="填 空 2">
+	  					 </div>
+					</td>
+				</tr>              
+				<tr>               
+					<td colspan="2">
+						 <div class="form-group">
+						    <label class="sr-only" for="exampleInputName2">填空2</label>
+	    					<input type="text" class="form-control"  placeholder="填 空 3">
+	  					 </div>
+					</td>
+					
+					<td colspan="2">
+						 <div class="form-group">
+						    <label class="sr-only" for="exampleInputName2">填空3</label>
+	    					<input type="text" class="form-control"  placeholder="填 空 4">
+	  					 </div>
+					</td>
 				</tr>
 				
 				<tr><td>&nbsp;</td></tr>
@@ -135,7 +157,7 @@
 					//data:{"start":0,"itemNums":10},
 					success:function(data){
 						 $.each(data,function(){
-							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
+							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>未审核</td>"
 							+"<td>"
 							+"<button type='button' name='confirm' class='btn btn-primary'>审核</button>&nbsp;&nbsp;"
 							+"<button type='button' class='btn btn-danger'>删除</button>"

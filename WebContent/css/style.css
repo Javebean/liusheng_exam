@@ -38,3 +38,27 @@ html,body{
 /* #loginIn table{
 	width:100%;
 } */
+
+.table{
+	table-layout: fixed;
+	
+}
+.table tbody tr td{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+#cboxLoadedContent thead{
+	text-align: center;
+	font-size: 30px;
+	font-weight: bolder;
+	
+}
+#cboxLoadedContent tfoot{
+	text-align: center;
+}
+
+
+
+
+
