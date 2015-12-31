@@ -3,6 +3,7 @@ package com.liusheng.dao;
 import java.util.List;
 
 import com.liusheng.entities.FillBlank;
+import com.liusheng.entities.FillBlankAnswer;
 
 public interface FillBlankDao {
 
@@ -17,5 +18,7 @@ public interface FillBlankDao {
 	public List<FillBlank> getAllFillBlank(int start, int itemNums);
 
 	public boolean checkOneFillBlank(int id);
+	
+	public List<FillBlankAnswer> getFBAnswer(int fbId);
 	
 }

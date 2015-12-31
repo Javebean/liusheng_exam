@@ -5,13 +5,13 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.KeypointsDao;
 import com.liusheng.entities.Keypoints;
 
-@Controller
+@Repository
 @Transactional
 public class KeypointsDaoImpl implements KeypointsDao {
 
@@ -34,26 +34,28 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	}
 
 	@Override
-	public void deleteKeypoints(int id) {
+	public int deleteKeypoints(int id) {
 		try {
 			String hql = "delete from Keypoints where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return 1;
 		}
 
+		return 0;
 	}
 
 	@Override
-	public void updateKeypoints(Keypoints kp) {
+	public boolean updateKeypoints(Keypoints kp) {
 		try {
 			getSession().update(kp);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 
+		return true;
 	}
 
 	@Override
@@ -71,11 +73,11 @@ public class KeypointsDaoImpl implements KeypointsDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Keypoints> getAllKeypoints() {
+	public List<Keypoints> getAllKeypoints(int start, int items) {
 		try {
 			String hql = "from Keypoints";
-			List<Keypoints> kp =  getSession().createQuery(hql)
-					.list();
+			List<Keypoints> kp = getSession().createQuery(hql)
+					.setFirstResult(start).setMaxResults(items).list();
 			return kp;
 		} catch (Exception e) {
 			e.printStackTrace();

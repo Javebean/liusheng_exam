@@ -54,6 +54,78 @@
 						<input type="submit" id ="submit" class ="btn btn-danger" value="确认上传">
 					</form>
 				</div>
+				
+				<hr>
+				<h4 class="sub-header">手动上传</h4>
+				
+				<form class="form-horizontal" role="form">
+				   <div class="form-group">
+				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
+				      <div class="col-sm-11">
+				         <textarea class="form-control" rows="2" placeholder="请输入题目"></textarea>
+				      </div>
+				   </div>
+				   <div class="form-group">
+				      <label for="optionA" class="col-sm-1 control-label">A:</label>
+				      <div class="col-sm-5">
+				         <input type="text" class="form-control" id="optionA" 
+				            placeholder="请输入选项A">
+				      </div>
+				      <label for="optionB" class="col-sm-1 control-label">B:</label>
+				      <div class="col-sm-5">
+				         <input type="text" class="form-control" id="optionB" 
+				            placeholder="请输入选项B">
+				      </div>
+				   </div>
+				   <div class="form-group">
+				      <label for="optionC" class="col-sm-1 control-label">C:</label>
+				      <div class="col-sm-5">
+				         <input type="text" class="form-control" id="optionC" 
+				            placeholder="请输入选项C">
+				      </div>
+				      <label for="optionD" class="col-sm-1 control-label">D:</label>
+				      <div class="col-sm-5">
+				         <input type="text" class="form-control" id="optionD" 
+				            placeholder="请输入选项D">
+				      </div>
+				   </div>
+				   
+				   <div class="form-group">
+				      <label  class="col-sm-2 control-label">正确答案：</label>
+				      <div class="col-sm-2">
+				          <label class="checkbox-inline">
+	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios1" 
+	         					  value="option2"> 选项 A
+   						  </label>
+				      </div>
+				      <div class="col-sm-2">
+				         <label class="checkbox-inline">
+	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios2" 
+	         					  value="option2"> 选项 B
+   						  </label>
+				      </div>
+				      <div class="col-sm-2">
+				         <label class="checkbox-inline">
+	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios3" 
+	         					  value="option2"> 选项 C
+   						  </label>
+				      </div>
+				      <div class="col-sm-2">
+				         <label class="checkbox-inline">
+	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios4" 
+	         					  value="option2"> 选项 D
+   						  </label>
+				      </div>
+				   </div>
+				 
+				   <div class="form-group">
+				      <div class="col-sm-1">
+				         <input type="submit" id ="submit2" class ="btn btn-danger" value="确认上传">
+				      </div>
+				   </div>
+				</form>
+				
+				
 			</div>
 		</div>
 	</div>

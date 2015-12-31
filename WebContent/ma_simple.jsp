@@ -79,7 +79,7 @@
 				<tr><td>题目：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea class="form-control" rows="2"></textarea>
+						<textarea symbol="question" class="form-control" rows="2"></textarea>
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
@@ -87,7 +87,7 @@
 				<tr>
 					<td colspan="4">
 						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重选择答案，该答案将作为该题的标准（参考）答案！
+		   					<strong>注意！</strong>请慎重审核答案和所属知识点，该答案将作为该题的标准（参考）答案！
 						</div>
 					</td>
 				</tr>
@@ -102,14 +102,8 @@
 				</tr>
 				
 				<tr><td>&nbsp;</td></tr>
-				<tr>
+				<tr id="kpArea">
 					<td colspan="4">所属知识点：</td>
-				</tr>
-				<tr>
-					<td><input type="radio" name="keypoint" id="kp1" /><label for="kp1">知识点1</label></td>
-					<td><input type="radio" name="keypoint" id="kp2" /><label for="kp2">知识点2</label></td>
-					<td><input type="radio" name="keypoint" id="kp3" /><label for="kp3">知识点3</label></td>
-					<td><input type="radio" name="keypoint" id="kp4" /><label for="kp4">知识点4</label></td>
 				</tr>
 				
 			</tbody>
@@ -117,7 +111,7 @@
 				<tr><td>&nbsp;<hr></td></tr>
 					<tr>
 						<td colspan="4">
-							<button type="button" class="btn btn-danger">确认选择</button>
+							<button type="button" class="btn btn-danger" id="agree" agreeId="" >通     过</button>
 						</td>
 					</tr>
 				</tfoot>
@@ -137,8 +131,8 @@
 						 $.each(data,function(){
 							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
 							+"<td>"
-							+"<button type='button' name='confirm' class='btn btn-primary'>审核</button>&nbsp;&nbsp;"
-							+"<button type='button' class='btn btn-danger'>删除</button>"
+							+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
+							+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
 							+"</td></tr>");
 						}); 
 						 
@@ -153,6 +147,12 @@
 		
 		/* init */
 		 loadExamInfo(0);
+		 /*查询知识点*/
+		 getAllkp();
+		 /*审核通过*/
+		 $("#agree").click(function(){
+			 agreeQues("agreeques",$(this).attr("agreeId"));
+		 });
 		 
 	})
 </script>

@@ -11,7 +11,6 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class CreateWord_Inter {
 	public static void cinter(XWPFDocument doc, Map<String, Boolean> info)

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.InterlocutionDao;
-import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.Interlocution;
 import com.liusheng.util.Constant;
 @Repository
@@ -36,7 +35,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	@Override
 	public void deleteOneInterlocution(int id) {
 		try {
-			String hql = "delete from interlocution where id = ?";
+			String hql = "delete from Interlocution where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,24 +57,37 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 
 	@Override
 	public Interlocution getOneInterlocution(int id) {
-		String hql = "from interlocution where id = ?";
-		return (Interlocution) getSession().createQuery(hql).setInteger(0, id)
-				.uniqueResult();
+		Interlocution inter =null;
+		try{
+			String hql = "from Interlocution where id = ?";
+			inter = (Interlocution) getSession().createQuery(hql).setInteger(0, id)
+					.uniqueResult();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			return inter;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Interlocution> getAllInterlocution(int start, int itemNums) {
-		String hql = "from interlocution where id = ?";
-		List<Interlocution> list = getSession().createQuery(hql)
-				.setFirstResult(start).setMaxResults(itemNums).list();
+		List<Interlocution> list = null;
+		try{
+			String hql = "from Interlocution";
+			list = getSession().createQuery(hql)
+					.setFirstResult(start).setMaxResults(itemNums).list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			
 		return list;
 	}
 
 	@Override
 	public boolean checkOneInterlocution(int id) {
 		try {
-			String hql = "update interlocution set checkStatus =? where id = ?";
+			String hql = "update Interlocution set checkStatus =? where id = ?";
 			getSession().createQuery(hql).setInteger(0, Constant.CHECKSUCCESS)
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {

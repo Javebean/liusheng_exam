@@ -19,6 +19,7 @@
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <style id="style-1-cropbar-clipper">
+
 .en-markup-crop-options {
 	top: 18px !important;
 	left: 50% !important;
@@ -54,9 +55,65 @@
 						<input type="submit" class ="btn btn-danger" value="确认上传">
 					</form>
 				</div>
+				
+				<hr>
+				<h4 class="sub-header">手动上传</h4>
+				<form class="form-horizontal" role="form">
+				   <div class="form-group">
+				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
+				      <div class="col-sm-11">
+				         <textarea class="form-control" rows="2" placeholder="请输入题目"></textarea>
+				      </div>
+				   </div>
+				   <h5 class="sub-header">图片上传</h5>
+				   
+    				<div id="blah" style="width: 400px;height: 400px;border: solid 1px #ccc;" class="col-sm-offset-4">
+    				</div>
+    				
+    				<br>
+    				<label class="btn btn-primary col-sm-1 col-sm-offset-4">
+    					<input type="file" required="required" id="imgInp"/>
+    					<span>上传图片</span>
+					</label>
+    				<br>
+    				<br>
+	    				<br>
+				   <div class="form-group">
+				      <label for="firstname" class="col-sm-1 control-label">答案：</label>
+				      <div class="col-sm-11">
+				         <textarea class="form-control" rows="4" placeholder="请输入答案"></textarea>
+				      </div>
+				   </div>
+				   
+				 
+				   <div class="form-group">
+				      <div class="col-sm-1">
+				         <input type="submit" id ="submit2" class ="btn btn-danger" value="确认上传">
+				      </div>
+				   </div>
+				</form>
+				
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
 
+	        reader.onload = function (e) {
+	        	$("#blah").append('<img id ="uploadImg" alt="your image"/>');
+	            $('#uploadImg').attr('src', e.target.result).css({"width":"400px","height":"400px"});
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$(function(){
+		$("#imgInp").change(function(){
+		    readURL(this);
+		});
+	})
+</script>
 </body>
 </html>

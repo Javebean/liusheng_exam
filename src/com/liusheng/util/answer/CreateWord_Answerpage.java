@@ -10,11 +10,8 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STJc;
-
-import sun.misc.UUDecoder;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 import com.liusheng.util.Constant;
 import com.liusheng.util.WordUtil;

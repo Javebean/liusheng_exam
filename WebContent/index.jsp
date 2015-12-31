@@ -5,7 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%@include file="public/public.html"%>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/publicfuc.js"></script>
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
 </head>
 <body id="loginbody">
 
@@ -38,12 +41,14 @@
 			$("#loginIn img").removeClass("hidden");
 			$("#login").addClass("hidden");
 			var param = {"username":$("input[name=username]").val(),"password":$("input[name=password]").val()};
-			$.get("login.do",param,function(data0){
+			$.post("login",param,function(data0){
 				var data = data0.data;
 				var result = data0.result;
 				console.log(result);
 				$(".msg").removeClass("hidden").text(result.msg);
 				if(result.code==0){
+					/*登陆成功*/
+					setCookie("user", data.username);
 					window.location.href="manager.jsp";
 				}
 				$("#login").removeClass("hidden");

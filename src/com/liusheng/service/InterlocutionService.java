@@ -27,7 +27,7 @@ public class InterlocutionService {
 	}
 
 	public List<Interlocution> getAllInterlocution(int start, int itemNums) {
-		return null;
+		return iDao.getAllInterlocution(start, itemNums);
 	}
 
 	public boolean checkOneInterlocution(int id) {

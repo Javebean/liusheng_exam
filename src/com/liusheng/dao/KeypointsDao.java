@@ -8,11 +8,11 @@ public interface KeypointsDao {
 
 	public void addKeypoints(Keypoints kp);
 	
-	public void deleteKeypoints(int id);
+	public int deleteKeypoints(int id);
 	
-	public void updateKeypoints(Keypoints kp);
+	public boolean updateKeypoints(Keypoints kp);
 	
 	public Keypoints getOneKeypoints(int id);
 	
-	public List<Keypoints> getAllKeypoints();
+	public List<Keypoints> getAllKeypoints(int start,int items);
 }

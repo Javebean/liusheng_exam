@@ -32,6 +32,14 @@ public class Keypoints {
 	public void setKeypoint(String keypoint) {
 		this.keypoint = keypoint;
 	}
+	public Keypoints(String keypoint) {
+		super();
+		this.keypoint = keypoint;
+	}
+	public Keypoints() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	

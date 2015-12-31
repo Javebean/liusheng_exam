@@ -19,8 +19,9 @@ public class ManagerAction {
 	@Autowired
 	private ManagerService managerService;
 
-	@RequestMapping(value = "/login",method=RequestMethod.GET)
-	public CommonResult login(String username, String password) {
+	@RequestMapping(value = "/login",method=RequestMethod.POST)
+	public CommonResult login( String username, String password) {
+		logger.info("用户名："+username+" 密码："+password);
 		Manager ma = managerService.getOneManager(username);
 		CommonResult cr = null;
 		if (ma != null) {

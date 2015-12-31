@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.liusheng.dao.FillBlankDao;
 import com.liusheng.entities.FillBlank;
+import com.liusheng.entities.FillBlankAnswer;
 @Service
 public class FillBlankService {
 	@Autowired
@@ -26,10 +27,14 @@ public class FillBlankService {
 	}
 
 	public List<FillBlank> getAllFillBlank(int start, int itemNums) {
-		return null;
+		return fillDao.getAllFillBlank(start, itemNums);
 	}
 
 	public boolean checkOneFillBlank(int id) {
 		return false;
+	}
+	
+	public List<FillBlankAnswer> getFBAnswer(int fbId) {
+		return fillDao.getFBAnswer(fbId);
 	}
 }

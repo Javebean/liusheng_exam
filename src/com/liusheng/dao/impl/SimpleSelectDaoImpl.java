@@ -32,15 +32,15 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	}
 
 	@Override
-	public void deleteOneSimpleSelection(int id) {
+	public boolean deleteOneSimpleSelection(int id) {
 		try {
 			String hql = "delete from SimpleSelection where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
-
+		return true;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 		return true;
 	}

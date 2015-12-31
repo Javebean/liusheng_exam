@@ -2,20 +2,28 @@ package com.liusheng.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.liusheng.dao.KeypointsDao;
 import com.liusheng.entities.Keypoints;
+
 @Service
 public class KeypointsService {
+
+	@Autowired
+	private KeypointsDao kDao;
+
 	public void addKeypoints(Keypoints kp) {
-
+		kDao.addKeypoints(kp);
 	}
 
-	public void deleteKeypoints(int id) {
-
+	public int deleteKeypoints(int id) {
+		return kDao.deleteKeypoints(id);
 	}
 
-	public void updateKeypoints(Keypoints kp) {
+	public boolean updateKeypoints(Keypoints kp) {
+		return kDao.updateKeypoints(kp);
 
 	}
 
@@ -23,7 +31,8 @@ public class KeypointsService {
 		return null;
 	}
 
-	public List<Keypoints> getAllKeypoints() {
-		return null;
+	public List<Keypoints> getAllKeypoints(int start, int items) {
+		List<Keypoints> allKeypoints = kDao.getAllKeypoints(start, items);
+		return allKeypoints;
 	}
 }

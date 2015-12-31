@@ -1,22 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-
-<div class="col-sm-3 col-md-2 sidebar">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="col-sm-3 col-md-2 sidebar" id="accordion">
 	<ul class="nav nav-sidebar">
-		<li class="active"><a href="#">试卷审核 </a></li>
-		<li><a href="ma_simple.jsp">&nbsp;&nbsp;>单选题审核</a></li>
-		<li><a href="ma_fillbank.jsp">&nbsp;&nbsp;>填空题审核</a></li>
-		<li><a href="ma_locution.jsp">&nbsp;&nbsp;>问答题审核</a></li>
+		<li class="active">
+			<a data-toggle="collapse" data-parent="#accordion" 
+          href="#collapseOne">试卷审核 </a>
+		</li>
+		<li>
+			<ul class="nav" id="collapseOne">
+				<li><a href="ma_simple.jsp">&nbsp;&nbsp;&nbsp;&nbsp;单选题审核</a></li>
+				<li><a href="ma_fillbank.jsp">&nbsp;&nbsp;&nbsp;&nbsp;填空题审核</a></li>
+				<li><a href="ma_locution.jsp">&nbsp;&nbsp;&nbsp;&nbsp;问答题审核</a></li>
+			</ul>
+		</li>
+	</ul>
+	
+	<ul class="nav nav-sidebar">
+		<li>
+			<a data-toggle="collapse" data-parent="#accordion" 
+          href="#collapseTwo">题库上传 </a>
+		</li>
+		<li>
+			<ul class="nav" id="collapseTwo">
+				<li><a href="upload0.jsp">&nbsp;&nbsp;&nbsp;&nbsp;综合上传</a></li>
+				<li><a href="upload1.jsp">&nbsp;&nbsp;&nbsp;&nbsp;上传单选题</a></li>
+				<li><a href="upload2.jsp">&nbsp;&nbsp;&nbsp;&nbsp;上传填空题</a></li>
+				<li><a href="upload3.jsp">&nbsp;&nbsp;&nbsp;&nbsp;上传问答题</a></li>
+			</ul>
+		</li>
 	</ul>
 	<ul class="nav nav-sidebar">
-		<li><a href="">题库上传</a></li>
-		<li><a href="upload0.jsp">&nbsp;&nbsp;>综合上传</a></li>
-		<li><a href="upload1.jsp">&nbsp;&nbsp;>上传单选题</a></li>
-		<li><a href="upload2.jsp">&nbsp;&nbsp;>上传填空题</a></li>
-		<li><a href="upload3.jsp">&nbsp;&nbsp;>上传问答题</a></li>
-	</ul>
-	<ul class="nav nav-sidebar">
-		<li><a href="">知识点管理</a></li>
+		<li><a href="ma_knowlegekey.jsp">知识点管理</a></li>
 		<li><a href="">出题</a></li>
 		<li><a href="">Another nav item</a></li>
 	</ul>

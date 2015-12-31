@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.FillBlankDao;
 import com.liusheng.entities.FillBlank;
+import com.liusheng.entities.FillBlankAnswer;
 import com.liusheng.util.Constant;
 
 @Repository
@@ -73,13 +74,13 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public List<FillBlank> getAllFillBlank(int start, int itemNums) {
 		try {
-			String hql = "from fillBlank where id = ?";
+			String hql = "from FillBlank";
 			List<FillBlank> list = getSession().createQuery(hql)
 					.setFirstResult(start).setMaxResults(itemNums).list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return null;
 		}
 	}
 
@@ -94,5 +95,19 @@ public class FillBlankDaoImpl implements FillBlankDao {
 			throw new RuntimeException(e);
 		}
 		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FillBlankAnswer> getFBAnswer(int fbId) {
+		try {
+			String hql = "from FillBlankAnswer where fillBlackId = ?";
+			List<FillBlankAnswer> list = getSession().createQuery(hql)
+					.setInteger(0, fbId).list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

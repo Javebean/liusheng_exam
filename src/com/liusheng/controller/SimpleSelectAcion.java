@@ -27,5 +27,16 @@ public class SimpleSelectAcion {
 		log.info("选择题的结果："+results);
 		return results;
 	}
+	
+	@RequestMapping("/agreeques/{id}")
+	public boolean agreeQues(@PathVariable int id){
+		log.info("审核通过题目的id "+id);
+		return service.checkOneSimpleSelection(id);
+	}
+	
+	@RequestMapping("/deletesim/{id}")
+	public boolean deleteSim(@PathVariable int id){
+		return service.deleteOneSimpleSelection(id);
+	}
 
 }

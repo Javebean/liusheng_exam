@@ -54,6 +54,7 @@
 						<input type="submit" class ="btn btn-danger" value="确认上传">
 					</form>
 				</div>
+				
 			</div>
 		</div>
 	</div>

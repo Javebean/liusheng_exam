@@ -78,7 +78,7 @@
 				<tr><td>题目：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea class="form-control" rows="2"></textarea>
+						<textarea symbol="question" class="form-control" rows="2"></textarea>
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
@@ -90,50 +90,10 @@
 						</div>
 					</td>
 				</tr>
-				<tr><td>填空：</td></tr>
-				<tr>
-					<td colspan="2">
-						 <div class="form-group">
-						    <label class="sr-only" for="exampleInputName2">填空1</label>
-	    					<input type="text" class="form-control"  placeholder="填 空 1">
-	  					 </div>
-					</td>
-					
-					
-					<td colspan="2">
-						 <div class="form-group">
-						    <label class="sr-only" for="exampleInputName2">填空2</label>
-	    					<input type="text" class="form-control"  placeholder="填 空 2">
-	  					 </div>
-					</td>
-				</tr>              
-				<tr>               
-					<td colspan="2">
-						 <div class="form-group">
-						    <label class="sr-only" for="exampleInputName2">填空2</label>
-	    					<input type="text" class="form-control"  placeholder="填 空 3">
-	  					 </div>
-					</td>
-					
-					<td colspan="2">
-						 <div class="form-group">
-						    <label class="sr-only" for="exampleInputName2">填空3</label>
-	    					<input type="text" class="form-control"  placeholder="填 空 4">
-	  					 </div>
-					</td>
-				</tr>
-				
 				<tr><td>&nbsp;</td></tr>
-				<tr>
+				<tr id="kpArea">
 					<td colspan="4">所属知识点：</td>
 				</tr>
-				<tr>
-					<td><input type="radio" name="keypoint" id="kp1" /><label for="kp1">知识点1</label></td>
-					<td><input type="radio" name="keypoint" id="kp2" /><label for="kp2">知识点2</label></td>
-					<td><input type="radio" name="keypoint" id="kp3" /><label for="kp3">知识点3</label></td>
-					<td><input type="radio" name="keypoint" id="kp4" /><label for="kp4">知识点4</label></td>
-				</tr>
-				
 			</tbody>
 			<tfoot>
 				<tr><td>&nbsp;<hr></td></tr>
@@ -151,16 +111,18 @@
 		 /*public function*/
 		 var loadExamInfo = function(start){
 				$.ajax({
-					url:"getpagess/"+start+"/10",
+					url:"getpagesfb/"+start+"/10",
 					type:"get",
 					dataType:"json",
-					//data:{"start":0,"itemNums":10},
 					success:function(data){
 						 $.each(data,function(){
+							$.get("getfbans/"+this.id,function(data){
+								
+							});
 							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>未审核</td>"
 							+"<td>"
-							+"<button type='button' name='confirm' class='btn btn-primary'>审核</button>&nbsp;&nbsp;"
-							+"<button type='button' class='btn btn-danger'>删除</button>"
+							+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
+							+"<button type='button' name='delete' class='btn btn-danger'>删除</button>"
 							+"</td></tr>");
 						}); 
 						 
@@ -175,6 +137,8 @@
 		
 		/* init */
 		 loadExamInfo(0);
+		 /*查询知识点*/
+		 getAllkp();
 		 
 	})
 </script>

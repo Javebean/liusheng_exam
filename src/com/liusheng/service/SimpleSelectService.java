@@ -18,7 +18,8 @@ public class SimpleSelectService {
 		ssDao.addOneSimpleSelection(ss);
 	}
 
-	public void deleteOneSimpleSelection(int id) {
+	public boolean deleteOneSimpleSelection(int id) {
+		return ssDao.deleteOneSimpleSelection(id);
 	}
 
 	public void updataOneSimpleSelection(SimpleSelection ss) {
@@ -33,6 +34,6 @@ public class SimpleSelectService {
 	}
 
 	public boolean checkOneSimpleSelection(int id) {
-		return false;
+		return ssDao.checkOneSimpleSelection(id);
 	}
 }
