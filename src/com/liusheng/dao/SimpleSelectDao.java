@@ -16,4 +16,11 @@ public interface SimpleSelectDao {
 	public List<SimpleSelection> getAllSimpleSelection(int start,int itemNums);
 	
 	public boolean checkOneSimpleSelection(int id);
+	
+	public SimpleSelection createSimpleByKid(String kpId , int romdom);
+	
+	public long getSimpleSelectionCount();
+	
+	//查询属于该知识点的单选题的数量
+	public long getSimpleSelectionCount(String kpId );
 }

@@ -18,9 +18,6 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBorder;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblBorders;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STBorder;
 
 import com.liusheng.util.answer.CreateWord_Answer;
 import com.liusheng.util.answer.CreateWord_Answerpage;

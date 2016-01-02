@@ -35,4 +35,9 @@ public class KeypointsService {
 		List<Keypoints> allKeypoints = kDao.getAllKeypoints(start, items);
 		return allKeypoints;
 	}
+	
+	public List<Keypoints> getAllkp(){
+		return kDao.getAllkp();
+	}
+	
 }

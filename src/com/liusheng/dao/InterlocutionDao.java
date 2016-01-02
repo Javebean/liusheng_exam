@@ -19,4 +19,11 @@ public interface InterlocutionDao {
 
 	public boolean checkOneInterlocution(int id);
 	
+	public Interlocution createInterlocaionByKid(String kpId , int romdom);
+	
+	public long getInterlocaionCount();
+	
+	//查询属于该知识点的单选题的数量
+	public long getInterlocaionCount(String kpId );
+	
 }

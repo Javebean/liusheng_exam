@@ -41,9 +41,9 @@ var deleteItem = function (url,dId){
 	});
 }
 
-/*查询知识点*/
+/*查询知识点，在colorbox 的pop up中*/
 var getAllkp = function(){
-	$.get("pageskeypoint/0/20",function(data){
+	$.get("getallkp",function(data){
 		var html = "";
 		$.each(data,function(index){
 			if(index%3==0){
@@ -62,6 +62,19 @@ var getAllkp = function(){
 		$("#kpArea").after(html);
 	});
 }
+
+/*出题的知识点*/
+var getAllkp_createExam = function(){
+	var html="";
+	$.get("getallkp",function(data){
+		$.each(data,function(){
+			//checkbox+知识点+输入框
+			html+='<input type="checkbox" name="'+this.id+'">'+this.keypoint+'&nbsp;×&nbsp;'+'<input value="" type="text" class="form-control" style="width:40px; height:25px;display:inline-block">&nbsp;&nbsp;';
+		});
+		$(".allkp").append(html);
+	});
+}
+
 
 
 /*审核通过题目*/

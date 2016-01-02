@@ -85,4 +85,15 @@ public class KeypointsDaoImpl implements KeypointsDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Keypoints> getAllkp() {
+		try{
+			String hql ="from Keypoints";
+			return getSession().createQuery(hql).list();
+		}catch(Exception e){
+			return null;
+		}
+	}
+
 }

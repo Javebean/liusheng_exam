@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.liusheng.dao.InterlocutionDao;
 import com.liusheng.entities.Interlocution;
 import com.liusheng.util.Constant;
+
 @Repository
 @Transactional
 public class InterlocutionDaoImpl implements InterlocutionDao {
@@ -21,6 +22,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
+
 	@Override
 	public void addOneInterlocution(Interlocution il) {
 		try {
@@ -57,30 +59,30 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 
 	@Override
 	public Interlocution getOneInterlocution(int id) {
-		Interlocution inter =null;
-		try{
+		Interlocution inter = null;
+		try {
 			String hql = "from Interlocution where id = ?";
-			inter = (Interlocution) getSession().createQuery(hql).setInteger(0, id)
-					.uniqueResult();
-			
-		}catch(Exception e){
+			inter = (Interlocution) getSession().createQuery(hql)
+					.setInteger(0, id).uniqueResult();
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			return inter;
+		return inter;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Interlocution> getAllInterlocution(int start, int itemNums) {
 		List<Interlocution> list = null;
-		try{
+		try {
 			String hql = "from Interlocution";
-			list = getSession().createQuery(hql)
-					.setFirstResult(start).setMaxResults(itemNums).list();
-		}catch(Exception e){
+			list = getSession().createQuery(hql).setFirstResult(start)
+					.setMaxResults(itemNums).list();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+
 		return list;
 	}
 
@@ -95,6 +97,45 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 			throw new RuntimeException(e);
 		}
 		return true;
+	}
+
+	@Override
+	public Interlocution createInterlocaionByKid(String kpId, int romdom) {
+		try {
+			String hql = "from Interlocution where keypointId = ?";
+			return (Interlocution) getSession().createQuery(hql)
+					.setString(0, kpId).setFirstResult(romdom).setMaxResults(1)
+					.uniqueResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public long getInterlocaionCount() {
+		try {
+			String hql = "select count(id) from Interlocution";
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public long getInterlocaionCount(String kpId) {
+		try {
+			String hql = "select count(id) from Interlocution where keypointId =?";
+			Long count = (Long) getSession().createQuery(hql)
+					.setString(0, kpId).uniqueResult();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 }

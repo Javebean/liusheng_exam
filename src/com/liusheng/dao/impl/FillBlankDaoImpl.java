@@ -38,7 +38,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public void deleteOneFillBlank(int id) {
 		try {
-			String hql = "delete from fillBlank where id = ?";
+			String hql = "delete from FillBlank where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public FillBlank getOneFillBlank(int id) {
 		try {
-			String hql = "from fillBlank where id = ?";
+			String hql = "from FillBlank where id = ?";
 			return (FillBlank) getSession().createQuery(hql).setInteger(0, id)
 					.uniqueResult();
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public boolean checkOneFillBlank(int id) {
 		try {
-			String hql = "update fillBlank set checkStatus =? where id = ?";
+			String hql = "update FillBlank set checkStatus =? where id = ?";
 			getSession().createQuery(hql).setInteger(0, Constant.CHECKSUCCESS)
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {
@@ -108,6 +108,33 @@ public class FillBlankDaoImpl implements FillBlankDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@Override
+	public FillBlank createFillBlankByKid(String kpId, int romdom) {
+		try {
+			String hql = "from FillBlank where keypointId =?";
+			return (FillBlank) getSession().createQuery(hql)
+					.setString(0, kpId).setFirstResult(romdom).setMaxResults(0)
+					.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+
+		}
+	}
+
+	@Override
+	public long getFillBlankCount(String kpId) {
+		try {
+			String hql = "select count(id) from FillBlank where keypointId =?";
+			Long count = (Long) getSession().createQuery(hql)
+					.setString(0, kpId).uniqueResult();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 }

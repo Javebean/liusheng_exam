@@ -18,4 +18,14 @@ public class Constant {
 	public static final int WUHAO_FONTSIZE = 21;
 	
 	public static final String FONTCOLOR = "FF0000";
+	
+	/*单选题的数量*/
+	public static final int SIMPLE_SELECT_NUMS = 10;
+	/*填空题填空的数量*/
+	public static final int FILL_BLANK_NUMS = 10;
+	/*问答题的数量*/
+	public static final int INTERLOCATION_NUMS = 6;
+	
+	
+	
 }

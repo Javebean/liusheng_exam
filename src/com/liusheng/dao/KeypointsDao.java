@@ -15,4 +15,6 @@ public interface KeypointsDao {
 	public Keypoints getOneKeypoints(int id);
 	
 	public List<Keypoints> getAllKeypoints(int start,int items);
+	
+	public List<Keypoints> getAllkp();
 }

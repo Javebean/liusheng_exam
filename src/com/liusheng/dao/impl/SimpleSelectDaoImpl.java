@@ -11,15 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.liusheng.dao.SimpleSelectDao;
 import com.liusheng.entities.SimpleSelection;
 import com.liusheng.util.Constant;
+
 @Repository
 @Transactional
 public class SimpleSelectDaoImpl implements SimpleSelectDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
+
 	@Override
 	public void addOneSimpleSelection(SimpleSelection ss) {
 		try {
@@ -58,8 +61,8 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	public SimpleSelection getOneSimpleSelection(int id) {
 		try {
 			String hql = "from SimpleSelection where id = ?";
-			return (SimpleSelection) getSession().createQuery(hql).setInteger(0, id)
-					.uniqueResult();
+			return (SimpleSelection) getSession().createQuery(hql)
+					.setInteger(0, id).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -91,6 +94,43 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public SimpleSelection createSimpleByKid(String kpId, int romdom) {
+		try {
+			String hql = "from SimpleSelection where keypointId =?";
+			return (SimpleSelection) getSession().createQuery(hql)
+					.setString(0, kpId).setFirstResult(romdom).setMaxResults(1)
+					.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public long getSimpleSelectionCount() {
+		try {
+			String hql = "select count(id) from SimpleSelection";
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public long getSimpleSelectionCount(String kpId) {
+		try {
+			String hql = "select count(id) from SimpleSelection where keypointId =?";
+			return (Long) getSession().createQuery(hql).setString(0, kpId)
+					.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 }
