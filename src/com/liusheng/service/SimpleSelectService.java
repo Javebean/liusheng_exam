@@ -14,6 +14,7 @@ import com.liusheng.dao.SimpleSelectDao;
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.Interlocution;
 import com.liusheng.entities.SimpleSelection;
+import com.liusheng.util.CreateWord;
 
 @Service
 public class SimpleSelectService {
@@ -61,12 +62,18 @@ public class SimpleSelectService {
 		SimpleSelection ss = null;
 		for(Map.Entry<String, Integer> m : map.entrySet()){
 			String kpId = m.getKey();
+			System.out.println("知识点Id:"+kpId);
 			//该知识点要出的数量
 			Integer nums = m.getValue();
 			int count =  (int) ssDao.getSimpleSelectionCount(kpId);
-			for(int i=0;i<nums;i++){
-				 ss = ssDao.createSimpleByKid(kpId, random.nextInt(count));
-				 list.add(ss);
+			System.out.println("该知识点相关的题目数量："+count);
+			
+			if(count>0){
+				//该知识点有>0的题目数量
+				for(int i=0;i<nums;i++){
+					ss = ssDao.createSimpleByKid(kpId, random.nextInt(count));
+					list.add(ss);
+				}
 			}
 		}
 		return list;
@@ -74,6 +81,7 @@ public class SimpleSelectService {
 	
 	//
 	public String createexamService(String simple,String fill,String inter){
+		//单选题
 		JSONArray simpleArr = new JSONArray(simple);
 		int simpleLen = simpleArr.length();
 		Map<String,Integer> simpleMap = new HashMap<String, Integer>();
@@ -81,11 +89,27 @@ public class SimpleSelectService {
 			String str = (String) simpleArr.get(i);
 			String arr[] = str.split("#");
 			simpleMap.put(arr[0], Integer.parseInt(arr[1]));
-			List<SimpleSelection> createSimple = createSimple(simpleMap);
-			System.out.println("+++"+createSimple);
+		}
+		List<SimpleSelection> createSimple = createSimple(simpleMap);
+		Map<String ,List<String>> simpleInfo = null;
+		if(createSimple.size()>0){
+			simpleInfo = new HashMap<String, List<String>>();
+			List<String> list = null;
+			for(SimpleSelection s : createSimple){
+				list = new ArrayList<String>();
+				list.add(s.getOptionA());
+				list.add(s.getOptionB());
+				list.add(s.getOptionC());
+				list.add(s.getOptionD());
+				simpleInfo.put(s.getProblem(), list);
+			}
+			
 		}
 		
 		
+		
+		
+		//填空题
 		JSONArray fillArr = new JSONArray(fill);
 		int fillLen = fillArr.length();
 		Map<String,Integer> fillMap = new HashMap<String, Integer>();
@@ -93,8 +117,14 @@ public class SimpleSelectService {
 			String str = (String) fillArr.get(i);
 			String arr[] = str.split("#");
 			fillMap.put(arr[0], Integer.parseInt(arr[1]));
-			List<FillBlank> createFill = fservice.createFillBlank(fillMap);
-			System.out.println("---"+createFill);
+		}
+		List<FillBlank> createFill = fservice.createFillBlank(fillMap);
+		List<String> fillblankInfo = null;
+		if(createFill.size()>0){
+			fillblankInfo = new ArrayList<String>();
+			for(FillBlank f:createFill){
+				fillblankInfo.add(f.getProblem());
+			}
 		}
 		
 		
@@ -105,10 +135,23 @@ public class SimpleSelectService {
 			String str = (String) fillArr.get(i);
 			String arr[] = str.split("#");
 			interMap.put(arr[0], Integer.parseInt(arr[1]));
-			List<Interlocution> createInter = iservice.createInter(interMap);
-			System.out.println("***"+createInter);
+		}
+		List<Interlocution> createInter = iservice.createInter(interMap);
+		Map<String,Boolean> interInfo = null;
+		if(createInter.size()>0){
+			interInfo = new HashMap<String, Boolean>();
+			for(Interlocution i :createInter){
+				interInfo.put(i.getProblem(), i.getImgUrl()==null?true:false);
+			}
+			
 		}
 		
-		return null;
+		try {
+			CreateWord.createExam(simpleInfo, fillblankInfo, interInfo);
+			return "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 	}
 }

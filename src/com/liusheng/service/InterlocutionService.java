@@ -101,10 +101,14 @@ public class InterlocutionService {
 			// 该知识点要出的数量
 			Integer nums = m.getValue();
 			int count = (int) iDao.getInterlocaionCount(kpId);
-			for (int i = 0; i < nums; i++) {
-				ss = iDao.createInterlocaionByKid(kpId, random.nextInt(count));
-				list.add(ss);
+			if(count>0){
+				//该知识点有>0的题目数量
+				for (int i = 0; i < nums; i++) {
+					ss = iDao.createInterlocaionByKid(kpId, random.nextInt(count));
+					list.add(ss);
+				}
 			}
+
 		}
 		return list;
 	}

@@ -126,8 +126,10 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	public long getSimpleSelectionCount(String kpId) {
 		try {
 			String hql = "select count(id) from SimpleSelection where keypointId =?";
-			return (Long) getSession().createQuery(hql).setString(0, kpId)
+			Long count =  (Long) getSession().createQuery(hql).setString(0, kpId)
 					.uniqueResult();
+			return count;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;

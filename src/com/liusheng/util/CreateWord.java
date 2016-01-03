@@ -2,8 +2,6 @@ package com.liusheng.util;
 
 import java.io.FileOutputStream;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +22,12 @@ import com.liusheng.util.answer.CreateWord_Answerpage;
 
 
 public class CreateWord {
-
-    public static void main(String[] args) throws Exception {
+/*
+ * 1.simpleInfo: key:题目，value:四个选项
+ * 2.fillblankInfo : 题目
+ * 3.interInfo   key 题目，value 是否有图片
+ */
+    public static void createExam(Map<String,List<String>> simpleInfo,List<String> fillblankInfo, Map<String,Boolean> interInfo) throws Exception {
 		XWPFDocument doc = new XWPFDocument();
         XWPFParagraph title = doc.createParagraph();
         //设置文本的对齐方式
@@ -369,7 +371,7 @@ public class CreateWord {
         			"注意：所有答案必须写在后面的答题纸上，写在试卷部分的不予评分！", null, true);
         
         //单选
-        Map<String ,List<String>> info = new HashMap<String, List<String>>();
+      /*  Map<String ,List<String>> info = new HashMap<String, List<String>>();
         for(int i=0;i<10;i++){
         	List<String> list = new ArrayList<String>();
         	list.add("IP、ICMP、ARP、TCP");
@@ -378,24 +380,24 @@ public class CreateWord {
         	list.add("UDP、 IP、 ICMP、 RARP");
         	
         	info.put("、TCP/IP 的网络层含有四"+i+"个重要的协议，分别为________。", list);
-        }
+        }*/
         
-        CreateWord_Simple.csimple(doc, info);
+        CreateWord_Simple.csimple(doc, simpleInfo);
         
         //填空
-        List<String> info2 = new ArrayList<String>();
+      /*  List<String> info2 = new ArrayList<String>();
         for(int i=0;i<8;i++){
         	info2.add("IP数据报由#和#两部分组成。");
-        }
-        CreateWord_Fillblank.cfillblank(doc, info2);
+        }*/
+        CreateWord_Fillblank.cfillblank(doc, fillblankInfo);
 
         //问答
-        Map<String,Boolean> info3 = new HashMap<String, Boolean>();
+     /*   Map<String,Boolean> info3 = new HashMap<String, Boolean>();
         for(int i=0;i<6;i++){
         	info3.put("什么是计算机网络？"+i, false);
         }
-        info3.put("5、请由下图解释TCP建立连接的三次握手机制。假定主机A运行的是TCP客户程序，主机B运行TCP服务器程序。", true);
-        CreateWord_Inter.cinter(doc, info3);
+        info3.put("5、请由下图解释TCP建立连接的三次握手机制。假定主机A运行的是TCP客户程序，主机B运行TCP服务器程序。", true);*/
+        CreateWord_Inter.cinter(doc, interInfo);
         
         /*******************************************/
         XWPFParagraph breakpage2 = doc.createParagraph();
