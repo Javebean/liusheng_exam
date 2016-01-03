@@ -25,8 +25,8 @@ public class SimpleSelectService {
 	@Autowired
 	private InterlocutionService iservice;
 	
-	public void addOneSimpleSelection(SimpleSelection ss) {
-		ssDao.addOneSimpleSelection(ss);
+	public boolean addOneSimpleSelection(SimpleSelection ss) {
+		return ssDao.addOneSimpleSelection(ss);
 	}
 
 	public boolean deleteOneSimpleSelection(int id) {

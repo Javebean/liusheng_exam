@@ -1,12 +1,17 @@
 package com.liusheng.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.liusheng.dao.InterlocutionDao;
 import com.liusheng.entities.Interlocution;
@@ -16,9 +21,53 @@ public class InterlocutionService {
 
 	@Autowired
 	private InterlocutionDao iDao;
+	@Autowired
+	private ServletContext context;
 
-	public void addOneInterlocution(Interlocution il) {
-		iDao.addOneInterlocution(il);
+	public boolean addOneInterlocution(Interlocution il, MultipartFile mf) {
+
+		// 获取上传路径baseUrl
+		String baseUrl = context.getRealPath("") + "\\file\\";
+
+		if (null != mf) {
+			String imgUrl = "";
+			String fileName = mf.getOriginalFilename();
+			if (!"".equalsIgnoreCase(fileName)) {
+				// 传到服务器文件夹中的文件名称为 ctimeMillis+3个随机整数+原始文件名.suffix
+				Long currentTimeMillis = System.currentTimeMillis();
+				StringBuilder sb = new StringBuilder(
+						currentTimeMillis.toString());
+				for (int i = 0; i < 3; i++) {
+					sb.append((int) (Math.random() * 10));
+				}
+
+				// 获取后缀
+				String suffix = fileName.substring(fileName.indexOf("."),
+						fileName.length());
+
+				sb.append(suffix);
+				if (fileName.endsWith(".png") || fileName.endsWith(".jpg")
+						|| fileName.endsWith(".gif")
+						|| fileName.endsWith(".jpeg")) {
+
+					// 上传的是图片
+					imgUrl = "uploadfile/" + sb;
+
+				}
+				try {
+					mf.transferTo(new File(baseUrl + sb));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+			il.setImgUrl(imgUrl);
+			return iDao.addOneInterlocution(il);
+		}
+
+		return false;
 	}
 
 	public void deleteOneInterlocution(int id) {

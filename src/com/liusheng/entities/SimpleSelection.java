@@ -111,6 +111,14 @@ public class SimpleSelection {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "SimpleSelection [id=" + id + ", problem=" + problem
+				+ ", optionA=" + optionA + ", optionB=" + optionB
+				+ ", optionC=" + optionC + ", optionD=" + optionD + ", answer="
+				+ answer + ", keypointId=" + keypointId + ", checkStatus="
+				+ checkStatus + "]";
+	}
 	
 	
 }

@@ -75,6 +75,19 @@ var getAllkp_createExam = function(){
 	});
 }
 
+var getAllkp_upload = function(){
+	var html="";
+	$.get("getallkp",function(data){
+		$.each(data,function(){
+			//checkbox+知识点+输入框
+			html+='<input type="radio" name="keypointId" value="'+this.id+'">'+this.keypoint+"&nbsp;&nbsp;";
+		});
+		$(".allkp").append(html);
+	});
+}
+
+
+
 
 
 /*审核通过题目*/

@@ -15,8 +15,8 @@ import com.liusheng.entities.FillBlankAnswer;
 public class FillBlankService {
 	@Autowired
 	private FillBlankDao fillDao;
-	public void addOneFillBlank(FillBlank fb) {
-		fillDao.addOneFillBlank(fb);
+	public boolean addOneFillBlank(FillBlank fb) {
+		return fillDao.addOneFillBlank(fb);
 	}
 
 	public void deleteOneFillBlank(int id) {

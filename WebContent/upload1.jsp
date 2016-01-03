@@ -58,35 +58,35 @@
 				<hr>
 				<h4 class="sub-header">手动上传</h4>
 				
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" id="uploadSimple" method="post">
 				   <div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="2" placeholder="请输入题目"></textarea>
+				         <textarea class="form-control" rows="2" placeholder="请输入题目" name="problem"></textarea>
 				      </div>
 				   </div>
 				   <div class="form-group">
 				      <label for="optionA" class="col-sm-1 control-label">A:</label>
 				      <div class="col-sm-5">
 				         <input type="text" class="form-control" id="optionA" 
-				            placeholder="请输入选项A">
+				            placeholder="请输入选项A" name="optionA">
 				      </div>
 				      <label for="optionB" class="col-sm-1 control-label">B:</label>
 				      <div class="col-sm-5">
 				         <input type="text" class="form-control" id="optionB" 
-				            placeholder="请输入选项B">
+				            placeholder="请输入选项B" name="optionB">
 				      </div>
 				   </div>
 				   <div class="form-group">
 				      <label for="optionC" class="col-sm-1 control-label">C:</label>
 				      <div class="col-sm-5">
 				         <input type="text" class="form-control" id="optionC" 
-				            placeholder="请输入选项C">
+				            placeholder="请输入选项C" name="optionC">
 				      </div>
 				      <label for="optionD" class="col-sm-1 control-label">D:</label>
 				      <div class="col-sm-5">
 				         <input type="text" class="form-control" id="optionD" 
-				            placeholder="请输入选项D">
+				            placeholder="请输入选项D" name="optionD">
 				      </div>
 				   </div>
 				   
@@ -94,41 +94,56 @@
 				      <label  class="col-sm-2 control-label">正确答案：</label>
 				      <div class="col-sm-2">
 				          <label class="checkbox-inline">
-	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios1" 
-	         					  value="option2"> 选项 A
+	      						<input type="radio" name="answer" 
+	         					  value="A"> 选项 A
    						  </label>
 				      </div>
 				      <div class="col-sm-2">
 				         <label class="checkbox-inline">
-	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios2" 
-	         					  value="option2"> 选项 B
+	      						<input type="radio" name="answer" 
+	         					  value="B"> 选项 B
    						  </label>
 				      </div>
 				      <div class="col-sm-2">
 				         <label class="checkbox-inline">
-	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios3" 
-	         					  value="option2"> 选项 C
+	      						<input type="radio" name="answer" 
+	         					  value="C"> 选项 C
    						  </label>
 				      </div>
 				      <div class="col-sm-2">
 				         <label class="checkbox-inline">
-	      						<input type="radio" name="optionsRadiosinline" id="optionsRadios4" 
-	         					  value="option2"> 选项 D
+	      						<input type="radio" name="answer" 
+	         					  value="D"> 选项 D
    						  </label>
 				      </div>
 				   </div>
 				 
 				   <div class="form-group">
-				      <div class="col-sm-1">
-				         <input type="submit" id ="submit2" class ="btn btn-danger" value="确认上传">
+				      <label for="firstname" class="col-xs-1 control-label">所属知识点：</label>
+				      
+				      <div class="allkp">
 				      </div>
 				   </div>
+				   
+				   <div class="form-group">
+				      <div class="col-sm-1">
+				         <button  id ="submit2" class ="btn btn-danger">确认上传</button>
+				      </div>
+				   </div>
+				   
 				</form>
 				
 				
 			</div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+	getAllkp_upload();
+	$("#submit2").click(function(){
+		$.post("addsimpleselect",$("#uploadSimple").serializeArray(),function(data){
+			console.log(data);
+		});
+	});
+</script>
 </body>
 </html>

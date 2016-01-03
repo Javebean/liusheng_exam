@@ -112,7 +112,7 @@ public class FileUploadController {
 
 						for (List<String> result : results) {
 							Interlocution i = new Interlocution(result.get(0), result.get(1), 2);
-							interService.addOneInterlocution(i);
+							//interService.addOneInterlocution(i);
 						}
 					}
 

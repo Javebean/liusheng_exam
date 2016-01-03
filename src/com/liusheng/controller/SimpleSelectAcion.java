@@ -38,5 +38,13 @@ public class SimpleSelectAcion {
 	public boolean deleteSim(@PathVariable int id){
 		return service.deleteOneSimpleSelection(id);
 	}
+	
+ 	@RequestMapping("/addsimpleselect")
+	public String addSimpleSelect(SimpleSelection ss){
+ 		System.out.println(ss);
+		boolean addOneSimpleSelection = service.addOneSimpleSelection(ss);
+		System.out.println(addOneSimpleSelection);
+		return "success";
+	}
 
 }

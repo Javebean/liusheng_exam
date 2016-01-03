@@ -7,7 +7,7 @@ import com.liusheng.entities.Interlocution;
 
 public interface InterlocutionDao {
 
-	public void addOneInterlocution(Interlocution il);
+	public boolean addOneInterlocution(Interlocution il);
 
 	public void deleteOneInterlocution(int id);
 

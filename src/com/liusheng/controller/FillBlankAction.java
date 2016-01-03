@@ -16,15 +16,23 @@ public class FillBlankAction {
 
 	@Autowired
 	private FillBlankService fservice;
-	
+
 	@RequestMapping("/getpagesfb/{start}/{items}")
-	public List<FillBlank>getpagesFillblank(@PathVariable int start,@PathVariable int items){
+	public List<FillBlank> getpagesFillblank(@PathVariable int start,
+			@PathVariable int items) {
 		return fservice.getAllFillBlank(start, items);
 	}
-	
+
 	@RequestMapping("/getfbans/{fbId}")
-	public List<FillBlankAnswer> getFBanswer(@PathVariable int fbId){
-			return fservice.getFBAnswer(fbId);
+	public List<FillBlankAnswer> getFBanswer(@PathVariable int fbId) {
+		return fservice.getFBAnswer(fbId);
 	}
-	
+
+	@RequestMapping("/addfb")
+	public boolean addFillblank(FillBlank fb) {
+		boolean b = fservice.addOneFillBlank(fb);
+		System.out.println(b);
+		return b;
+	}
+
 }

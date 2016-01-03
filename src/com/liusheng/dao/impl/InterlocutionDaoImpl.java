@@ -24,12 +24,13 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	}
 
 	@Override
-	public void addOneInterlocution(Interlocution il) {
+	public boolean addOneInterlocution(Interlocution il) {
 		try {
 			getSession().save(il);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 
 	}

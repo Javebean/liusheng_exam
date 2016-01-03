@@ -4,11 +4,10 @@ import java.util.List;
 
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
-import com.liusheng.entities.SimpleSelection;
 
 public interface FillBlankDao {
 
-	public void addOneFillBlank(FillBlank fb);
+	public boolean addOneFillBlank(FillBlank fb);
 
 	public void deleteOneFillBlank(int id);
 

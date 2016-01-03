@@ -24,12 +24,13 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	}
 
 	@Override
-	public void addOneSimpleSelection(SimpleSelection ss) {
+	public boolean addOneSimpleSelection(SimpleSelection ss) {
 		try {
 			getSession().save(ss);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 
 	}

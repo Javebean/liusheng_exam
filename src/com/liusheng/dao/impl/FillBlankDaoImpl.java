@@ -25,12 +25,13 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	}
 
 	@Override
-	public void addOneFillBlank(FillBlank fb) {
+	public boolean addOneFillBlank(FillBlank fb) {
 		try {
 			getSession().save(fb);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 
 	}
@@ -115,9 +116,8 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	public FillBlank createFillBlankByKid(String kpId, int romdom) {
 		try {
 			String hql = "from FillBlank where keypointId =?";
-			return (FillBlank) getSession().createQuery(hql)
-					.setString(0, kpId).setFirstResult(romdom).setMaxResults(0)
-					.uniqueResult();
+			return (FillBlank) getSession().createQuery(hql).setString(0, kpId)
+					.setFirstResult(romdom).setMaxResults(0).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

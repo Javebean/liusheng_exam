@@ -5,7 +5,7 @@ import java.util.List;
 import com.liusheng.entities.SimpleSelection;
 
 public interface SimpleSelectDao {
-	public  void addOneSimpleSelection(SimpleSelection ss);
+	public boolean addOneSimpleSelection(SimpleSelection ss);
 	
 	public boolean deleteOneSimpleSelection(int id);
 	

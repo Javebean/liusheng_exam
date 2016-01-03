@@ -58,21 +58,21 @@
 				
 				<hr>
 				<h4 class="sub-header">手动上传</h4>
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" id="uploadInter" enctype="multipart/form-data" action="addinter" method="post">
 				   <div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="2" placeholder="请输入题目"></textarea>
+				         <textarea class="form-control" rows="2" placeholder="请输入题目" name="problem"></textarea>
 				      </div>
 				   </div>
-				   <h5 class="sub-header">图片上传</h5>
+				   <h5 class="sub-header">图片上传（如果该题没有图片则不用上传）</h5>
 				   
     				<div id="blah" style="width: 400px;height: 400px;border: solid 1px #ccc;" class="col-sm-offset-4">
     				</div>
     				
     				<br>
     				<label class="btn btn-primary col-sm-1 col-sm-offset-4">
-    					<input type="file" required="required" id="imgInp"/>
+    					<input type="file" required="required" id="imgInp" name="file"/>
     					<span>上传图片</span>
 					</label>
     				<br>
@@ -81,10 +81,16 @@
 				   <div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">答案：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="4" placeholder="请输入答案"></textarea>
+				         <textarea class="form-control" rows="4" placeholder="请输入答案" name="answer"></textarea>
 				      </div>
 				   </div>
-				   
+				    
+				   <div class="form-group">
+				      <label for="firstname" class="col-xs-1 control-label">所属知识点：</label>
+				      
+				      <div class="allkp">
+				      </div>
+				   </div>
 				 
 				   <div class="form-group">
 				      <div class="col-sm-1">
@@ -110,9 +116,13 @@
 	    }
 	}
 	$(function(){
+		//加载所属知识点
+		getAllkp_upload();
+		
 		$("#imgInp").change(function(){
 		    readURL(this);
 		});
+		
 	})
 </script>
 </body>
