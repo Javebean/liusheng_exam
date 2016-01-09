@@ -57,14 +57,17 @@
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="abstract">
 						</tbody>
 						
 					</table>
 					
 					<ul class="pager">
-  						 <li class="previous"><a href="#">&larr;上一页</a></li>
-  							<li class="next"><a href="#">下一页 &rarr;</a></li>
+			 			<li><a class ="pageButton" name="sy">首页</a></li>
+			 			<li><a class ="pageButton" name="syy">上一页</a></li>
+			 			<li><a class ="pageButton" name="xyy">下一页</a></li>
+			 			<li><a class ="pageButton" name="wy">尾页</a></li>
+			 			<li><a>当前页码：<span id="showCurrnetPage">1</span></a></li>
 					</ul>
 					
 				</div>
@@ -119,35 +122,39 @@
 	</div>
 </div>	
 <script type="text/javascript">
+var items =3;
+/*public function*/
+var loadMessages = function(start){
+	$.ajax({
+		url:"getpagess/"+start+"/"+items,
+		type:"get",
+		dataType:"json",
+		//data:{"start":0,"itemNums":10},
+		success:function(data){
+			$("tbody.abstract").empty();
+			 $.each(data,function(){
+				$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
+				+"<td>"
+				+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
+				+"<i class='hidden' option1='"+this.optionA+"' option2='"+this.optionB+"' option3='"+this.optionC+"' option4='"+this.optionD+"'></i>"
+				+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
+				+"</td></tr>");
+			}); 
+			 
+			$.getScript("js/colorboxconfig.js");
+			
+		},
+		error:function(data,d1,d2){
+			console.log(data,d1,d2);
+		}
+	});
+}
 	 $(function(){
-		 /*public function*/
-		 var loadExamInfo = function(start){
-				$.ajax({
-					url:"getpagess/"+start+"/10",
-					type:"get",
-					dataType:"json",
-					//data:{"start":0,"itemNums":10},
-					success:function(data){
-						 $.each(data,function(){
-							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
-							+"<td>"
-							+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
-							+"<i class='hidden' option1='"+this.optionA+"' option2='"+this.optionB+"' option3='"+this.optionC+"' option4='"+this.optionD+"'></i>"
-							+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
-							+"</td></tr>");
-						}); 
-						 
-						$.getScript("js/colorboxconfig.js");
-						
-					},
-					error:function(data,d1,d2){
-						console.log(data,d1,d2);
-					}
-				});
-		 }
 		
 		/* init */
-		 loadExamInfo(0);
+		 loadMessages(0);
+		 pagebutton("getsimpages",items);
+		
 		 /*查询知识点*/
 		 getAllkp();
 		 /*审核通过*/

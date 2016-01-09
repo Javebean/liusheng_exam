@@ -26,6 +26,7 @@ import com.liusheng.service.FillBlankService;
 import com.liusheng.service.InterlocutionService;
 import com.liusheng.service.SimpleSelectService;
 import com.liusheng.util.AnalyzeExcel;
+import com.liusheng.util.NumberUtil;
 
 @Controller
 public class FileUploadController {
@@ -46,8 +47,7 @@ public class FileUploadController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	@ResponseBody
-	public CommonResult handleFileUpload(@RequestParam("type") String type,
+	public String handleFileUpload(@RequestParam("type") String type,
 			@RequestParam("file") MultipartFile file) {
 		CommonResult cr = null;
 		if (!file.isEmpty()) {
@@ -93,7 +93,7 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							SimpleSelection s = new SimpleSelection(result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), 2);
+							SimpleSelection s = new SimpleSelection(NumberUtil.createNum(),result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), 2);
 							simpleService.addOneSimpleSelection(s);
 						}
 					}  else if ("2".endsWith(type)) {
@@ -102,7 +102,7 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							FillBlank f = new FillBlank(result.get(0), 2);
+							FillBlank f = new FillBlank(NumberUtil.createNum(),result.get(0), 2);
 							fillService.addOneFillBlank(f);
 						}
 					} else if ("3".endsWith(type)) {
@@ -111,7 +111,7 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							Interlocution i = new Interlocution(result.get(0), result.get(1), 2);
+							Interlocution i = new Interlocution(NumberUtil.createNum(),result.get(0), result.get(1), 2);
 							//interService.addOneInterlocution(i);
 						}
 					}
@@ -125,12 +125,13 @@ public class FileUploadController {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new CommonResult(new Result(1, "上传文件出错，请检查试题类型！"), null);
+				//return new CommonResult(new Result(1, "上传文件出错，请检查试题类型！"), null);
 			}
 		} else {
 			logger.info("文件为空。。。");
 			cr = new CommonResult(new Result(1, "文件名为空！"), null);
 		}
-		return cr;
+		//return cr;
+		return "uploadState";
 	}
 }

@@ -13,6 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class SimpleSelection {
 	
 	private int id;
+	private String number;
 	private String problem;
 	private String optionA;
 	private String optionB;
@@ -97,9 +98,21 @@ public class SimpleSelection {
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
 	}
-	public SimpleSelection(String problem, String optionA, String optionB,
+	
+	
+	public String getNumber() {
+		return number;
+	}
+	
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
+	
+	public SimpleSelection(String number,String problem, String optionA, String optionB,
 			String optionC, String optionD, int checkStatus) {
 		super();
+		this.number = number;
 		this.problem = problem;
 		this.optionA = optionA;
 		this.optionB = optionB;

@@ -18,15 +18,21 @@ public class SimpleSelectAcion {
 	@Autowired
 	private SimpleSelectService service;
 
-	@RequestMapping("/getpagess/{start}/{itemNums}")
-	public List<SimpleSelection> getPageSimpleSelestartct( @PathVariable int start,
+	@RequestMapping("/getpagess/{page}/{itemNums}")
+	public List<SimpleSelection> getPageSimpleSelestartct( @PathVariable int page,
 			@PathVariable int itemNums) {
-		log.info("参数--start:"+start+"--itemNums: "+itemNums);
-		List<SimpleSelection> results = service.getAllSimpleSelection(start,
+		log.info("参数--page:"+page+"--itemNums: "+itemNums);
+		List<SimpleSelection> results = service.getAllSimpleSelection(page,
 				itemNums);
 		log.info("选择题的结果："+results);
 		return results;
 	}
+	
+	@RequestMapping("/getsimpages")
+	public int getsimpleselectPageNums(int items){
+		return service.getsimplecount(items);
+	}
+	
 	
 	@RequestMapping("/agreeques/{id}")
 	public boolean agreeQues(@PathVariable int id){

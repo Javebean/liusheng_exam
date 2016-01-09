@@ -56,14 +56,17 @@
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="abstract">
 						</tbody>
 						
 					</table>
 					
 					<ul class="pager">
-  						 <li class="previous"><a href="#">&larr;上一页</a></li>
-  							<li class="next"><a href="#">下一页 &rarr;</a></li>
+			 			<li><a class ="pageButton" name="sy">首页</a></li>
+			 			<li><a class ="pageButton" name="syy">上一页</a></li>
+			 			<li><a class ="pageButton" name="xyy">下一页</a></li>
+			 			<li><a class ="pageButton" name="wy">尾页</a></li>
+			 			<li><a>当前页码：<span id="showCurrnetPage">1</span></a></li>
 					</ul>
 					
 				</div>
@@ -107,36 +110,39 @@
 	</div>
 </div>	
 <script type="text/javascript">
-	 $(function(){
-		 /*public function*/
-		 var loadExamInfo = function(start){
-				$.ajax({
-					url:"getpagesfb/"+start+"/10",
-					type:"get",
-					dataType:"json",
-					success:function(data){
-						 $.each(data,function(){
-							$.get("getfbans/"+this.id,function(data){
-								
-							});
-							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>未审核</td>"
-							+"<td>"
-							+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
-							+"<button type='button' name='delete' class='btn btn-danger'>删除</button>"
-							+"</td></tr>");
-						}); 
-						 
-						$.getScript("js/colorboxconfig.js");
+var items = 2;
+ /*public function*/
+ var loadMessages = function(start){
+		$.ajax({
+			url:"getpagesfb/"+start+"/"+items,
+			type:"get",
+			dataType:"json",
+			success:function(data){
+				$("tbody.abstract").empty();
+				 $.each(data,function(){
+					$.get("getfbans/"+this.id,function(data){
 						
-					},
-					error:function(data,d1,d2){
-						console.log(data,d1,d2);
-					}
-				});
-		 }
-		
+					});
+					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>未审核</td>"
+					+"<td>"
+					+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
+					+"<button type='button' name='delete' class='btn btn-danger'>删除</button>"
+					+"</td></tr>");
+				}); 
+				 
+				$.getScript("js/colorboxconfig.js");
+				
+			},
+			error:function(data,d1,d2){
+				console.log(data,d1,d2);
+			}
+		});
+ }
+
+	 $(function(){
 		/* init */
-		 loadExamInfo(0);
+		 loadMessages(0);
+		 pagebutton("getfbpages",items);
 		 /*查询知识点*/
 		 getAllkp();
 		 

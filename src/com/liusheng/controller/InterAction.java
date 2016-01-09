@@ -1,6 +1,7 @@
 package com.liusheng.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.liusheng.entities.Interlocution;
 import com.liusheng.service.InterlocutionService;
+import com.liusheng.util.NumberUtil;
 
 @Controller
 public class InterAction {
@@ -21,20 +23,30 @@ public class InterAction {
 	private Logger log = Logger.getLogger(InterAction.class);
 
 	@ResponseBody
-	@RequestMapping(value = "/getpagesinter/{start}/{itemNums}")
-	public List<Interlocution> getPagesInterlocation(@PathVariable int start,
+	@RequestMapping(value = "/getpagesinter/{page}/{itemNums}")
+	public List<Interlocution> getPagesInterlocation(@PathVariable int page,
 			@PathVariable int itemNums) {
-		log.info("查询pages问答题: start:" + start + ",itemNums:" + itemNums);
-		return service.getAllInterlocution(start, itemNums);
+		log.info("查询pages问答题: start:" + page + ",itemNums:" + itemNums);
+		return service.getAllInterlocution(page, itemNums);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getinterpages")
+	public int getInterLocationPageNums(int items){
+		return service.geteInterLocutionPageNums(items);
+	}
+	
 	@RequestMapping("/addinter")
-	public String addInterlocation(Interlocution il, MultipartFile file) {
+	public String addInterlocation(Interlocution il, MultipartFile file,Map<String,String>map) {
+		il.setNumber(NumberUtil.createNum());
 		boolean b = service.addOneInterlocution(il, file);
+		String text = null;
 		if (b) {
-			return "upload3";
+			text = "上传成功";
 		} else {
-			return "error";
+			text = "上传失败";
 		}
+		map.put("message", text);
+		return "redirect:uploadState.jsp";
 	}
 }

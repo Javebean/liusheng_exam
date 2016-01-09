@@ -80,6 +80,8 @@
 				      <div class="col-sm-1">
 				         <button id ="submit2" class ="btn btn-danger">确认上传</button>
 				      </div>
+				      <img alt="loading" src="images/loading.gif" class="col-sm-1 loading hidden">
+				      <p class="tipmes col-sm-2"></p>
 				   </div>
 				</form>
 			</div>
@@ -90,8 +92,15 @@
 	
 	$(function(){
 		$("#submit2").click(function(){
+			$(".loading").removeClass("hidden");
 			$.post("addfb",$("#uploadFillBlank").serializeArray(),function(data){
-				console.log(data);
+				if(data){
+					//添加填空题成功
+					$(".loading").addClass("hidden");
+					$(".tipmes").text("上传成功");
+				}else{
+					$(".tipmes").text("上传失败");
+				}
 			});
 			return false;
 		});

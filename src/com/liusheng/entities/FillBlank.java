@@ -12,6 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class FillBlank {
 	
 	private int id;
+	private String number;
 	private String problem;
 	private String keypointId;
 	private int checkStatus;
@@ -49,8 +50,18 @@ public class FillBlank {
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
 	}
-	public FillBlank(String problem, int checkStatus) {
+	
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
+	
+	public FillBlank(String number,String problem, int checkStatus) {
 		super();
+		this.number = number;
 		this.problem = problem;
 		this.checkStatus = checkStatus;
 	}

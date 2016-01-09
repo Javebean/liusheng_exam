@@ -69,7 +69,7 @@
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="abstract">
 						</tbody>
 						
 					</table>
@@ -125,7 +125,7 @@ var items = 10;
 			dataType:"json",
 			//data:{"start":0,"itemNums":10},
 			success:function(data){
-				 $("tbody").empty();
+				 $("tbody.abstract").empty();
 				 $.each(data,function(){
 					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.keypoint+"</td>"
 					+"<td>"
@@ -146,7 +146,7 @@ var items = 10;
  $(function(){
 		/* init */
 		 loadMessages(1);
-		 pagebutton("getkpages",items)
+		 pagebutton("getkpages",items);
 		/*增加知识点*/
 		 $("#addKey").click(function(){
 			 var keyName = $("#keyName").val();

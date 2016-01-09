@@ -41,7 +41,8 @@ public class SimpleSelectService {
 		return null;
 	}
 
-	public List<SimpleSelection> getAllSimpleSelection(int start, int itemNums) {
+	public List<SimpleSelection> getAllSimpleSelection(int page, int itemNums) {
+		int start = (page-1)*itemNums;
 		return ssDao.getAllSimpleSelection(start, itemNums);
 	}
 
@@ -49,7 +50,11 @@ public class SimpleSelectService {
 		return ssDao.checkOneSimpleSelection(id);
 	}
 	
-	
+	public int getsimplecount(int items){
+		double count = ssDao.getSimpleSelectionCount();
+		int page = (int) Math.ceil(count/items);
+		return page;
+	}
 	
 	public List<SimpleSelection> createSimple(Map<String,Integer> map){
 		/**

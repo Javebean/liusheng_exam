@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
 import com.liusheng.service.FillBlankService;
+import com.liusheng.util.NumberUtil;
 
 @RestController
 public class FillBlankAction {
@@ -17,12 +18,18 @@ public class FillBlankAction {
 	@Autowired
 	private FillBlankService fservice;
 
-	@RequestMapping("/getpagesfb/{start}/{items}")
-	public List<FillBlank> getpagesFillblank(@PathVariable int start,
+	@RequestMapping("/getpagesfb/{page}/{items}")
+	public List<FillBlank> getpagesFillblank(@PathVariable int page,
 			@PathVariable int items) {
-		return fservice.getAllFillBlank(start, items);
+		return fservice.getAllFillBlank(page, items);
 	}
 
+	@RequestMapping("/getfbpages")
+	public int getfillBlankpageNums(int items){
+		return fservice.getFillBlankPageNums(items);
+		
+	}
+	
 	@RequestMapping("/getfbans/{fbId}")
 	public List<FillBlankAnswer> getFBanswer(@PathVariable int fbId) {
 		return fservice.getFBAnswer(fbId);
@@ -30,6 +37,7 @@ public class FillBlankAction {
 
 	@RequestMapping("/addfb")
 	public boolean addFillblank(FillBlank fb) {
+		fb.setNumber(NumberUtil.createNum());
 		boolean b = fservice.addOneFillBlank(fb);
 		System.out.println(b);
 		return b;

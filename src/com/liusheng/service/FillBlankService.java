@@ -29,8 +29,16 @@ public class FillBlankService {
 		return null;
 	}
 
-	public List<FillBlank> getAllFillBlank(int start, int itemNums) {
+	public List<FillBlank> getAllFillBlank(int page, int itemNums) {
+		int start = (page-1)*itemNums;
 		return fillDao.getAllFillBlank(start, itemNums);
+	}
+	
+	
+	public int getFillBlankPageNums(int items){
+		double count = fillDao.getFillBlankCount();
+		int pages = (int) Math.ceil(count/items);
+		return pages;
 	}
 
 	public boolean checkOneFillBlank(int id) {

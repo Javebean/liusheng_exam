@@ -13,6 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Interlocution {
 	private int id;
 	
+	private String number;
 	private String problem;
 	
 	private String imgUrl;
@@ -77,9 +78,16 @@ public class Interlocution {
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
 	}
+	
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
-	public Interlocution(String problem, String imgUrl, int checkStatus) {
-		super();
+	public Interlocution(String number,String problem, String imgUrl, int checkStatus) {
+		this.number = number;
 		this.problem = problem;
 		this.imgUrl = imgUrl;
 		this.checkStatus = checkStatus;

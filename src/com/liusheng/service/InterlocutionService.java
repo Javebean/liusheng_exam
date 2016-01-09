@@ -80,10 +80,17 @@ public class InterlocutionService {
 		return null;
 	}
 
-	public List<Interlocution> getAllInterlocution(int start, int itemNums) {
+	public List<Interlocution> getAllInterlocution(int page, int itemNums) {
+		int start = (page-1)*itemNums;
 		return iDao.getAllInterlocution(start, itemNums);
 	}
 
+	public int geteInterLocutionPageNums(int items){
+		double count = iDao.getInterlocaionCount();
+		int pages = (int) Math.ceil(count/items);
+		return pages;
+	}
+	
 	public boolean checkOneInterlocution(int id) {
 		return false;
 	}
