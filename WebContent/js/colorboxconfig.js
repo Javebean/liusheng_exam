@@ -26,9 +26,16 @@ $(function() {
 				$("#D").attr("checked","checked");
 			}
 			
-			/*回显知识点*/
+			/*回显知识点 kpId在审核的按钮上，所以能获取到*/
 			var kpId = $(this).attr("kpId");
 			$("#kp"+kpId).attr("checked","checked");
+			/*回显四个选项*/
+			var $option = $(this).next();
+			$("#A").next().text($option.attr("option1"));
+			$("#B").next().text($option.attr("option2"));
+			$("#C").next().text($option.attr("option3"));
+			$("#D").next().text($option.attr("option4"));
+			
 			/*获取题目id*/
 			var qid = $(this).attr("qId");
 			$("#agree").attr("agreeId",qid);

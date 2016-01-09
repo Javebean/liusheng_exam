@@ -93,12 +93,12 @@
 				</tr>
 				<tr><td>选项：</td></tr>
 				<tr>
-					<td colspan="2"><input type="radio" name="answer" id="A" /><label for="A">A：选项选项1</label></td>
-					<td colspan="2"><input type="radio" name="answer" id="B" /><label for="B">B：选项选项2</label></td>
+					<td colspan="2"><input type="radio" name="answer" id="A" />A：<label for="A"></label></td>
+					<td colspan="2"><input type="radio" name="answer" id="B" />B：<label for="B"></label></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="radio" name="answer" id="C" /><label for="C">C：选项选项3</label></td>
-					<td colspan="2"><input type="radio" name="answer" id="D" /><label for="D">D：选项选项4</label></td>
+					<td colspan="2"><input type="radio" name="answer" id="C" />C：<label for="C"></label></td>
+					<td colspan="2"><input type="radio" name="answer" id="D" />D：<label for="D"></label></td>
 				</tr>
 				
 				<tr><td>&nbsp;</td></tr>
@@ -132,6 +132,7 @@
 							$(".table tbody").append("<tr><td>1,001</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
 							+"<td>"
 							+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
+							+"<i class='hidden' option1='"+this.optionA+"' option2='"+this.optionB+"' option3='"+this.optionC+"' option4='"+this.optionD+"'></i>"
 							+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
 							+"</td></tr>");
 						}); 

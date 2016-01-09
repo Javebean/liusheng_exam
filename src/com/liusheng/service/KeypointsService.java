@@ -2,6 +2,7 @@ package com.liusheng.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import com.liusheng.entities.Keypoints;
 @Service
 public class KeypointsService {
 
+	private static Logger log = Logger.getLogger(KeypointsService.class);
 	@Autowired
 	private KeypointsDao kDao;
 
@@ -31,13 +33,21 @@ public class KeypointsService {
 		return null;
 	}
 
-	public List<Keypoints> getAllKeypoints(int start, int items) {
+	public List<Keypoints> getAllKeypoints(int page, int items) {
+		int start = (page-1)*items;
 		List<Keypoints> allKeypoints = kDao.getAllKeypoints(start, items);
 		return allKeypoints;
 	}
 	
 	public List<Keypoints> getAllkp(){
 		return kDao.getAllkp();
+	}
+	
+	public int getkpPages(int items){
+		double count =  kDao.getkeypointCount();
+		int pages = (int) Math.ceil(count/items);
+		log.info("查询知识点一共 "+pages+" 页");
+		return pages;
 	}
 	
 }

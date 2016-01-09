@@ -75,8 +75,11 @@
 					</table>
 					
 					<ul class="pager">
-  						 <li class="previous"><a href="#">&larr;上一页</a></li>
-  							<li class="next"><a href="#">下一页 &rarr;</a></li>
+			 			<li><a class ="pageButton" name="sy">首页</a></li>
+			 			<li><a class ="pageButton" name="syy">上一页</a></li>
+			 			<li><a class ="pageButton" name="xyy">下一页</a></li>
+			 			<li><a class ="pageButton" name="wy">尾页</a></li>
+			 			<li><a>当前页码：<span id="showCurrnetPage">1</span></a></li>
 					</ul>
 					
 				</div>
@@ -113,35 +116,37 @@
 </div>	
 
 <script type="text/javascript">
-	 $(function(){
-		 /*public function*/
-		 var loadExamInfo = function(start){
-				$.ajax({
-					url:"pageskeypoint/"+start+"/10",
-					type:"get",
-					dataType:"json",
-					//data:{"start":0,"itemNums":10},
-					success:function(data){
-						 $.each(data,function(){
-							$(".table tbody").append("<tr><td>1,001</td><td>"+this.keypoint+"</td>"
-							+"<td>"
-							+"<button type='button' name='updateKey' class='btn btn-primary' tid='"+this.id+"'>修改</button>&nbsp;&nbsp;"
-							+"<button type='button' name='delete' class='btn btn-danger' ky='kp' tid='"+this.id+"'>删除</button>"
-							+"</td></tr>");
-						}); 
-						 
-						$.getScript("js/colorboxconfig.js");
-						
-					},
-					error:function(data,d1,d2){
-						console.log(data,d1,d2);
-					}
-				});
-		 }
-		
+var items = 10;	
+ /*public function*/
+ var loadMessages = function(start){
+		$.ajax({
+			url:"pageskeypoint/"+start+"/"+items,
+			type:"get",
+			dataType:"json",
+			//data:{"start":0,"itemNums":10},
+			success:function(data){
+				 $("tbody").empty();
+				 $.each(data,function(){
+					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.keypoint+"</td>"
+					+"<td>"
+					+"<button type='button' name='updateKey' class='btn btn-primary' tid='"+this.id+"'>修改</button>&nbsp;&nbsp;"
+					+"<button type='button' name='delete' class='btn btn-danger' ky='kp' tid='"+this.id+"'>删除</button>"
+					+"</td></tr>");
+				}); 
+				 
+				$.getScript("js/colorboxconfig.js");
+				
+			},
+			error:function(data,d1,d2){
+				console.log(data,d1,d2);
+			}
+		});
+ }
+
+ $(function(){
 		/* init */
-		 loadExamInfo(0);
-		
+		 loadMessages(1);
+		 pagebutton("getkpages",items)
 		/*增加知识点*/
 		 $("#addKey").click(function(){
 			 var keyName = $("#keyName").val();

@@ -96,4 +96,16 @@ public class KeypointsDaoImpl implements KeypointsDao {
 		}
 	}
 
+	@Override
+	public long getkeypointCount() {
+		try{
+			String hql = "select count(id) from Keypoints";
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }

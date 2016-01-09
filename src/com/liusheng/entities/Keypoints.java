@@ -13,6 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class Keypoints {
 	private int id;
 	private String keypoint;
+	private String number;//编号
+	
 	
 	@Id
 	@GenericGenerator(name="generator",strategy="native")
@@ -32,9 +34,17 @@ public class Keypoints {
 	public void setKeypoint(String keypoint) {
 		this.keypoint = keypoint;
 	}
-	public Keypoints(String keypoint) {
+	
+	public Keypoints(String keypoint, String number) {
 		super();
 		this.keypoint = keypoint;
+		this.number = number;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
 	}
 	public Keypoints() {
 		super();
