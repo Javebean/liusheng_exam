@@ -1,9 +1,9 @@
 package com.liusheng.util;
 
 public class Constant {
-	public static final int CHECKSUCCESS = 1;//审核通过
+	public static final int CHECK_SUCCESS = 1;//审核通过
 	
-	public static final int CHECKFAIL = 0;//审核不通过
+	public static final int CHECK_FAIL = 0;//审核不通过
 	
 	public static final int ERHAO_FONTSIZE =44;
 	

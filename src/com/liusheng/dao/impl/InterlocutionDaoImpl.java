@@ -75,11 +75,11 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Interlocution> getAllInterlocution(int start, int itemNums) {
+	public List<Interlocution> getAllInterlocution(int start, int itemNums,int state) {
 		List<Interlocution> list = null;
 		try {
-			String hql = "from Interlocution";
-			list = getSession().createQuery(hql).setFirstResult(start)
+			String hql = "from Interlocution where checkStatus =?";
+			list = getSession().createQuery(hql).setInteger(0, state).setFirstResult(start)
 					.setMaxResults(itemNums).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +92,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	public boolean checkOneInterlocution(int id) {
 		try {
 			String hql = "update Interlocution set checkStatus =? where id = ?";
-			getSession().createQuery(hql).setInteger(0, Constant.CHECKSUCCESS)
+			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS)
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

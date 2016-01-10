@@ -72,10 +72,10 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SimpleSelection> getAllSimpleSelection(int start, int itemNums) {
+	public List<SimpleSelection> getAllSimpleSelection(int start, int itemNums,int state) {
 		try {
-			String hql = "from SimpleSelection";
-			List<SimpleSelection> list = getSession().createQuery(hql)
+			String hql = "from SimpleSelection where checkStatus =?";
+			List<SimpleSelection> list = getSession().createQuery(hql).setInteger(0, state)
 					.setFirstResult(start).setMaxResults(itemNums).list();
 			return list;
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	public boolean checkOneSimpleSelection(int id) {
 		try {
 			String hql = "update SimpleSelection set checkStatus =? where id = ?";
-			getSession().createQuery(hql).setInteger(0, Constant.CHECKSUCCESS)
+			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS)
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

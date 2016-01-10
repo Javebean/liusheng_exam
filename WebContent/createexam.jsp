@@ -65,30 +65,42 @@
 				<div class="allkp">
 				</div>
 				<hr>
-				<button type="button" id="createExam" class="btn btn-danger center-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				<div class="col-xs-4 col-xs-offset-4">
+					<button type="button" id="createExam" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<img alt="loding" src="images/loading.gif" class="hidden load">
+					<p class="tipmes"></p>
+				</div>
 			</div>
 		</div>
 	</div>
 <script type="text/javascript">
 	var index = 0;
 	var flag = false;
+	var checkNum = function(val){
+		if(!$.isNumeric(val)){
+			alert("请输入合法的数字");
+			flag = true;
+		}
+		index+=val;
+		if(index>10){
+			alert("填入的数量总和大于题目数量");
+			flag = true;
+		}
+		index =0;
+	}
 	$(function(){
 		getAllkp_createExam();
-		var checkNum = function(val){
-			if(!$.isNumeric(val)){
-				alert("请输入合法的数字");
-				flag = true;
-			}
-			index+=val;
-			if(index>10){
-				alert("填入的数量总和大于题目数量");
-				flag = true;
-			}
-			index =0;
-		}
-		
-		
 		$("#createExam").click(function(){
+			$(".load").removeClass("hidden");
+			$(".tipmes").text("");
+			//检查单选 填空 问答 一共选择的数量
+			var length = $(".allkp").children("input:checked").length;
+			if(length<3){
+				$(".load").addClass("hidden");
+				$(".tipmes").text("请至少选择3项");
+				return false;
+			}
+			
 			//输入框里面填的数字之和不能大于所给的题目数量
 			var a = $(".allkp").eq(0).children("input:checked").map(function(){
 				var val = $(this).next().val();

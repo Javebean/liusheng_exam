@@ -45,10 +45,10 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">出卷系统控制台</h1>
 
-				<h2 class="sub-header">填空题审核</h2>
+				<h2 class="sub-header">单选题审核</h2>
 				<ul class="nav nav-tabs">
-				   <li class="active"><a href="ma_fillbank.jsp">未审核</a></li>
-				   <li><a href="ma_fillbank_audited.jsp">已审核</a></li>
+				   <li><a href="ma_simple.jsp">未审核</a></li>
+				   <li class="active"><a href="ma_simple_audited.jsp">已审核</a></li>
 				</ul>
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -56,6 +56,7 @@
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
+								<th>选项</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -93,20 +94,31 @@
 				<tr>
 					<td colspan="4">
 						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重填写答案，该答案将作为该题的标准（参考）答案！
+		   					<strong>注意！</strong>请慎重审核答案和所属知识点，该答案将作为该题的标准（参考）答案！
 						</div>
 					</td>
 				</tr>
+				<tr><td>选项：</td></tr>
+				<tr>
+					<td colspan="2"><input type="radio" name="answer" id="A" />A：<label for="A"></label></td>
+					<td colspan="2"><input type="radio" name="answer" id="B" />B：<label for="B"></label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="radio" name="answer" id="C" />C：<label for="C"></label></td>
+					<td colspan="2"><input type="radio" name="answer" id="D" />D：<label for="D"></label></td>
+				</tr>
+				
 				<tr><td>&nbsp;</td></tr>
 				<tr id="kpArea">
 					<td colspan="4">所属知识点：</td>
 				</tr>
+				
 			</tbody>
 			<tfoot>
 				<tr><td>&nbsp;<hr></td></tr>
 					<tr>
 						<td colspan="4">
-							<button type="button" class="btn btn-danger">确认选择</button>
+							<button type="button" class="btn btn-danger" id="agree" agreeId="" >通     过</button>
 						</td>
 					</tr>
 				</tfoot>
@@ -114,41 +126,45 @@
 	</div>
 </div>	
 <script type="text/javascript">
-var items = 2;
- /*public function*/
- var loadMessages = function(start){
-		$.ajax({
-			url:"getpagesfb/"+start+"/"+items+"/0",
-			type:"get",
-			dataType:"json",
-			success:function(data){
-				$("tbody.abstract").empty();
-				 $.each(data,function(){
-					$.get("getfbans/"+this.id,function(data){
-						
-					});
-					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>未审核</td>"
-					+"<td>"
-					+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
-					+"<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+this.id+"'>删除</button>"
-					+"</td></tr>");
-				}); 
-				 
-				$.getScript("js/colorboxconfig.js");
-				
-			},
-			error:function(data,d1,d2){
-				console.log(data,d1,d2);
-			}
-		});
- }
-
+var items =3;
+/*public function*/
+var loadMessages = function(start){
+	$.ajax({
+		url:"getpagess/"+start+"/"+items+"/1",
+		type:"get",
+		dataType:"json",
+		//data:{"start":0,"itemNums":10},
+		success:function(data){
+			$("tbody.abstract").empty();
+			 $.each(data,function(){
+				$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
+				+"<td>"
+				+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
+				+"<i class='hidden' option1='"+this.optionA+"' option2='"+this.optionB+"' option3='"+this.optionC+"' option4='"+this.optionD+"'></i>"
+				+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
+				+"</td></tr>");
+			}); 
+			 
+			$.getScript("js/colorboxconfig.js");
+			
+		},
+		error:function(data,d1,d2){
+			console.log(data,d1,d2);
+		}
+	});
+}
 	 $(function(){
+		
 		/* init */
 		 loadMessages(0);
-		 pagebutton("getfbpages",items);
+		 pagebutton("getsimpages",items);
+		
 		 /*查询知识点*/
 		 getAllkp();
+		 /*审核通过*/
+		 $("#agree").click(function(){
+			 agreeQues("agreeques",$(this).attr("agreeId"));
+		 });
 		 
 	})
 </script>

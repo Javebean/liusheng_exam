@@ -15,7 +15,7 @@ public interface InterlocutionDao {
 
 	public Interlocution getOneInterlocution(int id);
 
-	public List<Interlocution> getAllInterlocution(int start, int itemNums);
+	public List<Interlocution> getAllInterlocution(int start, int itemNums,int state);
 
 	public boolean checkOneInterlocution(int id);
 	

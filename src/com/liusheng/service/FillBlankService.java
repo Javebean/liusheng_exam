@@ -30,9 +30,9 @@ public class FillBlankService {
 		return null;
 	}
 
-	public List<FillBlank> getAllFillBlank(int page, int itemNums) {
+	public List<FillBlank> getAllFillBlank(int page, int itemNums,int state) {
 		int start = (page-1)*itemNums;
-		return fillDao.getAllFillBlank(start, itemNums);
+		return fillDao.getAllFillBlank(start, itemNums,state);
 	}
 	
 	

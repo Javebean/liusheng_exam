@@ -18,12 +18,12 @@ public class SimpleSelectAcion {
 	@Autowired
 	private SimpleSelectService service;
 
-	@RequestMapping("/getpagess/{page}/{itemNums}")
+	@RequestMapping("/getpagess/{page}/{itemNums}/{state}")
 	public List<SimpleSelection> getPageSimpleSelestartct( @PathVariable int page,
-			@PathVariable int itemNums) {
+			@PathVariable int itemNums,@PathVariable int state) {
 		log.info("参数--page:"+page+"--itemNums: "+itemNums);
 		List<SimpleSelection> results = service.getAllSimpleSelection(page,
-				itemNums);
+				itemNums,state);
 		log.info("选择题的结果："+results);
 		return results;
 	}

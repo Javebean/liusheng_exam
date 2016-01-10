@@ -41,9 +41,9 @@ public class SimpleSelectService {
 		return null;
 	}
 
-	public List<SimpleSelection> getAllSimpleSelection(int page, int itemNums) {
+	public List<SimpleSelection> getAllSimpleSelection(int page, int itemNums ,int state) {
 		int start = (page-1)*itemNums;
-		return ssDao.getAllSimpleSelection(start, itemNums);
+		return ssDao.getAllSimpleSelection(start, itemNums,state);
 	}
 
 	public boolean checkOneSimpleSelection(int id) {

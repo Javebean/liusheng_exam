@@ -15,7 +15,7 @@ public interface FillBlankDao {
 
 	public FillBlank getOneFillBlank(int id);
 
-	public List<FillBlank> getAllFillBlank(int start, int itemNums);
+	public List<FillBlank> getAllFillBlank(int start, int itemNums,int state);
 	
 	public long getFillBlankCount();
 

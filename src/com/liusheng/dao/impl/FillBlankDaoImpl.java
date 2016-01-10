@@ -74,10 +74,10 @@ public class FillBlankDaoImpl implements FillBlankDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FillBlank> getAllFillBlank(int start, int itemNums) {
+	public List<FillBlank> getAllFillBlank(int start, int itemNums,int state) {
 		try {
-			String hql = "from FillBlank";
-			List<FillBlank> list = getSession().createQuery(hql)
+			String hql = "from FillBlank where checkStatus =?";
+			List<FillBlank> list = getSession().createQuery(hql).setInteger(0, state)
 					.setFirstResult(start).setMaxResults(itemNums).list();
 			return list;
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	public boolean checkOneFillBlank(int id) {
 		try {
 			String hql = "update FillBlank set checkStatus =? where id = ?";
-			getSession().createQuery(hql).setInteger(0, Constant.CHECKSUCCESS)
+			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS)
 					.setInteger(1, id).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

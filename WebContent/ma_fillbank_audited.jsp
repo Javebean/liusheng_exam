@@ -47,8 +47,8 @@
 
 				<h2 class="sub-header">填空题审核</h2>
 				<ul class="nav nav-tabs">
-				   <li class="active"><a href="ma_fillbank.jsp">未审核</a></li>
-				   <li><a href="ma_fillbank_audited.jsp">已审核</a></li>
+				   <li><a href="ma_fillbank.jsp">未审核</a></li>
+				   <li class="active"><a href="ma_fillbank_audited.jsp">已审核</a></li>
 				</ul>
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -118,7 +118,7 @@ var items = 2;
  /*public function*/
  var loadMessages = function(start){
 		$.ajax({
-			url:"getpagesfb/"+start+"/"+items+"/0",
+			url:"getpagesfb/"+start+"/"+items+"/1",
 			type:"get",
 			dataType:"json",
 			success:function(data){

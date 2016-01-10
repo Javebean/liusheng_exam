@@ -81,9 +81,9 @@ public class InterlocutionService {
 		return null;
 	}
 
-	public List<Interlocution> getAllInterlocution(int page, int itemNums) {
+	public List<Interlocution> getAllInterlocution(int page, int itemNums,int state) {
 		int start = (page-1)*itemNums;
-		return iDao.getAllInterlocution(start, itemNums);
+		return iDao.getAllInterlocution(start, itemNums,state);
 	}
 
 	public int geteInterLocutionPageNums(int items){

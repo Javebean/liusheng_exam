@@ -23,11 +23,11 @@ public class InterAction {
 	private Logger log = Logger.getLogger(InterAction.class);
 
 	@ResponseBody
-	@RequestMapping(value = "/getpagesinter/{page}/{itemNums}")
+	@RequestMapping(value = "/getpagesinter/{page}/{itemNums}/{state}")
 	public List<Interlocution> getPagesInterlocation(@PathVariable int page,
-			@PathVariable int itemNums) {
+			@PathVariable int itemNums,@PathVariable int state) {
 		log.info("查询pages问答题: start:" + page + ",itemNums:" + itemNums);
-		return service.getAllInterlocution(page, itemNums);
+		return service.getAllInterlocution(page, itemNums,state);
 	}
 
 	@ResponseBody

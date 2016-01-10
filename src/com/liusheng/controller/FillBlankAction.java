@@ -18,10 +18,10 @@ public class FillBlankAction {
 	@Autowired
 	private FillBlankService fservice;
 
-	@RequestMapping("/getpagesfb/{page}/{items}")
+	@RequestMapping("/getpagesfb/{page}/{items}/{state}")
 	public List<FillBlank> getpagesFillblank(@PathVariable int page,
-			@PathVariable int items) {
-		return fservice.getAllFillBlank(page, items);
+			@PathVariable int items,@PathVariable int state) {
+		return fservice.getAllFillBlank(page, items,state);
 	}
 
 	@RequestMapping("/getfbpages")

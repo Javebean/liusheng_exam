@@ -45,10 +45,10 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">出卷系统控制台</h1>
 
-				<h2 class="sub-header">填空题审核</h2>
+				<h2 class="sub-header">问答题审核</h2>
 				<ul class="nav nav-tabs">
-				   <li class="active"><a href="ma_fillbank.jsp">未审核</a></li>
-				   <li><a href="ma_fillbank_audited.jsp">已审核</a></li>
+				   <li><a href="ma_locution.jsp">未审核</a></li>
+				   <li class="active"><a href="ma_locution_audited.jsp">已审核</a></li>
 				</ul>
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -56,6 +56,7 @@
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
+								<th>答案</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -93,10 +94,17 @@
 				<tr>
 					<td colspan="4">
 						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重填写答案，该答案将作为该题的标准（参考）答案！
+		   					<strong>注意！</strong>请慎重选择答案，该答案将作为该题的标准（参考）答案！
 						</div>
 					</td>
 				</tr>
+				<tr><td>答案：</td></tr>
+				<tr>
+					<td colspan="4">
+						<textarea class="form-control" rows="2" symbol="answer"></textarea>
+					</td>
+				</tr>
+				
 				<tr><td>&nbsp;</td></tr>
 				<tr id="kpArea">
 					<td colspan="4">所属知识点：</td>
@@ -114,23 +122,22 @@
 	</div>
 </div>	
 <script type="text/javascript">
-var items = 2;
+var items =2;
  /*public function*/
  var loadMessages = function(start){
 		$.ajax({
-			url:"getpagesfb/"+start+"/"+items+"/0",
+			url:"getpagesinter/"+start+"/"+items+"/1",
 			type:"get",
 			dataType:"json",
+			//data:{"start":0,"itemNums":10},
 			success:function(data){
-				$("tbody.abstract").empty();
+				 $("tbody.abstract").empty();
 				 $.each(data,function(){
-					$.get("getfbans/"+this.id,function(data){
-						
-					});
-					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>未审核</td>"
+					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.answer+"</td><td>未审核</td>"
 					+"<td>"
-					+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
-					+"<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+this.id+"'>删除</button>"
+					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
+					+"<i class='hidden' ></i>"
+					+"<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				}); 
 				 
@@ -142,11 +149,11 @@ var items = 2;
 			}
 		});
  }
-
 	 $(function(){
+		
 		/* init */
-		 loadMessages(0);
-		 pagebutton("getfbpages",items);
+		 loadMessages(1);
+		 pagebutton("getinterpages",items);
 		 /*查询知识点*/
 		 getAllkp();
 		 

@@ -12,8 +12,8 @@ public interface SimpleSelectDao {
 	public void updataOneSimpleSelection(SimpleSelection ss);
 	
 	public SimpleSelection getOneSimpleSelection(int id);
-	
-	public List<SimpleSelection> getAllSimpleSelection(int start,int itemNums);
+	/*state 审核状态*/
+	public List<SimpleSelection> getAllSimpleSelection(int start,int itemNums,int state);
 	
 	public boolean checkOneSimpleSelection(int id);
 	

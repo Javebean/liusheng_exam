@@ -46,6 +46,10 @@
 				<h1 class="page-header">出卷系统控制台</h1>
 
 				<h2 class="sub-header">问答题审核</h2>
+				<ul class="nav nav-tabs">
+				   <li class="active"><a href="ma_locution.jsp">未审核</a></li>
+				   <li><a href="ma_locution_audited.jsp">已审核</a></li>
+				</ul>
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
@@ -122,7 +126,7 @@ var items =2;
  /*public function*/
  var loadMessages = function(start){
 		$.ajax({
-			url:"getpagesinter/"+start+"/"+items,
+			url:"getpagesinter/"+start+"/"+items+"/0",
 			type:"get",
 			dataType:"json",
 			//data:{"start":0,"itemNums":10},

@@ -71,9 +71,12 @@ var getAllkp = function(){
 var getAllkp_createExam = function(){
 	var html="";
 	$.get("getallkp",function(data){
-		$.each(data,function(){
+		$.each(data,function(index){
 			//checkbox+知识点+输入框
-			html+='<input type="checkbox" name="'+this.id+'">'+this.keypoint+'&nbsp;×&nbsp;'+'<input value="" type="text" class="form-control" style="width:40px; height:25px;display:inline-block">&nbsp;&nbsp;';
+			html+='<input type="checkbox" name="'+this.id+'">'+this.keypoint+'&nbsp;×&nbsp;'+'<input value="" type="text" class="form-control" style="width:50px; height:25px;display:inline-block">&nbsp;&nbsp;';
+			if((index+1)%4==0){
+				html+="<br/><br/>";
+			}
 		});
 		$(".allkp").append(html);
 	});
