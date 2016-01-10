@@ -32,10 +32,14 @@ var deleteItem = function (url,dId){
 		type:"get",
 		dataType:"json",
 		success:function (data){
-			window.location.reload();
+			if(data){
+				window.location.reload();
+			}else{
+				alert("删除失败！");
+			}
 		},
 		error:function(){
-			console.log("ajax error");
+			alert("删除失败！");
 		} 
 		
 	});

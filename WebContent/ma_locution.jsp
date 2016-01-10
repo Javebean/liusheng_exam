@@ -45,7 +45,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">出卷系统控制台</h1>
 
-				<h2 class="sub-header">单选题审核</h2>
+				<h2 class="sub-header">问答题审核</h2>
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
@@ -97,7 +97,7 @@
 				<tr><td>答案：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea class="form-control" rows="2"></textarea>
+						<textarea class="form-control" rows="2" symbol="answer"></textarea>
 					</td>
 				</tr>
 				
@@ -132,7 +132,8 @@ var items =2;
 					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.answer+"</td><td>未审核</td>"
 					+"<td>"
 					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
-					+"<button type='button' name='delete' class='btn btn-danger'>删除</button>"
+					+"<i class='hidden' ></i>"
+					+"<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				}); 
 				 

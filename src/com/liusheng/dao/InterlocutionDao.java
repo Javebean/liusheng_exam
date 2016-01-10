@@ -9,7 +9,7 @@ public interface InterlocutionDao {
 
 	public boolean addOneInterlocution(Interlocution il);
 
-	public void deleteOneInterlocution(int id);
+	public boolean deleteOneInterlocution(int id);
 
 	public void updataOneInterlocution(Interlocution ss);
 

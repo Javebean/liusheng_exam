@@ -9,7 +9,7 @@ public interface FillBlankDao {
 
 	public boolean addOneFillBlank(FillBlank fb);
 
-	public void deleteOneFillBlank(int id);
+	public boolean deleteOneFillBlank(int id);
 
 	public void updataOneFillBlank(FillBlank fb);
 

@@ -76,6 +76,9 @@ $(function() {
 		onComplete:function(){
 			var text = $(this).parent().prev().prev().prev().text();
 			$("[symbol=question]").val(text);
+			
+			var answer = $(this).parent().prev().prev().text();
+			$("[symbol=answer]").val(answer);
 			/*回显知识点*/
 			var kpId = $(this).attr("kpId");
 			$("#kp"+kpId).attr("checked","checked");
@@ -106,14 +109,18 @@ $(function() {
 			title : "提示",
 			text:"确认删除？",
 			confirm : function(button) {
+				/*每个删除按钮上有个ky属性，根据ky来判断是那个类型的删除*/
 				var ky = $(button).attr("ky");
 				var deleteId = $(button).attr("tid");
 				if(ky=="kp"){
 					/**知识点的删除*/
 					deleteItem("deletekey", deleteId);
-				}
-				if(ky=="sim"){
+				}else if(ky=="sim"){
 					deleteItem("deletesim", deleteId);
+				}else if(ky=="fill"){
+					deleteItem("deletefb", deleteId);
+				}else if(ky=="inter"){
+					deleteItem("deleteil", deleteId);
 				}
 				
 			},

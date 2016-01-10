@@ -42,5 +42,10 @@ public class FillBlankAction {
 		System.out.println(b);
 		return b;
 	}
+	
+	@RequestMapping("/deletefb/{id}")
+	public boolean deleteFillBlankById(@PathVariable int id){
+		return fservice.deleteOneFillBlank(id);
+	}
 
 }

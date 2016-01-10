@@ -36,13 +36,14 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	}
 
 	@Override
-	public void deleteOneInterlocution(int id) {
+	public boolean deleteOneInterlocution(int id) {
 		try {
 			String hql = "delete from Interlocution where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 
 	}

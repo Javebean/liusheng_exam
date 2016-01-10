@@ -126,7 +126,7 @@ var items = 2;
 					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>未审核</td>"
 					+"<td>"
 					+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
-					+"<button type='button' name='delete' class='btn btn-danger'>删除</button>"
+					+"<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				}); 
 				 

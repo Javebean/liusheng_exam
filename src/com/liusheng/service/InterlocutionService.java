@@ -70,7 +70,8 @@ public class InterlocutionService {
 		return false;
 	}
 
-	public void deleteOneInterlocution(int id) {
+	public boolean deleteOneInterlocution(int id) {
+		return iDao.deleteOneInterlocution(id);
 	}
 
 	public void updataOneInterlocution(Interlocution ss) {

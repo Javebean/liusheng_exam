@@ -49,4 +49,10 @@ public class InterAction {
 		map.put("message", text);
 		return "redirect:uploadState.jsp";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/deleteil/{id}")
+	public boolean delteInterLocation(@PathVariable int id){
+		return service.deleteOneInterlocution(id);
+	}
 }

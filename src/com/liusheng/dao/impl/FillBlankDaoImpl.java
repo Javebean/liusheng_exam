@@ -37,13 +37,14 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	}
 
 	@Override
-	public void deleteOneFillBlank(int id) {
+	public boolean deleteOneFillBlank(int id) {
 		try {
 			String hql = "delete from FillBlank where id = ?";
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 
 	}

@@ -19,7 +19,8 @@ public class FillBlankService {
 		return fillDao.addOneFillBlank(fb);
 	}
 
-	public void deleteOneFillBlank(int id) {
+	public boolean deleteOneFillBlank(int id) {
+		return fillDao.deleteOneFillBlank(id);
 	}
 
 	public void updataOneFillBlank(FillBlank fb) {
