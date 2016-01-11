@@ -118,7 +118,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 		try {
 			String hql = "from FillBlank where keypointId =?";
 			return (FillBlank) getSession().createQuery(hql).setString(0, kpId)
-					.setFirstResult(romdom).setMaxResults(0).uniqueResult();
+					.setFirstResult(romdom).setMaxResults(1).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
