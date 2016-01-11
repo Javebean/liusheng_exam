@@ -55,4 +55,10 @@ public class InterAction {
 	public boolean delteInterLocation(@PathVariable int id){
 		return service.deleteOneInterlocution(id);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/agreeil/{id}")
+	public boolean checkOneInterlocution(@PathVariable int id){
+		return service.checkOneInterlocution(id);
+	}
 }

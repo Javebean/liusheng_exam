@@ -77,44 +77,8 @@
 			</div>
 		</div>
 	</div>
-<div style="display: none;">
-	<div id="cboxLoadedContent" >
-		<table style="width: 80%;margin: 0 auto;" border="0">
-			<thead><tr><td colspan="4">题目详细</td></tr></thead>
-			<tbody>
-				<tr><td>题目：</td></tr>
-				<tr>
-					<td colspan="4">
-						<textarea symbol="question" class="form-control" rows="2"></textarea>
-					</td>
-				</tr>
-				<tr><td>&nbsp;</td></tr>
-				
-				<tr>
-					<td colspan="4">
-						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重填写答案，该答案将作为该题的标准（参考）答案！
-						</div>
-					</td>
-				</tr>
-				<tr><td>&nbsp;</td></tr>
-				<tr id="kpArea">
-					<td colspan="4">所属知识点：</td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr><td>&nbsp;<hr></td></tr>
-					<tr>
-						<td colspan="4">
-							<button type="button" class="btn btn-danger">确认选择</button>
-						</td>
-					</tr>
-				</tfoot>
-		</table>
-	</div>
-</div>	
 <script type="text/javascript">
-var items = 2;
+var items = 10;
  /*public function*/
  var loadMessages = function(start){
 		$.ajax({
@@ -127,15 +91,11 @@ var items = 2;
 					$.get("getfbans/"+this.id,function(data){
 						
 					});
-					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>未审核</td>"
+					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>已审核</td>"
 					+"<td>"
-					+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
 					+"<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				}); 
-				 
-				$.getScript("js/colorboxconfig.js");
-				
 			},
 			error:function(data,d1,d2){
 				console.log(data,d1,d2);
@@ -145,11 +105,8 @@ var items = 2;
 
 	 $(function(){
 		/* init */
-		 loadMessages(0);
+		 loadMessages(1);
 		 pagebutton("getfbpages",items);
-		 /*查询知识点*/
-		 getAllkp();
-		 
 	})
 </script>
 

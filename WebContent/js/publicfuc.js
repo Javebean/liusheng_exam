@@ -131,7 +131,7 @@ var pagebutton = function(pageNumUrl,items){
 				curpage=pageNums;
 			}
 			loadMessages(curpage);
-			$("#showCurrnetPage").text(curpage);
+			$("#showCurrnetPage").text(curpage+"/"+pageNums);
 			
 		});
 	});

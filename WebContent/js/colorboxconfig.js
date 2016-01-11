@@ -59,6 +59,9 @@ $(function() {
 			$("#kp"+kpId).attr("checked","checked");
 			
 			
+			/*获取题目id*/
+			var qid = $(this).attr("qId");
+			$("#agree").attr("agreeId",qid);
 		}
 			
 			
@@ -84,6 +87,9 @@ $(function() {
 			$("#kp"+kpId).attr("checked","checked");
 			
 			
+			/*获取题目id*/
+			var qid = $(this).attr("qId");
+			$("#agree").attr("agreeId",qid);
 		}
 	});
 

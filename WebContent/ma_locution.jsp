@@ -114,7 +114,7 @@
 				<tr><td>&nbsp;<hr></td></tr>
 					<tr>
 						<td colspan="4">
-							<button type="button" class="btn btn-danger">确认选择</button>
+							<button type="button" class="btn btn-danger" id="agree" agreeId="">通过</button>
 						</td>
 					</tr>
 				</tfoot>
@@ -122,7 +122,7 @@
 	</div>
 </div>	
 <script type="text/javascript">
-var items =2;
+var items =10;
  /*public function*/
  var loadMessages = function(start){
 		$.ajax({
@@ -135,8 +135,8 @@ var items =2;
 				 $.each(data,function(){
 					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.answer+"</td><td>未审核</td>"
 					+"<td>"
-					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"'>审核</button>&nbsp;&nbsp;"
-					+"<i class='hidden' ></i>"
+					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
+					+"<i class='hidden'></i>"
 					+"<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				}); 
@@ -157,6 +157,10 @@ var items =2;
 		 /*查询知识点*/
 		 getAllkp();
 		 
+		 /*审核通过*/
+		 $("#agree").click(function(){
+			 agreeQues("agreeil",$(this).attr("agreeId"));
+		 });
 	})
 </script>
 

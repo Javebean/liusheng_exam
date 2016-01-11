@@ -43,7 +43,7 @@ public class FillBlankService {
 	}
 
 	public boolean checkOneFillBlank(int id) {
-		return false;
+		return fillDao.checkOneFillBlank(id);
 	}
 	
 	public List<FillBlankAnswer> getFBAnswer(int fbId) {

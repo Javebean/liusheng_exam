@@ -93,7 +93,7 @@ public class InterlocutionService {
 	}
 	
 	public boolean checkOneInterlocution(int id) {
-		return false;
+		return iDao.checkOneInterlocution(id);
 	}
 
 	public List<Interlocution> createInter(Map<String, Integer> map) {

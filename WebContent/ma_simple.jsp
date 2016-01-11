@@ -126,7 +126,7 @@
 	</div>
 </div>	
 <script type="text/javascript">
-var items =3;
+var items =10;
 /*public function*/
 var loadMessages = function(start){
 	$.ajax({
@@ -156,7 +156,7 @@ var loadMessages = function(start){
 	 $(function(){
 		
 		/* init */
-		 loadMessages(0);
+		 loadMessages(1);
 		 pagebutton("getsimpages",items);
 		
 		 /*查询知识点*/
