@@ -97,13 +97,15 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 		return true;
 	}
 
+	/*突然发现sql可以直接查询随机多少条数据*/
+	@SuppressWarnings("unchecked")
 	@Override
-	public SimpleSelection createSimpleByKid(String kpId, int romdom) {
+	public List<SimpleSelection> createSimpleByKid(String kpId, int limit) {
 		try {
-			String hql = "from SimpleSelection where keypointId =?";
-			return (SimpleSelection) getSession().createQuery(hql)
-					.setString(0, kpId).setFirstResult(romdom).setMaxResults(1)
-					.uniqueResult();
+			String hql = "from SimpleSelection where keypointId =? order by rand() limit ?";
+			return  getSession().createQuery(hql).setString(0, kpId)
+					.setInteger(0, limit)
+					.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

@@ -17,7 +17,7 @@ public interface SimpleSelectDao {
 	
 	public boolean checkOneSimpleSelection(int id);
 	
-	public SimpleSelection createSimpleByKid(String kpId , int romdom);
+	public List<SimpleSelection> createSimpleByKid(String kpId , int limit);
 	
 	public long getSimpleSelectionCount();
 	

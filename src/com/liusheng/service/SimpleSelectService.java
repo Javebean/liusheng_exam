@@ -63,23 +63,15 @@ public class SimpleSelectService {
 		 * 
 		 * */
 		List<SimpleSelection> list = new ArrayList<SimpleSelection>();
-		Random random = new Random();
-		SimpleSelection ss = null;
+		List<SimpleSelection> ss = null;
 		for(Map.Entry<String, Integer> m : map.entrySet()){
 			String kpId = m.getKey();
 			System.out.println("知识点Id:"+kpId);
 			//该知识点要出的数量
 			Integer nums = m.getValue();
-			int count =  (int) ssDao.getSimpleSelectionCount(kpId);
-			System.out.println("该知识点相关的题目数量："+count);
-			
-			if(count>0){
-				//该知识点有>0的题目数量
-				for(int i=0;i<nums;i++){
-					ss = ssDao.createSimpleByKid(kpId, random.nextInt(count));
-					list.add(ss);
-				}
-			}
+			//该知识点有>0的题目数量
+			ss = ssDao.createSimpleByKid(kpId, nums);
+			list.addAll(ss);
 		}
 		return list;
 	}
