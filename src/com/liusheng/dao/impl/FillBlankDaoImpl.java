@@ -113,16 +113,16 @@ public class FillBlankDaoImpl implements FillBlankDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public FillBlank createFillBlankByKid(String kpId, int romdom) {
+	public List<FillBlank> createFillBlankByKid(String kpId, int limit) {
 		try {
-			String hql = "from FillBlank where keypointId =?";
-			return (FillBlank) getSession().createQuery(hql).setString(0, kpId)
-					.setFirstResult(romdom).setMaxResults(1).uniqueResult();
+			String hql = "from FillBlank where keypointId =? order by rand()";
+			return (List<FillBlank>) getSession().createQuery(hql).setString(0, kpId)
+					.setMaxResults(limit).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-
 		}
 	}
 

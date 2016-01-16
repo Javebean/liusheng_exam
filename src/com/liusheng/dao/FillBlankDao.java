@@ -23,7 +23,7 @@ public interface FillBlankDao {
 	
 	public List<FillBlankAnswer> getFBAnswer(int fbId);
 	
-	public FillBlank createFillBlankByKid(String kpId , int romdom);
+	public List<FillBlank> createFillBlankByKid(String kpId , int limit);
 	
 	//查询属于该知识点的单选题的数量
 	public long getFillBlankCount(String kpId );

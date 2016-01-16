@@ -3,7 +3,6 @@ package com.liusheng.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,25 +55,17 @@ public class FillBlankService {
 		 * 2.从中随机选择一定数量的题目
 		 * 
 		 * */
-		List<FillBlank> list = new ArrayList<FillBlank>();
-		Random random = new Random();
-		FillBlank ss = null;
+		List<FillBlank> lists = new ArrayList<FillBlank>();
+		List<FillBlank> list = null;
 		for(Map.Entry<String, Integer> m : map.entrySet()){
 			String kpId = m.getKey();
 			//该知识点要出的数量
 			Integer nums = m.getValue();
-			int count =  (int) fillDao.getFillBlankCount(kpId);
-			
-			if(count>0){
-				//该知识点有>0的题目数量
-				for(int i=0;i<nums;i++){
-					ss = fillDao.createFillBlankByKid(kpId, random.nextInt(count));
-					list.add(ss);
-				}
+			list = fillDao.createFillBlankByKid(kpId, nums);
+			lists.addAll(list);
 				
-			}
 		}
-		return list;
+		return lists;
 	}
 	
 }

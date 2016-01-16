@@ -102,9 +102,9 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public List<SimpleSelection> createSimpleByKid(String kpId, int limit) {
 		try {
-			String hql = "from SimpleSelection where keypointId =? order by rand() limit ?";
+			String hql = "from SimpleSelection where keypointId =? order by rand()";
 			return  getSession().createQuery(hql).setString(0, kpId)
-					.setInteger(0, limit)
+					.setMaxResults(limit)
 					.list();
 		} catch (Exception e) {
 			e.printStackTrace();
