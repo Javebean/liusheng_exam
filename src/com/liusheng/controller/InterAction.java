@@ -3,6 +3,8 @@ package com.liusheng.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,8 @@ import com.liusheng.util.NumberUtil;
 public class InterAction {
 	@Autowired
 	private InterlocutionService service;
-
+	@Autowired
+	private ServletContext context;
 	private Logger log = Logger.getLogger(InterAction.class);
 
 	@ResponseBody
@@ -39,7 +42,7 @@ public class InterAction {
 	@RequestMapping("/addinter")
 	public String addInterlocation(Interlocution il, MultipartFile file,Map<String,String>map) {
 		il.setNumber(NumberUtil.createNum());
-		boolean b = service.addOneInterlocution(il, file);
+		boolean b = service.addOneInterlocution(il, file,context);
 		String text = null;
 		if (b) {
 			text = "上传成功";

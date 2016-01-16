@@ -1,6 +1,6 @@
 package com.liusheng.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -11,9 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.liusheng.dao.SimpleSelectDao;
-import com.liusheng.entities.Interlocution;
 import com.liusheng.entities.SimpleSelection;
-import com.liusheng.service.InterlocutionService;
 import com.liusheng.service.SimpleSelectService;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 @ContextConfiguration("classpath:application.xml")
@@ -57,4 +55,10 @@ public class testcase {
 		System.out.println(allInterlocution.size());
 	}*/
 
+	@Test
+	public void testRandSelectSimple(){
+		List<SimpleSelection> a = ssDao.createSimpleByKid("5", 3);
+		System.out.println(a.size());
+	}
+	
 }

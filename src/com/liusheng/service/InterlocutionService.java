@@ -21,10 +21,8 @@ public class InterlocutionService {
 
 	@Autowired
 	private InterlocutionDao iDao;
-	@Autowired
-	private ServletContext context;
 
-	public boolean addOneInterlocution(Interlocution il, MultipartFile mf) {
+	public boolean addOneInterlocution(Interlocution il, MultipartFile mf,ServletContext context) {
 
 		// 获取上传路径baseUrl
 		String baseUrl = context.getRealPath("") + "\\file\\";
