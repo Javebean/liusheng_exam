@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,15 +106,15 @@ public class SimpleSelectService {
 		
 		
 		//填空题
+		//填空题传过来不用传该知识点的题目数量，以为每个填空题 空 不确定，
 		JSONArray fillArr = new JSONArray(fill);
 		int fillLen = fillArr.length();
-		Map<String,Integer> fillMap = new HashMap<String, Integer>();
+		String fillKpIdArr[] = new String[fillLen];
+		
 		for(int i=0;i<fillLen;i++){
-			String str = (String) fillArr.get(i);
-			String arr[] = str.split("#");
-			fillMap.put(arr[0], Integer.parseInt(arr[1]));
+			fillKpIdArr[i] = fillArr.get(i).toString();
 		}
-		List<FillBlank> createFill = fservice.createFillBlank(fillMap);
+		List<FillBlank> createFill = fservice.createFillBlank(fillKpIdArr);
 		List<String> fillblankInfo = null;
 		if(createFill.size()>0){
 			fillblankInfo = new ArrayList<String>();

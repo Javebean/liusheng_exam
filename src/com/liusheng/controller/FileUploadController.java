@@ -102,7 +102,7 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							FillBlank f = new FillBlank(NumberUtil.createNum(),result.get(0), 2);
+							FillBlank f = new FillBlank(NumberUtil.createNum(),result.get(0), "5",2,5);
 							fillService.addOneFillBlank(f);
 						}
 					} else if ("3".endsWith(type)) {

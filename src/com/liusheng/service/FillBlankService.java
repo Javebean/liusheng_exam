@@ -2,7 +2,6 @@ package com.liusheng.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,23 +48,21 @@ public class FillBlankService {
 		return fillDao.getFBAnswer(fbId);
 	}
 	
-	public List<FillBlank> createFillBlank(Map<String,Integer> map){
-		/**
-		 * 1.查询知识点1 kid 的集合  daoImpl里面写的
-		 * 2.从中随机选择一定数量的题目
-		 * 
-		 * */
-		List<FillBlank> lists = new ArrayList<FillBlank>();
-		List<FillBlank> list = null;
-		for(Map.Entry<String, Integer> m : map.entrySet()){
-			String kpId = m.getKey();
-			//该知识点要出的数量
-			Integer nums = m.getValue();
-			list = fillDao.createFillBlankByKid(kpId, nums);
-			lists.addAll(list);
-				
+	public List<FillBlank> createFillBlank(String kpId[]){
+		List<FillBlank> list =  fillDao.createFillBlankByKid(kpId);
+		List<FillBlank> result = new ArrayList<FillBlank>();
+		//从查出来的list中取出10个空,但是不一定是10个空
+		int fillNums  = 0;
+		for(FillBlank f: list){
+			fillNums+=f.getFillNums();
+			result.add(f);
+			if(fillNums>=10){
+				break;
+			}
 		}
-		return lists;
+		
+		return result;
+		
 	}
 	
 }

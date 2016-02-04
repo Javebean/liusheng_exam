@@ -16,6 +16,9 @@ public class FillBlank {
 	private String problem;
 	private String keypointId;
 	private int checkStatus;
+	private int fillNums;//该题目有多少个空
+	
+	
 	
 	@Id
 	@GenericGenerator(name = "generator", strategy = "native")
@@ -59,11 +62,25 @@ public class FillBlank {
 	}
 	
 	
-	public FillBlank(String number,String problem, int checkStatus) {
+	public int getFillNums() {
+		return fillNums;
+	}
+	
+	public void setFillNums(int fillNums) {
+		this.fillNums = fillNums;
+	}
+	
+
+	
+	
+	public FillBlank(String number, String problem, String keypointId,
+			int checkStatus, int fillNums) {
 		super();
 		this.number = number;
 		this.problem = problem;
+		this.keypointId = keypointId;
 		this.checkStatus = checkStatus;
+		this.fillNums = fillNums;
 	}
 	public FillBlank() {
 		super();
