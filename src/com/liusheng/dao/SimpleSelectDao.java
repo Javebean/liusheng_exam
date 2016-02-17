@@ -23,4 +23,5 @@ public interface SimpleSelectDao {
 	
 	//查询属于该知识点的单选题的数量
 	public long getSimpleSelectionCount(String kpId );
+	
 }

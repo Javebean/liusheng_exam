@@ -26,6 +26,7 @@ import com.liusheng.service.FillBlankService;
 import com.liusheng.service.InterlocutionService;
 import com.liusheng.service.SimpleSelectService;
 import com.liusheng.util.AnalyzeExcel;
+import com.liusheng.util.Constant;
 import com.liusheng.util.NumberUtil;
 
 @Controller
@@ -94,8 +95,20 @@ public class FileUploadController {
 
 						for (List<String> result : results) {
 							SimpleSelection s = new SimpleSelection(NumberUtil.createNum(),result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), 2);
+							s.setNumber(NumberUtil.createNum());
+							s.setProblem(result.get(0));
+							s.setOptionA(result.get(1));
+							s.setOptionB(result.get(2));
+							s.setOptionC(result.get(3));
+							s.setOptionD(result.get(4));
+							s.setAnswer(result.get(5));
+							s.setKeypoint(result.get(6));
+							s.setCheckStatus(Constant.NO_CHECK);
 							simpleService.addOneSimpleSelection(s);
 						}
+						
+						
+						
 					}  else if ("2".endsWith(type)) {
 						//填空题
 						List<List<String>> results = AnalyzeExcel.analyzeExcel(

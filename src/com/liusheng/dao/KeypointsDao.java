@@ -19,4 +19,7 @@ public interface KeypointsDao {
 	public long getkeypointCount();
 	
 	public List<Keypoints> getAllkp();
+	
+	//作用于excel上传的时候，excel填的知识点如果存在，就不用插入了
+	public Keypoints getKeypointByName(String name);
 }

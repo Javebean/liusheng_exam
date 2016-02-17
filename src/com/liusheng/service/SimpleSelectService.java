@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.liusheng.dao.SimpleSelectDao;
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.Interlocution;
+import com.liusheng.entities.Keypoints;
 import com.liusheng.entities.SimpleSelection;
 import com.liusheng.util.CreateWord;
 import com.liusheng.util.NumberUtil;
@@ -25,6 +26,8 @@ public class SimpleSelectService {
 	private FillBlankService fservice;
 	@Autowired
 	private InterlocutionService iservice;
+	@Autowired
+	private KeypointsService kpservice;
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
 		ss.setNumber(NumberUtil.createNum());
@@ -42,11 +45,26 @@ public class SimpleSelectService {
 		}
 		ss.setAnswerText(answerText);
 		
-		//传过来的keypointId,实际上这【id，知识点】这种组合
+		//网页传过来的keypointId,实际上这【id，知识点】这种组合
 		String keypointId = ss.getKeypointId();
-		String[] split = keypointId.split(",");
-		ss.setKeypoint(split[1]);
-		ss.setKeypointId(split[0]);
+		String keypoint = ss.getKeypoint();
+		if(null!=keypointId && !"".equals(keypointId)){
+			String[] split = keypointId.split(",");
+			ss.setKeypoint(split[1]);
+			ss.setKeypointId(split[0]);
+		}else{
+			//解析excel中的
+			int kpid = kpservice.getKeypointByName(keypoint);
+			if(kpid!=-1){
+				ss.setKeypointId(kpid+"");
+			}else{
+				Keypoints k = new Keypoints(ss.getKeypoint(), NumberUtil.createNum());
+				kpservice.addKeypoints(k);
+				ss.setKeypointId(k.getId()+"");
+			}
+			
+		}
+		
 		return ssDao.addOneSimpleSelection(ss);
 	}
 

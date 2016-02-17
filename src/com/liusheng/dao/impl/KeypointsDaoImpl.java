@@ -15,6 +15,7 @@ import com.liusheng.entities.Keypoints;
 @Transactional
 public class KeypointsDaoImpl implements KeypointsDao {
 
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -110,6 +111,18 @@ public class KeypointsDaoImpl implements KeypointsDao {
 		}catch(Exception e){
 			e.printStackTrace();
 			return 0;
+		}
+	}
+
+	@Override
+	public Keypoints getKeypointByName(String name) {
+		try{
+			String hql ="from Keypoints where keypoint=?";
+			Keypoints res = (Keypoints) getSession().createQuery(hql).setString(0, name).uniqueResult();
+			return res;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
 	}
 

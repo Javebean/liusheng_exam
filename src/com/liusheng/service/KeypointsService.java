@@ -50,4 +50,14 @@ public class KeypointsService {
 		return pages;
 	}
 	
+	public int getKeypointByName(String name){
+		Keypoints k = kDao.getKeypointByName(name);
+		if(null!=k){
+			return k.getId();
+		}else{
+			return -1;
+		}
+		
+	}
+	
 }
