@@ -76,18 +76,6 @@
 <script type="text/javascript">
 	var index = 0;
 	var flag = false;
-	var checkNum = function(val){
-		if(!$.isNumeric(val)){
-			alert("请输入合法的数字");
-			flag = true;
-		}
-		index+=val;
-		if(index>10){
-			alert("填入的数量总和大于题目数量");
-			flag = true;
-		}
-		index =0;
-	}
 	$(function(){
 		getAllkp_createExam();
 		$("#createExam").click(function(){
@@ -103,19 +91,13 @@
 			
 			//输入框里面填的数字之和不能大于所给的题目数量
 			var a = $(".allkp").eq(0).children("input:checked").map(function(){
-				var val = $(this).next().val();
-				checkNum(val);
-				return this.name+"#"+val;
+				return this.name;
 			}).get();
 			var b = $(".allkp").eq(1).children("input:checked").map(function(){
-				var val = $(this).next().val();
-				checkNum(val);
-				return this.name+"#"+val;
+				return this.name;
 			}).get();
 			var c = $(".allkp").eq(2).children("input:checked").map(function(){
-				var val = $(this).next().val();
-				checkNum(val);
-				return this.name+"#"+val;
+				return this.name;
 			}).get();
 			//如果有错误就返回
 			if(flag){

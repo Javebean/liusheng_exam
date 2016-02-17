@@ -11,6 +11,11 @@ public class CreateExam {
 
 	@Autowired
 	private SimpleSelectService sservice;
+	/**
+	 * 1.知识点id放进数组
+	 * 2.随机再对数组进行排序
+	 * 
+	 */
 	
 	@RequestMapping("/cratexam")
 	public String createexam(String simple,String fill,String inter){
