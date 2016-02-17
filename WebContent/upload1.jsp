@@ -125,10 +125,10 @@
 				      </div>
 				   </div>
 				   
-				   <div class="form-group">
-				      <div class="col-sm-1">
+				   <div>
 				         <button  id ="submit2" class ="btn btn-danger">确认上传</button>
-				      </div>
+				         <img alt="loading" src="images/loading.gif" class="hidden loading">
+				         <span class="msg"></span>
 				   </div>
 				   
 				</form>
@@ -138,11 +138,16 @@
 		</div>
 	</div>
 <script type="text/javascript">
+	//得到所有知识点
 	getAllkp_upload();
 	$("#submit2").click(function(){
+		$("img.loading").removeClass("hidden");
+		$(".msg").text("");
 		$.post("addsimpleselect",$("#uploadSimple").serializeArray(),function(data){
-			console.log(data);
+			$("img.loading").addClass("hidden");
+			$(".msg").text("上传成功");
 		});
+		return false;
 	});
 </script>
 </body>
