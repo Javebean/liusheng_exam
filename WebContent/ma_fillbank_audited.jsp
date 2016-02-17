@@ -77,6 +77,23 @@
 			</div>
 		</div>
 	</div>
+	
+<div style="display: none;">
+	<div id="cboxLoadedContent" >
+		   <br>
+		   <br>
+		   <br>
+		<div class="panel panel-default">
+		   <div class="panel-heading">
+		      <h3 class="panel-title text-center">题目详细</h3>
+		   </div>
+		   <table class="table">
+		      <tr><th>题目：</th><th id="show_pr"></th></tr>
+		      <tr><td>所属知识点：</td><td id="show_kp"></td></tr>
+		   </table>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
 var items = 10;
  /*public function*/
@@ -86,16 +103,15 @@ var items = 10;
 			type:"get",
 			dataType:"json",
 			success:function(data){
-				$("tbody.abstract").empty();
+				 $("tbody.abstract").empty();
 				 $.each(data,function(){
-					$.get("getfbans/"+this.id,function(data){
-						
-					});
-					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>已审核</td>"
+					$("tbody.abstract").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>已审核</td>"
 					+"<td>"
-					+"<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+this.id+"'>删除</button>"
+					+"<button type='button' class='btn btn-primary showinfo' as ='"+this.answerText+"' kp='"+this.keypoint+"' pr='"+this.problem+"'>查看</button>"
+					+"&nbsp;&nbsp;<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				}); 
+				$.getScript("js/colorboxconfig.js");
 			},
 			error:function(data,d1,d2){
 				console.log(data,d1,d2);

@@ -1,4 +1,4 @@
-$(function() {
+//$(function() {
 	$("button[name=confirm1]").colorbox({
 		transition : "elastic", // fade,none,elastic
 		width : "55%",
@@ -136,4 +136,25 @@ $(function() {
 			confirmButtonClass: "btn-danger",
 			cancelButtonClass: "btn-default"
 		});
-})
+//})
+
+$("button.showinfo").colorbox({
+	transition : "elastic", // fade,none,elastic
+	width : "55%",
+	height : "88%",
+	inline : true,
+	href : "#cboxLoadedContent",
+	opacity : 0.5,
+	scrolling : true,
+	overlayClose : false,
+	close : "关闭",
+	onComplete:function(){
+		var pr = $(this).attr("pr");
+		var as = $(this).attr("as");
+		var kp = $(this).attr("kp");
+		$("#show_pr").text(pr);
+		$("#show_as").text(as);
+		$("#show_kp").text(kp);
+	}
+	
+});

@@ -18,6 +18,16 @@ public class FillBlank {
 	private int checkStatus;
 	private int fillNums;//该题目有多少个空
 	
+	private String keypoint;
+	
+	public String getKeypoint() {
+		return keypoint;
+	}
+	
+	public void setKeypoint(String keypoint) {
+		this.keypoint = keypoint;
+	}
+	
 	
 	
 	@Id

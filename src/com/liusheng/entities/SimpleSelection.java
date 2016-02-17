@@ -23,6 +23,23 @@ public class SimpleSelection {
 	private String keypointId;
 	private int checkStatus;
 	
+	private String answerText;
+	private String keypoint;
+	
+	
+	
+	public String getAnswerText() {
+		return answerText;
+	}
+	public void setAnswerText(String answerText) {
+		this.answerText = answerText;
+	}
+	public String getKeypoint() {
+		return keypoint;
+	}
+	public void setKeypoint(String keypoint) {
+		this.keypoint = keypoint;
+	}
 	@Id
 	@GenericGenerator(name = "generator", strategy = "native")
 	@GeneratedValue(generator = "generator")

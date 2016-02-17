@@ -22,6 +22,17 @@ public class Interlocution {
 
 	private String keypointId;
 	
+	private String keypoint;
+	
+	public String getKeypoint() {
+		return keypoint;
+	}
+	public void setKeypoint(String keypoint) {
+		this.keypoint = keypoint;
+	}
+	
+	
+	
 	private int checkStatus;
 	@Id
 	@GenericGenerator(name="generator",strategy="native")

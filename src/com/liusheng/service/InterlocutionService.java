@@ -61,6 +61,11 @@ public class InterlocutionService {
 
 			}
 			il.setImgUrl(imgUrl);
+			//id,知识点的组合
+			String keypointId = il.getKeypointId();
+			String[] split = keypointId.split(",");
+			il.setKeypointId(split[0]);
+			il.setKeypoint(split[1]);
 			return iDao.addOneInterlocution(il);
 		}
 

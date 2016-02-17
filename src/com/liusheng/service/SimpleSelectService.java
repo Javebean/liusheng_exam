@@ -28,6 +28,25 @@ public class SimpleSelectService {
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
 		ss.setNumber(NumberUtil.createNum());
+		String answer = ss.getAnswer();
+		//根据答案标号 abcd,选择正确的答案
+		String answerText=null;
+		if("A".equalsIgnoreCase(answer)){
+			answerText = ss.getOptionA();
+		}else if("B".equalsIgnoreCase(answer)){
+			answerText = ss.getOptionB();
+		}else if("C".equalsIgnoreCase(answer)){
+			answerText = ss.getOptionC();
+		}else if("D".equalsIgnoreCase(answer)){
+			answerText = ss.getOptionD();
+		}
+		ss.setAnswerText(answerText);
+		
+		//传过来的keypointId,实际上这【id，知识点】这种组合
+		String keypointId = ss.getKeypointId();
+		String[] split = keypointId.split(",");
+		ss.setKeypoint(split[1]);
+		ss.setKeypointId(split[0]);
 		return ssDao.addOneSimpleSelection(ss);
 	}
 

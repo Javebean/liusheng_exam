@@ -14,6 +14,11 @@ public class FillBlankService {
 	@Autowired
 	private FillBlankDao fillDao;
 	public boolean addOneFillBlank(FillBlank fb) {
+		//keypoint实际上是【id,知识点】组合
+		String keypointId = fb.getKeypointId();
+		String[] split = keypointId.split(",");
+		fb.setKeypoint(split[1]);
+		fb.setKeypointId(split[0]);
 		return fillDao.addOneFillBlank(fb);
 	}
 
