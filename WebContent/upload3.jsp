@@ -46,11 +46,12 @@
 
 				<h2 class="sub-header">上传问答题</h2>
 				<div class="alert alert-warning">
-   					<strong>注意！</strong>综合上传时，请务必保持sheet1,sheet2,sheet3分别是单选题，填空题，问答题的顺序！
+   					<strong>注意！</strong>上传问答题时，Excel表格一行为一题，每一行中请保持依次为“题目”，“答案”，“所属知识点”的顺序！
+   					<br><span class="msg">请不要在excel中上传带有图片的题目，带图片请手动在下面上传</span>
 				</div>
 				<div class="table-responsive">
 					<form method="POST" enctype="multipart/form-data" action="upload">
-						<input type="file" class="form-control" name="file"> <br />
+						<input type="file" class="form-control" name="file" required="required"> <br />
 						<input type="hidden" name="type" value="3">
 						<input type="submit" class ="btn btn-danger" value="确认上传">
 					</form>

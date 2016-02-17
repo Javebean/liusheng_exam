@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.liusheng.dao.InterlocutionDao;
 import com.liusheng.entities.Interlocution;
+import com.liusheng.entities.Keypoints;
+import com.liusheng.util.NumberUtil;
 
 @Service
 public class InterlocutionService {
@@ -21,12 +23,14 @@ public class InterlocutionService {
 	@Autowired
 	private InterlocutionDao iDao;
 
+	@Autowired
+	private KeypointsService kpservice;
 	public boolean addOneInterlocution(Interlocution il, MultipartFile mf,ServletContext context) {
 
 		// 获取上传路径baseUrl
-		String baseUrl = context.getRealPath("") + "\\file\\";
-
+		il.setNumber(NumberUtil.createNum());
 		if (null != mf) {
+			String baseUrl = context.getRealPath("") + "\\file\\";
 			String imgUrl = "";
 			String fileName = mf.getOriginalFilename();
 			if (!"".equalsIgnoreCase(fileName)) {
@@ -67,9 +71,30 @@ public class InterlocutionService {
 			il.setKeypointId(split[0]);
 			il.setKeypoint(split[1]);
 			return iDao.addOneInterlocution(il);
+		}else{
+			//网页传过来的keypointId,实际上这【id，知识点】这种组合
+			String keypointId = il.getKeypointId();
+			String keypoint = il.getKeypoint();
+			if(null!=keypointId && !"".equals(keypointId)){
+				String[] split = keypointId.split(",");
+				il.setKeypoint(split[1]);
+				il.setKeypointId(split[0]);
+			}else{
+				//解析excel中的
+				int kpid = kpservice.getKeypointByName(keypoint);
+				if(kpid!=-1){
+					il.setKeypointId(kpid+"");
+				}else{
+					Keypoints k = new Keypoints(keypoint, NumberUtil.createNum());
+					kpservice.addKeypoints(k);
+					il.setKeypointId(k.getId()+"");
+				}
+				
+			}
+			il.setImgUrl(null);
+			return iDao.addOneInterlocution(il);
+			
 		}
-
-		return false;
 	}
 
 	public boolean deleteOneInterlocution(int id) {

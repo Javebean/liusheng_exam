@@ -45,7 +45,7 @@
 
 				<h2 class="sub-header">上传单选题</h2>
 				<div class="alert alert-warning">
-   					<strong>注意！</strong>综合上传时，Excel表格一行为一题，每一行中请保持依次为“题目”，“选项A”，“选项B”，“选项C”，“选项D”，"答案"，“所属知识点”的顺序！
+   					<strong>注意！</strong>上传单选题时，Excel表格一行为一题，每一行中请保持依次为“题目”，“选项A”，“选项B”，“选项C”，“选项D”，"答案"，“所属知识点”的顺序！
    					<br><span class="msg">其中“答案”只需填写正确答案的字母，即A或B或C或D！</span>
 				</div>
 				<div class="table-responsive">

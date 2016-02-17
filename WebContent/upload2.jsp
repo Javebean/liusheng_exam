@@ -45,7 +45,8 @@
 
 				<h2 class="sub-header">上传填空题</h2>
 				<div class="alert alert-warning">
-   					<strong>注意！</strong>综合上传时，请务必保持sheet1,sheet2,sheet3分别是单选题，填空题，问答题的顺序！
+   					<strong>注意！</strong>上传填空题时，Excel表格一行为一题，每一行中请保持依次为“题目”，“所属知识点”的顺序！
+   					<br><span class="msg">请在题目中的要填空的词两边使用&nbsp;“&lt;&gt;”&nbsp;标记！</span>
 				</div>
 				<div class="table-responsive">
 					<form method="POST" enctype="multipart/form-data" action="upload">

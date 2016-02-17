@@ -115,7 +115,6 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							System.out.println(result);
 							FillBlank f = new FillBlank();
 							f.setCheckStatus(Constant.NO_CHECK);
 							f.setProblem(result.get(0));
@@ -128,8 +127,14 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							Interlocution i = new Interlocution(NumberUtil.createNum(),result.get(0), result.get(1), 2);
-							//interService.addOneInterlocution(i);
+							Interlocution i = new Interlocution();
+							i.setProblem(result.get(0));
+							i.setAnswer(result.get(1));
+							i.setKeypoint(result.get(2));
+							i.setCheckStatus(Constant.NO_CHECK);
+							interService.addOneInterlocution(i, null, null);
+							//通过excel中不允许上传带图片的图片
+							
 						}
 					}
 
