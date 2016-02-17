@@ -14,6 +14,7 @@ import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.Interlocution;
 import com.liusheng.entities.SimpleSelection;
 import com.liusheng.util.CreateWord;
+import com.liusheng.util.NumberUtil;
 
 @Service
 public class SimpleSelectService {
@@ -26,6 +27,7 @@ public class SimpleSelectService {
 	private InterlocutionService iservice;
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
+		ss.setNumber(NumberUtil.createNum());
 		return ssDao.addOneSimpleSelection(ss);
 	}
 

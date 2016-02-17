@@ -46,11 +46,8 @@ public class SimpleSelectAcion {
 	}
 	
  	@RequestMapping("/addsimpleselect")
-	public String addSimpleSelect(SimpleSelection ss){
- 		System.out.println(ss);
-		boolean addOneSimpleSelection = service.addOneSimpleSelection(ss);
-		System.out.println(addOneSimpleSelection);
-		return "success";
+	public boolean addSimpleSelect(SimpleSelection ss){
+		return  service.addOneSimpleSelection(ss);
 	}
 
 }

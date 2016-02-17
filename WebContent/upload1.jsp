@@ -144,8 +144,12 @@
 		$("img.loading").removeClass("hidden");
 		$(".msg").text("");
 		$.post("addsimpleselect",$("#uploadSimple").serializeArray(),function(data){
-			$("img.loading").addClass("hidden");
-			$(".msg").text("上传成功");
+			if(data){
+				$("img.loading").addClass("hidden");
+				$(".msg").text("上传成功");
+			}else{
+				alert("上传失败");
+			}
 		});
 		return false;
 	});
