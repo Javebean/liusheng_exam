@@ -92,10 +92,7 @@
 				<tr><td>&nbsp;</td></tr>
 				
 				<tr>
-					<td colspan="4">
-						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重选择答案，该答案将作为该题的标准（参考）答案！
-						</div>
+					<td colspan="4" id="inter_img">
 					</td>
 				</tr>
 				<tr><td>答案：</td></tr>
@@ -135,7 +132,7 @@ var items =10;
 				 $.each(data,function(){
 					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.answer+"</td><td>未审核</td>"
 					+"<td>"
-					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
+					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"' qId='"+this.id+"' imgurl='"+this.imgUrl+"'>审核</button>&nbsp;&nbsp;"
 					+"<i class='hidden'></i>"
 					+"<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");

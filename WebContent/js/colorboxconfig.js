@@ -86,7 +86,9 @@
 			var kpId = $(this).attr("kpId");
 			$("#kp"+kpId).attr("checked","checked");
 			
-			
+			var imgurl = $(this).attr("imgurl");
+			$("#inter_img").empty();
+			$("#inter_img").append('<img alt="pic" src='+imgurl+'>');
 			/*获取题目id*/
 			var qid = $(this).attr("qId");
 			$("#agree").attr("agreeId",qid);
