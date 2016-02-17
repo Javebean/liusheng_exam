@@ -106,7 +106,10 @@ var agreeQues = function(url,id){
 				text:data?"审核通过":"审核失败",
 				confirmButton : "确认",
 				confirmButtonClass: "btn-danger",
-				cancelButtonClass: "hidden"
+				cancelButtonClass: "hidden",
+				confirm:function(){
+					window.location.reload();
+				}
 			});
 		
 	});
