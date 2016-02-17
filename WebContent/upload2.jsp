@@ -49,7 +49,7 @@
 				</div>
 				<div class="table-responsive">
 					<form method="POST" enctype="multipart/form-data" action="upload">
-						<input type="file" class="form-control" name="file"> <br />
+						<input type="file" class="form-control" name="file" required="required"> <br />
 						<input type="hidden" name="type" value="2">
 						<input type="submit" class ="btn btn-danger" value="确认上传">
 					</form>

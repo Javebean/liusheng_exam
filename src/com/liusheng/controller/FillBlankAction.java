@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
 import com.liusheng.service.FillBlankService;
-import com.liusheng.util.NumberUtil;
 
 @RestController
 public class FillBlankAction {
@@ -37,9 +36,7 @@ public class FillBlankAction {
 
 	@RequestMapping("/addfb")
 	public boolean addFillblank(FillBlank fb) {
-		fb.setNumber(NumberUtil.createNum());
 		boolean b = fservice.addOneFillBlank(fb);
-		System.out.println(b);
 		return b;
 	}
 	

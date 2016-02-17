@@ -89,14 +89,6 @@
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
-				
-				<tr>
-					<td colspan="4">
-						<div class="alert alert-warning">
-		   					<strong>注意！</strong>请慎重填写答案，该答案将作为该题的标准（参考）答案！
-						</div>
-					</td>
-				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr id="kpArea">
 					<td colspan="4">所属知识点：</td>

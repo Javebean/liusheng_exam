@@ -94,7 +94,7 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							SimpleSelection s = new SimpleSelection(NumberUtil.createNum(),result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), 2);
+							SimpleSelection s = new SimpleSelection();
 							s.setNumber(NumberUtil.createNum());
 							s.setProblem(result.get(0));
 							s.setOptionA(result.get(1));
@@ -115,7 +115,11 @@ public class FileUploadController {
 								0, filepath);
 
 						for (List<String> result : results) {
-							FillBlank f = new FillBlank(NumberUtil.createNum(),result.get(0), "5",2,5);
+							System.out.println(result);
+							FillBlank f = new FillBlank();
+							f.setCheckStatus(Constant.NO_CHECK);
+							f.setProblem(result.get(0));
+							f.setKeypoint(result.get(1));
 							fillService.addOneFillBlank(f);
 						}
 					} else if ("3".endsWith(type)) {

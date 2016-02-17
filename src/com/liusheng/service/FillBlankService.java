@@ -9,16 +9,36 @@ import org.springframework.stereotype.Service;
 import com.liusheng.dao.FillBlankDao;
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
+import com.liusheng.entities.Keypoints;
+import com.liusheng.util.NumberUtil;
 @Service
 public class FillBlankService {
 	@Autowired
 	private FillBlankDao fillDao;
+	@Autowired
+	private KeypointsService kpservice;
+	
 	public boolean addOneFillBlank(FillBlank fb) {
+		
 		//keypoint实际上是【id,知识点】组合
 		String keypointId = fb.getKeypointId();
-		String[] split = keypointId.split(",");
-		fb.setKeypoint(split[1]);
-		fb.setKeypointId(split[0]);
+		String keypoint = fb.getKeypoint();
+		if(null!=keypointId && !"".equals(keypointId)){
+			String[] split = keypointId.split(",");
+			fb.setKeypoint(split[1]);
+			fb.setKeypointId(split[0]);
+		}else{
+			//解析excel中的
+			int kpid = kpservice.getKeypointByName(keypoint);
+			if(kpid!=-1){
+				fb.setKeypointId(kpid+"");
+			}else{
+				Keypoints k = new Keypoints(keypoint, NumberUtil.createNum());
+				kpservice.addKeypoints(k);
+				fb.setKeypointId(k.getId()+"");
+			}
+		}
+		fb.setNumber(NumberUtil.createNum());
 		return fillDao.addOneFillBlank(fb);
 	}
 
