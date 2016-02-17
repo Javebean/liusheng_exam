@@ -156,7 +156,7 @@ var items = 10;
 			 }
 			 
 			 $(".load1").removeClass("hidden");
-			 $.get("addkey/"+keyName,function(data){
+			 $.get("addkey?keyname="+keyName,function(data){
 				 $(".load1").addClass("hidden");
 				 $(".msg").text(data.result.msg);
 				 window.location.reload();
@@ -168,7 +168,7 @@ var items = 10;
 			var itId = $(this).attr("name");
 			var key = $("#updateKp").val();
 			
-			$.get("updatekey/"+itId+"/"+key,function(data){
+			$.get("updatekey/"+itId+"?key="+key,function(data){
 				/*关闭colorbox*/
 				$.colorbox.close();
 					//success

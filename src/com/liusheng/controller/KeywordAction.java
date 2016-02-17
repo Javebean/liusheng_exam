@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.liusheng.entities.CommonResult;
@@ -32,8 +33,8 @@ public class KeywordAction {
 	}
 	
 	
-	@RequestMapping(value="/addkey/{keyName}")
-	public CommonResult addKey(@PathVariable String keyName){
+	@RequestMapping(value="/addkey")
+	public CommonResult addKey(@RequestParam(value="keyname") String keyName){
 		keyName = utf(keyName);
 		log.info("知识点 :： "+keyName);
 		kservice.addKeypoints(new Keypoints(keyName,NumberUtil.createNum()));
@@ -58,8 +59,8 @@ public class KeywordAction {
 		return kservice.getAllkp();
 	}
 	
-	@RequestMapping("/updatekey/{id}/{key}")
-	public CommonResult updateKey(@PathVariable String id,@PathVariable String key){
+	@RequestMapping("/updatekey/{id}")
+	public CommonResult updateKey(@PathVariable String id,@RequestParam String key){
 		key = utf(key);
 		log.info("更新知识点   id:"+id+" key"+key);
 		Keypoints kp = new Keypoints(key,NumberUtil.createNum());
