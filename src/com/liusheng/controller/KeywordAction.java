@@ -71,7 +71,7 @@ public class KeywordAction {
 	}
 	
 	@RequestMapping("/deletekey/{id}")
-	public int deleteKey(@PathVariable int id){
+	public boolean deleteKey(@PathVariable int id){
 		return  kservice.deleteKeypoints(id);
 	}
 	

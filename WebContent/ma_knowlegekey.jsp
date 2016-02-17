@@ -180,9 +180,6 @@ var items = 10;
 						confirmButtonClass: "btn-danger",
 						cancelButtonClass: "hidden"
 					});
-					if(r.code==0){
-						console.log($("button[tid="+itId+"]").parent().prev().text(data.data));
-					}
 					
 			});
 			return false;

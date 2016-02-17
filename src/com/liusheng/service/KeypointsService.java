@@ -20,7 +20,7 @@ public class KeypointsService {
 		kDao.addKeypoints(kp);
 	}
 
-	public int deleteKeypoints(int id) {
+	public boolean deleteKeypoints(int id) {
 		return kDao.deleteKeypoints(id);
 	}
 

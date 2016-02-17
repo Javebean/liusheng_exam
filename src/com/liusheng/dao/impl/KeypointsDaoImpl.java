@@ -34,16 +34,21 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	}
 
 	@Override
-	public int deleteKeypoints(int id) {
+	public boolean deleteKeypoints(int id) {
 		try {
 			String hql = "delete from Keypoints where id = ?";
-			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
+			int up = getSession().createQuery(hql).setInteger(0, id).executeUpdate();
+			if(up>0){
+				return true;
+			}else{
+				return false;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 1;
+			return false;
 		}
 
-		return 0;
 	}
 
 	@Override

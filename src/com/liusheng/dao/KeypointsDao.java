@@ -8,7 +8,7 @@ public interface KeypointsDao {
 
 	public void addKeypoints(Keypoints kp);
 	
-	public int deleteKeypoints(int id);
+	public boolean deleteKeypoints(int id);
 	
 	public boolean updateKeypoints(Keypoints kp);
 	
