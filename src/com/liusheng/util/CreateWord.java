@@ -2,6 +2,8 @@ package com.liusheng.util;
 
 import java.io.FileOutputStream;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
+import com.liusheng.entities.SimpleSelection;
 import com.liusheng.util.answer.CreateWord_Answer;
 import com.liusheng.util.answer.CreateWord_Answerpage;
 
@@ -27,7 +30,7 @@ public class CreateWord {
  * 2.fillblankInfo : 题目
  * 3.interInfo   key 题目，value 是否有图片
  */
-    public static void createExam(Map<String,List<String>> simpleInfo,List<String> fillblankInfo, Map<String,Boolean> interInfo) throws Exception {
+    public static void createExam(List<SimpleSelection> simpleInfo,List<String> fillblankInfo, Map<String,Boolean> interInfo) throws Exception {
 		XWPFDocument doc = new XWPFDocument();
         XWPFParagraph title = doc.createParagraph();
         //设置文本的对齐方式
@@ -382,7 +385,25 @@ public class CreateWord {
         	info.put("、TCP/IP 的网络层含有四"+i+"个重要的协议，分别为________。", list);
         }*/
         
-        CreateWord_Simple.csimple(doc, simpleInfo);
+        
+        
+      //标题，list为四个选项	
+  		Map<String ,List<String>> simMap = null;
+  		int pnum =1;
+  		if(simpleInfo.size()>0){
+  			simMap = new LinkedHashMap<String, List<String>>();
+  			List<String> list = null;
+  			for(SimpleSelection s : simpleInfo){
+  				list = new ArrayList<String>();
+  				list.add(s.getOptionA());
+  				list.add(s.getOptionB());
+  				list.add(s.getOptionC());
+  				list.add(s.getOptionD());
+  				simMap.put(pnum+++"."+s.getProblem(), list);
+  			}
+  			
+  		}
+        CreateWord_Simple.csimple(doc, simMap);
         
         //填空
       /*  List<String> info2 = new ArrayList<String>();
@@ -407,7 +428,16 @@ public class CreateWord {
         /*答题纸*/
         CreateWord_Answerpage.canswerpage(doc);
         /*参考答案*/
-        String [] simAnswer = {"A","C","D","B","A","C","D","B","D","B"};
+        int simpleAsLen = simpleInfo.size();
+        String simAnswer[] = new String[10];
+        for(int i=0;i<10;i++){
+        	simAnswer[i] = "无";
+        }
+        for(int i=0;i<simpleAsLen;i++){
+        	
+        	simAnswer[i] = simpleInfo.get(i).getAnswer().toUpperCase();
+        }
+        
         String []fillAnswer ={"128.202.10.0","首部","数据","物理层","数据链路层","局域网","城域网 ","广域网",".CN","FTP"};
         Map<String,String> interAnswer = new LinkedHashMap<String, String>();
         interAnswer.put("1、什么是计算机网络？", "计算机网络是一些互相连接的自治的计算机的集合，是将不同地理位置上的具有独立功能的多个计算机系统用通信线路相互连接起来，在协议的控制之下，以实现资源共享和数据通信为目的的系统。");

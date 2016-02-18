@@ -16,16 +16,17 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 public class CreateWord_Simple {
 //数据封装在 Map<String ,List<String>>中
 	public static void csimple(XWPFDocument doc, Map<String ,List<String>> info){
+		
 		XWPFParagraph para = doc.createParagraph();
 		XWPFRun run = para.createRun();
 		String s_title="一、单项选择题(每小题 2分，共20 分)";
 		WordUtil.setTextAndStyle(run, "SimHei", Constant.XIAOSI_FONTSIZE, null, s_title, null, true);
-		int proNum = 0;
+		System.out.println(info.size()+"zzz");
 		for(Map.Entry<String, List<String>> map : info.entrySet()){
+			System.out.println("&&&&&");
 			XWPFParagraph p_para = doc.createParagraph();
 			XWPFRun p_run = p_para.createRun();
-			String text = ++proNum+map.getKey();
-			WordUtil.setTextAndStyle(p_run, "SimSun", Constant.WUHAO_FONTSIZE, null, "  "+text, null, true);
+			WordUtil.setTextAndStyle(p_run, "SimSun", Constant.WUHAO_FONTSIZE, null, "  "+map.getKey(), null, true);
 			//run.addCarriageReturn();
 			
 			XWPFTable tableItems = doc.createTable(2,2);

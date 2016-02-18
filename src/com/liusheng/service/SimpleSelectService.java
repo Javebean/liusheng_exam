@@ -137,21 +137,6 @@ public class SimpleSelectService {
 				sarr[i] = str;
 			}
 			List<SimpleSelection> createSimple = createSimple(sarr);
-		//标题，list为四个选项	
-		Map<String ,List<String>> simpleInfo = null;
-		if(createSimple.size()>0){
-			simpleInfo = new HashMap<String, List<String>>();
-			List<String> list = null;
-			for(SimpleSelection s : createSimple){
-				list = new ArrayList<String>();
-				list.add(s.getOptionA());
-				list.add(s.getOptionB());
-				list.add(s.getOptionC());
-				list.add(s.getOptionD());
-				simpleInfo.put(s.getProblem(), list);
-			}
-			
-		}
 		
 		
 		
@@ -193,7 +178,7 @@ public class SimpleSelectService {
 		}
 		
 		try {
-			CreateWord.createExam(simpleInfo, fillblankInfo, interInfo);
+			CreateWord.createExam(createSimple, fillblankInfo, interInfo);
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();

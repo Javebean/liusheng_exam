@@ -15,24 +15,26 @@ public class CreateWord_Fillblank {
 		String text = "二、填空题(每空2，共20分)";
 		WordUtil.setTextAndStyle(runtitle, "SimHei",Constant.XIAOSI_FONTSIZE, null, text, null, true);
 		runtitle.addBreak();
-		
-		int len = info.size();
-		int num = 1;
-		for(int i=1;i<=len;i++){
-			XWPFRun run = para.createRun();
-			String pro = info.get(i-1);
-			
-			Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
-			Matcher matcher = reg.matcher(pro);
-			StringBuffer sb = new StringBuffer();
-			while(matcher.find()){
-				matcher.appendReplacement(sb, "__["+num+++"]____");
+		if(null!=info){
+			int len = info.size();
+			int num = 1;
+			for(int i=1;i<=len;i++){
+				XWPFRun run = para.createRun();
+				String pro = info.get(i-1);
+				
+				Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
+				Matcher matcher = reg.matcher(pro);
+				StringBuffer sb = new StringBuffer();
+				while(matcher.find()){
+					matcher.appendReplacement(sb, "__["+num+++"]____");
+				}
+				matcher.appendTail(sb);
+				String text1 = i+"、"+sb;
+				
+				WordUtil.setTextAndStyle(run, "SimSun",Constant.WUHAO_FONTSIZE, null, text1, null, true);
+				run.addCarriageReturn();
 			}
-			matcher.appendTail(sb);
-			String text1 = i+"、"+sb;
 			
-			WordUtil.setTextAndStyle(run, "SimSun",Constant.WUHAO_FONTSIZE, null, text1, null, true);
-			run.addCarriageReturn();
 		}
 	}
 }
