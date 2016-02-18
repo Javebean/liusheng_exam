@@ -392,11 +392,6 @@ public class CreateWord {
         CreateWord_Fillblank.cfillblank(doc, fillblankInfo);
 
         //问答
-     /*   Map<String,Boolean> info3 = new HashMap<String, Boolean>();
-        for(int i=0;i<6;i++){
-        	info3.put("什么是计算机网络？"+i, false);
-        }
-        info3.put("5、请由下图解释TCP建立连接的三次握手机制。假定主机A运行的是TCP客户程序，主机B运行TCP服务器程序。", true);*/
         CreateWord_Inter.cinter(doc, interInfo);
         
         /*******************************************/

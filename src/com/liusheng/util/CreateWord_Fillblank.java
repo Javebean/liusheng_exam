@@ -1,6 +1,8 @@
 package com.liusheng.util;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -18,21 +20,19 @@ public class CreateWord_Fillblank {
 		int num = 1;
 		for(int i=1;i<=len;i++){
 			XWPFRun run = para.createRun();
-			String text1 = i+"、"+info.get(i-1);
-			String substring = "#";
-			int index = text1.indexOf(substring);
-			StringBuilder sb = new StringBuilder(text1);
-			while(index != -1) {
-			    sb = sb.replace(index, index+1, "___["+num+++"]_______");
-			    index = sb.indexOf(substring, index + 1);
+			String pro = info.get(i-1);
+			
+			Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
+			Matcher matcher = reg.matcher(pro);
+			StringBuffer sb = new StringBuffer();
+			while(matcher.find()){
+				matcher.appendReplacement(sb, "__["+num+++"]____");
 			}
+			matcher.appendTail(sb);
+			String text1 = i+"、"+sb;
 			
-			
-			WordUtil.setTextAndStyle(run, "SimSun",Constant.WUHAO_FONTSIZE, null, sb.toString(), null, true);
+			WordUtil.setTextAndStyle(run, "SimSun",Constant.WUHAO_FONTSIZE, null, text1, null, true);
 			run.addCarriageReturn();
-			
-			if(num==11)
-				break;
 		}
 	}
 }

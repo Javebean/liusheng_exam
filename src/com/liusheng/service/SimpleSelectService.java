@@ -157,7 +157,6 @@ public class SimpleSelectService {
 		
 		
 		//填空题
-		//填空题传过来不用传该知识点的题目数量，以为每个填空题 空 不确定，
 		JSONArray fillArr = new JSONArray(fill);
 		int fillLen = fillArr.length();
 		String fillKpIdArr[] = new String[fillLen];

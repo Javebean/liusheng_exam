@@ -33,10 +33,11 @@ public class CreateWord_Inter {
 				XWPFParagraph pic_para = doc.createParagraph();
 				pic_para.setAlignment(ParagraphAlignment.CENTER);
 				XWPFRun picrun = pic_para.createRun();
-				String path = "D:\\Java_workspace\\examination\\WebContent\\file\\pic.png";
+				//暂时注释掉
+				/*String path = "D:\\Java_workspace\\examination\\WebContent\\file\\pic.png";
 				picrun.addPicture(new FileInputStream(path),
 						getSuffix(path), "xxx", Units.toEMU(300),
-						Units.toEMU(298));
+						Units.toEMU(298));*/
 			}
 		}
 	}
