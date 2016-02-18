@@ -17,7 +17,7 @@ public interface SimpleSelectDao {
 	
 	public boolean checkOneSimpleSelection(int id);
 	
-	public List<SimpleSelection> createSimpleByKid(String kpId , int limit);
+	public SimpleSelection createSimpleByKid(String kpId);
 	
 	public long getSimpleSelectionCount();
 	

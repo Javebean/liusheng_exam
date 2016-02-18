@@ -3,8 +3,9 @@ package com.liusheng.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -123,21 +124,26 @@ public class InterlocutionService {
 		return iDao.checkOneInterlocution(id);
 	}
 
-	public List<Interlocution> createInter(Map<String, Integer> map) {
+	public List<Interlocution> createInter(String [] kpids) {
 		/**
 		 * 1.查询知识点1 kid 的集合 daoImpl里面写的 2.从中随机选择一定数量的题目
 		 * 
 		 * */
-		List<Interlocution> lists = new ArrayList<Interlocution>();
-		List<Interlocution> list = null;
-		for (Map.Entry<String, Integer> m : map.entrySet()) {
-			String kpId = m.getKey();
-			// 该知识点要出的数量
-			Integer nums = m.getValue();
-			list = iDao.createInterlocaionByKid(kpId, nums);
-			lists.addAll(list);
-
+		Collections.shuffle(Arrays.asList(kpids));
+		int arrLen = kpids.length;
+		int i=0;
+		Interlocution il = null;
+		int nums =5; //问答题的数量
+		List<Interlocution> result = new ArrayList<Interlocution>();
+		for(;i<nums;i++){
+			il = iDao.createInterlocaionByKid(kpids[i%arrLen]);
+			result.add(il);
+			if(i%arrLen==0&&i!=0){
+				Collections.shuffle(Arrays.asList(kpids));
+			}
+			
 		}
-		return lists;
+		
+		return result;
 	}
 }

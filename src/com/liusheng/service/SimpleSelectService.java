@@ -1,6 +1,8 @@
 package com.liusheng.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,7 @@ public class SimpleSelectService {
 	private InterlocutionService iservice;
 	@Autowired
 	private KeypointsService kpservice;
+	
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
 		ss.setNumber(NumberUtil.createNum());
@@ -94,22 +97,27 @@ public class SimpleSelectService {
 		return page;
 	}
 	
-	public List<SimpleSelection> createSimple(Map<String,Integer> map){
+	public List<SimpleSelection> createSimple(String []arr){
 		/**
-		 * 1.查询知识点1 kid 的集合  daoImpl里面写的
-		 * 2.从中随机选择一定数量的题目
+			arr:要出的单选题知识点id，
+			先对arr.随机排序，然后依次取题
+			然后在随机排序。在依次取题，取满10题为止
 		 * 
 		 * */
+		
+		Collections.shuffle(Arrays.asList(arr));
+		System.out.println("第一次洗牌："+Arrays.toString(arr));
 		List<SimpleSelection> list = new ArrayList<SimpleSelection>();
-		List<SimpleSelection> ss = null;
-		for(Map.Entry<String, Integer> m : map.entrySet()){
-			String kpId = m.getKey();
-			System.out.println("知识点Id:"+kpId);
-			//该知识点要出的数量
-			Integer nums = m.getValue();
-			//该知识点有>0的题目数量
-			ss = ssDao.createSimpleByKid(kpId, nums);
-			list.addAll(ss);
+		SimpleSelection ss = null;
+		int i=0;
+		int arrLen = arr.length;
+		for(;i<10;i++){
+			ss = ssDao.createSimpleByKid(arr[i%arrLen]);
+			list.add(ss);
+			if(i%arrLen==0&&i!=0){
+				Collections.shuffle(Arrays.asList(arr));
+			}
+			
 		}
 		return list;
 	}
@@ -118,14 +126,15 @@ public class SimpleSelectService {
 	public String createexamService(String simple,String fill,String inter){
 		//单选题
 		JSONArray simpleArr = new JSONArray(simple);
-		int simpleLen = simpleArr.length();
-		Map<String,Integer> simpleMap = new HashMap<String, Integer>();
-		for(int i=0;i<simpleLen;i++){
-			String str = (String) simpleArr.get(i);
-			String arr[] = str.split("#");
-			simpleMap.put(arr[0], Integer.parseInt(arr[1]));
-		}
-		List<SimpleSelection> createSimple = createSimple(simpleMap);
+			int simpleLen = simpleArr.length();
+			//存放传过来的知识点id
+			String sarr[] = new String[simpleLen]; 
+			for(int i=0;i<simpleLen;i++){
+				String str = (String) simpleArr.get(i);
+				sarr[i] = str;
+			}
+			List<SimpleSelection> createSimple = createSimple(sarr);
+		//标题，list为四个选项	
 		Map<String ,List<String>> simpleInfo = null;
 		if(createSimple.size()>0){
 			simpleInfo = new HashMap<String, List<String>>();
@@ -162,16 +171,14 @@ public class SimpleSelectService {
 			}
 		}
 		
-		
+		//问答题
 		JSONArray interArr = new JSONArray(fill);
 		int interLen = interArr.length();
-		Map<String,Integer> interMap = new HashMap<String, Integer>();
+		String iArr[] = new String[interLen];//存放kpid的数组
 		for(int i=0;i<interLen;i++){
-			String str = (String) fillArr.get(i);
-			String arr[] = str.split("#");
-			interMap.put(arr[0], Integer.parseInt(arr[1]));
+			iArr[i] = (String) fillArr.get(i);
 		}
-		List<Interlocution> createInter = iservice.createInter(interMap);
+		List<Interlocution> createInter = iservice.createInter(iArr);
 		Map<String,Boolean> interInfo = null;
 		if(createInter.size()>0){
 			interInfo = new HashMap<String, Boolean>();

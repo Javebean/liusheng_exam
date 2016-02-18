@@ -74,18 +74,28 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	var index = 0;
-	var flag = false;
 	$(function(){
 		getAllkp_createExam();
 		$("#createExam").click(function(){
 			$(".load").removeClass("hidden");
 			$(".tipmes").text("");
 			//检查单选 填空 问答 一共选择的数量
-			var length = $(".allkp").children("input:checked").length;
-			if(length<3){
+			var length1 = $(".allkp").eq(0).children("input:checked").length;
+			var length2 = $(".allkp").eq(1).children("input:checked").length;
+			var length3 = $(".allkp").eq(2).children("input:checked").length;
+			if(length1==0){
 				$(".load").addClass("hidden");
-				$(".tipmes").text("请至少选择3项");
+				$(".tipmes").text("请勾选单选题出题知识点");
+				return false;
+			}
+			if(length2==0){
+				$(".load").addClass("hidden");
+				$(".tipmes").text("请勾选填空题出题知识点");
+				return false;
+			}
+			if(length3==0){
+				$(".load").addClass("hidden");
+				$(".tipmes").text("请勾选问答题出题知识点");
 				return false;
 			}
 			
@@ -99,10 +109,6 @@
 			var c = $(".allkp").eq(2).children("input:checked").map(function(){
 				return this.name;
 			}).get();
-			//如果有错误就返回
-			if(flag){
-				return;
-			}
 			var param = {"simple":JSON.stringify(a),"fill":JSON.stringify(b),"inter":JSON.stringify(c)};
 			$.get("cratexam",param,function(data){
 				console.log(data);

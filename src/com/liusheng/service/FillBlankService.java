@@ -1,6 +1,8 @@
 package com.liusheng.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,18 +76,26 @@ public class FillBlankService {
 	}
 	
 	public List<FillBlank> createFillBlank(String kpId[]){
-		List<FillBlank> list =  fillDao.createFillBlankByKid(kpId);
+		Collections.shuffle(Arrays.asList(kpId));
+		
+		int arrLen = kpId.length;
+		int i=0;
+		FillBlank fb = null;
+		int nums=0;//记录空格数量
 		List<FillBlank> result = new ArrayList<FillBlank>();
-		//从查出来的list中取出10个空,但是不一定是10个空
-		int fillNums  = 0;
-		for(FillBlank f: list){
-			fillNums+=f.getFillNums();
-			result.add(f);
-			if(fillNums>=10){
+		for(;i<10;i++){
+			fb = fillDao.createFillBlankByKid(kpId[i%arrLen]);
+			result.add(fb);
+			if(i%arrLen==0&&i!=0){
+				Collections.shuffle(Arrays.asList(kpId));
+			}
+			nums+=fb.getFillNums();
+			if(nums>=10){
+				//如果空大于等于10了。结束循环
 				break;
 			}
+			
 		}
-		
 		return result;
 		
 	}

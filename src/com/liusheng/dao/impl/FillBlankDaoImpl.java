@@ -113,26 +113,13 @@ public class FillBlankDaoImpl implements FillBlankDao {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<FillBlank> createFillBlankByKid(String kpId[]) {
+	public FillBlank createFillBlankByKid(String kpId) {
 		try {
-			int length = kpId.length;
-			if(length>0){
-				StringBuilder hql = new StringBuilder("from FillBlank where keypointId in (");
-				int i=0;
-				for(;i<length;i++){
-					hql.append(kpId[i]);
-					if(i!=length-1){
-						hql.append(",");
-					}
-				}
-				hql.append(") order by rand()");
-				System.out.println("填空题的sql "+hql.toString());
-				//先取10题。然后再service层，再从中取10个空
-				return (List<FillBlank>) getSession().createQuery(hql.toString()).setMaxResults(10).list();
-			}
-			return null;
+			String hql = "from FillBlank where keypointId =? order by rand()";
+			return  (FillBlank) getSession().createQuery(hql).setString(0, kpId)
+					.setMaxResults(1)
+					.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

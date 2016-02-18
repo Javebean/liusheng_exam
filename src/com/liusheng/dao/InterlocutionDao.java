@@ -19,7 +19,7 @@ public interface InterlocutionDao {
 
 	public boolean checkOneInterlocution(int id);
 	
-	public List<Interlocution> createInterlocaionByKid(String kpId , int limit);
+	public Interlocution createInterlocaionByKid(String kpId);
 	
 	public long getInterlocaionCount();
 	

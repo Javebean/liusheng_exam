@@ -101,14 +101,13 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Interlocution> createInterlocaionByKid(String kpId, int limit) {
+	public Interlocution createInterlocaionByKid(String kpId) {
 		try {
 			String hql = "from Interlocution where keypointId = ? order by rand()";
-			return (List<Interlocution>) getSession().createQuery(hql)
-					.setString(0, kpId).setMaxResults(limit)
-					.list();
+			return (Interlocution) getSession().createQuery(hql)
+					.setString(0, kpId).setMaxResults(1)
+					.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
