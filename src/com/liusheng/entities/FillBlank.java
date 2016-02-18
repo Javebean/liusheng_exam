@@ -20,6 +20,18 @@ public class FillBlank {
 	
 	private String keypoint;
 	
+	private String answer;//填空答案的组合，中间用逗号隔开。
+	
+	public String getAnswer() {
+		return answer;
+	}
+	
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	
+	
+	
 	public String getKeypoint() {
 		return keypoint;
 	}

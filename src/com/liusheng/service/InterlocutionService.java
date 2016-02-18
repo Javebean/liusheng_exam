@@ -137,7 +137,9 @@ public class InterlocutionService {
 		List<Interlocution> result = new ArrayList<Interlocution>();
 		for(;i<nums;i++){
 			il = iDao.createInterlocaionByKid(kpids[i%arrLen]);
-			result.add(il);
+			if(null!=il){
+				result.add(il);
+			}
 			if(i%arrLen==0&&i!=0){
 				Collections.shuffle(Arrays.asList(kpids));
 			}

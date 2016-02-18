@@ -113,7 +113,10 @@ public class SimpleSelectService {
 		int arrLen = arr.length;
 		for(;i<10;i++){
 			ss = ssDao.createSimpleByKid(arr[i%arrLen]);
-			list.add(ss);
+			if(ss!=null){
+				list.add(ss);
+			}
+			
 			if(i%arrLen==0&&i!=0){
 				Collections.shuffle(Arrays.asList(arr));
 			}
@@ -183,7 +186,9 @@ public class SimpleSelectService {
 		if(createInter.size()>0){
 			interInfo = new HashMap<String, Boolean>();
 			for(Interlocution i :createInter){
-				interInfo.put(i.getProblem(), i.getImgUrl()==null?true:false);
+				String pro = i.getProblem();
+				String imgurl = i.getImgUrl();
+				interInfo.put(pro, imgurl==null?true:false);
 			}
 			
 		}

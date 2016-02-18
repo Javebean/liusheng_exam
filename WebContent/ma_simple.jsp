@@ -118,7 +118,7 @@
 				<tr><td>&nbsp;<hr></td></tr>
 					<tr>
 						<td colspan="4">
-							<button type="button" class="btn btn-danger" id="agree" agreeId="" >通     过</button>
+							<button type="button" class="btn btn-danger col-sm-2 col-sm-offset-5"  id="agree" agreeId="" >通     过</button>
 						</td>
 					</tr>
 				</tfoot>

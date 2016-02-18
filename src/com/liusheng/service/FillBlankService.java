@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,18 @@ public class FillBlankService {
 			}
 		}
 		fb.setNumber(NumberUtil.createNum());
+		
+		String problem = fb.getProblem();
+		Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
+		Matcher matcher = reg.matcher(problem);
+		StringBuilder answer = new StringBuilder();
+		while(matcher.find()){
+			answer.append(matcher.group(1));
+			answer.append(",");
+		}
+		//删掉最后一个逗号“，”
+		answer.deleteCharAt(answer.length()-1);
+		fb.setAnswer(answer.toString());
 		return fillDao.addOneFillBlank(fb);
 	}
 
@@ -85,14 +99,16 @@ public class FillBlankService {
 		List<FillBlank> result = new ArrayList<FillBlank>();
 		for(;i<10;i++){
 			fb = fillDao.createFillBlankByKid(kpId[i%arrLen]);
-			result.add(fb);
-			if(i%arrLen==0&&i!=0){
-				Collections.shuffle(Arrays.asList(kpId));
-			}
-			nums+=fb.getFillNums();
-			if(nums>=10){
-				//如果空大于等于10了。结束循环
-				break;
+			if(null!=fb){
+				result.add(fb);
+				if(i%arrLen==0&&i!=0){
+					Collections.shuffle(Arrays.asList(kpId));
+				}
+				nums+=fb.getFillNums();
+				if(nums>=10){
+					//如果空大于等于10了。结束循环
+					break;
+				}
 			}
 			
 		}
