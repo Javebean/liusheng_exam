@@ -150,13 +150,6 @@ public class SimpleSelectService {
 			fillKpIdArr[i] = fillArr.get(i).toString();
 		}
 		List<FillBlank> createFill = fservice.createFillBlank(fillKpIdArr);
-		List<String> fillblankInfo = null;
-		if(createFill.size()>0){
-			fillblankInfo = new ArrayList<String>();
-			for(FillBlank f:createFill){
-				fillblankInfo.add(f.getProblem());
-			}
-		}
 		
 		//问答题
 		JSONArray interArr = new JSONArray(fill);
@@ -178,7 +171,7 @@ public class SimpleSelectService {
 		}
 		
 		try {
-			CreateWord.createExam(createSimple, fillblankInfo, interInfo);
+			CreateWord.createExam(createSimple, createFill, interInfo);
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();

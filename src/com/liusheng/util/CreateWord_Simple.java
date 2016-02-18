@@ -21,9 +21,7 @@ public class CreateWord_Simple {
 		XWPFRun run = para.createRun();
 		String s_title="一、单项选择题(每小题 2分，共20 分)";
 		WordUtil.setTextAndStyle(run, "SimHei", Constant.XIAOSI_FONTSIZE, null, s_title, null, true);
-		System.out.println(info.size()+"zzz");
 		for(Map.Entry<String, List<String>> map : info.entrySet()){
-			System.out.println("&&&&&");
 			XWPFParagraph p_para = doc.createParagraph();
 			XWPFRun p_run = p_para.createRun();
 			WordUtil.setTextAndStyle(p_run, "SimSun", Constant.WUHAO_FONTSIZE, null, "  "+map.getKey(), null, true);

@@ -3,8 +3,8 @@ package com.liusheng.util;
 import java.io.FileOutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +19,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
+import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.SimpleSelection;
 import com.liusheng.util.answer.CreateWord_Answer;
 import com.liusheng.util.answer.CreateWord_Answerpage;
@@ -30,7 +31,7 @@ public class CreateWord {
  * 2.fillblankInfo : 题目
  * 3.interInfo   key 题目，value 是否有图片
  */
-    public static void createExam(List<SimpleSelection> simpleInfo,List<String> fillblankInfo, Map<String,Boolean> interInfo) throws Exception {
+    public static void createExam(List<SimpleSelection> simpleInfo,List<FillBlank> fillblankInfo, Map<String,Boolean> interInfo) throws Exception {
 		XWPFDocument doc = new XWPFDocument();
         XWPFParagraph title = doc.createParagraph();
         //设置文本的对齐方式
@@ -410,7 +411,17 @@ public class CreateWord {
         for(int i=0;i<8;i++){
         	info2.add("IP数据报由#和#两部分组成。");
         }*/
-        CreateWord_Fillblank.cfillblank(doc, fillblankInfo);
+        
+		if(fillblankInfo.size()>0){
+			List<String> fillblankInfolist = new ArrayList<String>();
+			for(FillBlank f:fillblankInfo){
+				fillblankInfolist.add(f.getProblem());
+			}
+			CreateWord_Fillblank.cfillblank(doc, fillblankInfolist);
+		}
+
+        
+        
 
         //问答
         CreateWord_Inter.cinter(doc, interInfo);
@@ -438,7 +449,20 @@ public class CreateWord {
         	simAnswer[i] = simpleInfo.get(i).getAnswer().toUpperCase();
         }
         
-        String []fillAnswer ={"128.202.10.0","首部","数据","物理层","数据链路层","局域网","城域网 ","广域网",".CN","FTP"};
+        //填空题答案
+        String [] fillAnswer = new String[10];
+        List<String> fillAnswerList = new ArrayList<String>();
+        for(int i=0;i<10;i++){
+        	fillAnswer[i] = "无";
+        }
+        int fillLen = fillblankInfo.size();
+        for(int i=0;i<fillLen;i++){
+        	String s = fillblankInfo.get(i).getAnswer();
+        	if(s.contains(",")){
+        		
+        	}
+        }
+        
         Map<String,String> interAnswer = new LinkedHashMap<String, String>();
         interAnswer.put("1、什么是计算机网络？", "计算机网络是一些互相连接的自治的计算机的集合，是将不同地理位置上的具有独立功能的多个计算机系统用通信线路相互连接起来，在协议的控制之下，以实现资源共享和数据通信为目的的系统。");
         interAnswer.put("2、简述OSI参考模型。", "OSI七层模型从高到低依次为应用层、表示层、会话层、运输层、网络层、数据链路层、物理层。");
