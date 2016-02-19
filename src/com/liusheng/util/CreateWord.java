@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -451,17 +450,27 @@ public class CreateWord {
         
         //填空题答案
         String [] fillAnswer = new String[10];
-        List<String> fillAnswerList = new ArrayList<String>();
         for(int i=0;i<10;i++){
         	fillAnswer[i] = "无";
         }
         int fillLen = fillblankInfo.size();
+        List<String> list = new ArrayList<String>();
+        
         for(int i=0;i<fillLen;i++){
         	String s = fillblankInfo.get(i).getAnswer();
         	if(s.contains(",")){
-        		
+        		String[] split = s.split(",");
+        		for(String st : split){
+        			list.add(st);
+        		}
+        	}else{
+        		list.add(s);
         	}
         }
+        for(int i=0;i<list.size();i++){
+        	fillAnswer[i] = list.get(i);
+        }
+        
         
         Map<String,String> interAnswer = new LinkedHashMap<String, String>();
         interAnswer.put("1、什么是计算机网络？", "计算机网络是一些互相连接的自治的计算机的集合，是将不同地理位置上的具有独立功能的多个计算机系统用通信线路相互连接起来，在协议的控制之下，以实现资源共享和数据通信为目的的系统。");

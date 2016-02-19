@@ -48,12 +48,16 @@ public class FillBlankService {
 		Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
 		Matcher matcher = reg.matcher(problem);
 		StringBuilder answer = new StringBuilder();
+		int fillnum = 0;
 		while(matcher.find()){
-			answer.append(matcher.group(1));
+			fillnum++;
+			answer.append(matcher.group(2));
 			answer.append(",");
 		}
 		//删掉最后一个逗号“，”
+		
 		answer.deleteCharAt(answer.length()-1);
+		fb.setFillNums(fillnum);
 		fb.setAnswer(answer.toString());
 		return fillDao.addOneFillBlank(fb);
 	}

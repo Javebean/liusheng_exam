@@ -22,23 +22,26 @@ public class CreateWord_Inter {
 				null, text, null, true);
 		runtitle.addBreak();
 		int index = 1;
-		for (Map.Entry<String, Boolean> m : info.entrySet()) {
-			 XWPFParagraph p_para = doc.createParagraph();
-			XWPFRun run = p_para.createRun();
-			String text1 = index++ + "、" + m.getKey();
-			WordUtil.setTextAndStyle(run, "SimSun", Constant.WUHAO_FONTSIZE,
-					null, text1, null, true);
-			run.addCarriageReturn();
-			if(m.getValue()){
-				XWPFParagraph pic_para = doc.createParagraph();
-				pic_para.setAlignment(ParagraphAlignment.CENTER);
-				XWPFRun picrun = pic_para.createRun();
-				//暂时注释掉
-				/*String path = "D:\\Java_workspace\\examination\\WebContent\\file\\pic.png";
+		if(info!=null){
+			for (Map.Entry<String, Boolean> m : info.entrySet()) {
+				XWPFParagraph p_para = doc.createParagraph();
+				XWPFRun run = p_para.createRun();
+				String text1 = index++ + "、" + m.getKey();
+				WordUtil.setTextAndStyle(run, "SimSun", Constant.WUHAO_FONTSIZE,
+						null, text1, null, true);
+				run.addCarriageReturn();
+				if(m.getValue()){
+					XWPFParagraph pic_para = doc.createParagraph();
+					pic_para.setAlignment(ParagraphAlignment.CENTER);
+					XWPFRun picrun = pic_para.createRun();
+					//暂时注释掉
+					/*String path = "D:\\Java_workspace\\examination\\WebContent\\file\\pic.png";
 				picrun.addPicture(new FileInputStream(path),
 						getSuffix(path), "xxx", Units.toEMU(300),
 						Units.toEMU(298));*/
+				}
 			}
+			
 		}
 	}
 
