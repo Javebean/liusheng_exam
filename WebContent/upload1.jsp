@@ -144,10 +144,44 @@
 	$("#submit2").click(function(){
 		$("img.loading").removeClass("hidden");
 		$(".msg").text("");
+		
+		//检查题目和选项
+		var flag = false;
+		$("#uploadSimple :input:not(:button)").each(function(){
+			var v = $(this).val();
+			if(v==""){
+				$("img.loading").addClass("hidden");
+				$(".msg").text("请填写题目或者选项");
+				flag =true;
+			}
+			
+		});
+		if(flag){
+			return false;
+		}
+		
+		//检查答案与知识点
+		var flag2 = 0;
+		$("input[type=radio]").each(function(){
+			var v = $(this).prop("checked");
+			if(v){
+				flag2++;
+			}
+			
+		});
+		if(flag2!=2){
+			$("img.loading").addClass("hidden");
+			$(".msg").text("请检查答案以及知识点");
+			return false;
+		}
+		
+		
 		$.post("addsimpleselect",$("#uploadSimple").serializeArray(),function(data){
 			if(data){
 				$("img.loading").addClass("hidden");
 				$(".msg").text("上传成功");
+				$("input[type=text],textarea").val("");
+				$("input[type=radio]").prop("checked",false);
 			}else{
 				alert("上传失败");
 			}
