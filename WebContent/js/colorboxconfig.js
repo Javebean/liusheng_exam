@@ -87,8 +87,18 @@
 			$("#kp"+kpId).attr("checked","checked");
 			
 			var imgurl = $(this).attr("imgurl");
-			$("#inter_img").empty();
-			$("#inter_img").append('<img alt="pic" src='+imgurl+'>');
+			
+			if(imgurl!=null&&""!=imgurl){
+				
+				$("#inter_img").empty();
+				$("#inter_img").append('<img alt="pic" src='+imgurl+'>');
+			}else{
+				$("#inter_img").append('该题无图');
+				
+			}
+			
+			
+			
 			/*获取题目id*/
 			var qid = $(this).attr("qId");
 			$("#agree").attr("agreeId",qid);
@@ -157,6 +167,9 @@ $("button.showinfo").colorbox({
 		$("#show_pr").text(pr);
 		$("#show_as").text(as);
 		$("#show_kp").text(kp);
+		
+		$("#interimg").empty();
+		$("#interimg").append('<img alt="pic" src='+$(this).attr("imgurl")+'>');
 	}
 	
 });

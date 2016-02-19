@@ -41,7 +41,6 @@ public class InterAction {
 	
 	@RequestMapping("/addinter")
 	public String addInterlocation(Interlocution il, MultipartFile file,Map<String,String>map) {
-		il.setNumber(NumberUtil.createNum());
 		boolean b = service.addOneInterlocution(il, file,context);
 		String text = null;
 		if (b) {

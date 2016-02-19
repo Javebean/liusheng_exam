@@ -93,6 +93,10 @@
 		      <tr><td>答案：</td><td id="show_as"></td></tr>
 		      <tr><td>所属知识点：</td><td id="show_kp"></td></tr>
 		   </table>
+		   
+		   <div id="interimg">
+		   
+		   </div>
 		</div>
 	</div>
 </div>
@@ -110,7 +114,7 @@ var items = 10;
 				 $.each(data,function(){
 					$("tbody.abstract").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.answer+"</td><td>已审核</td>"
 					+"<td>"
-					+"<button type='button' class='btn btn-primary showinfo' kp='"+this.keypoint+"' as='"+this.answer+"' pr='"+this.problem+"'>查看</button>"
+					+"<button type='button' class='btn btn-primary showinfo' kp='"+this.keypoint+"' as='"+this.answer+"' pr='"+this.problem+"' imgurl='"+this.imgUrl+"'>查看</button>"
 					+"&nbsp;&nbsp;<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+this.id+"'>删除</button>"
 					+"</td></tr>");
 				 $.getScript("js/colorboxconfig.js");

@@ -31,7 +31,7 @@ public class InterlocutionService {
 		// 获取上传路径baseUrl
 		il.setNumber(NumberUtil.createNum());
 		if (null != mf) {
-			String baseUrl = context.getRealPath("") + "\\file\\";
+			String baseUrl = context.getRealPath("") + "\\uploadfile\\";
 			String imgUrl = "";
 			String fileName = mf.getOriginalFilename();
 			if (!"".equalsIgnoreCase(fileName)) {
