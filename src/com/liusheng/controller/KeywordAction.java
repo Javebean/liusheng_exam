@@ -54,8 +54,8 @@ public class KeywordAction {
 	}
 	
 	
-	@RequestMapping(value="/getallkp")
-	public List<Keypoints> getAllkeyPoint(){
+	@RequestMapping(value="/getallkp",produces="text/html;charset=utf-8")
+	public String getAllkeyPoint(){
 		return kservice.getAllkp();
 	}
 	

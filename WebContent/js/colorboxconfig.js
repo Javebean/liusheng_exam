@@ -168,8 +168,11 @@ $("button.showinfo").colorbox({
 		$("#show_as").text(as);
 		$("#show_kp").text(kp);
 		
-		$("#interimg").empty();
-		$("#interimg").append('<img alt="pic" src='+$(this).attr("imgurl")+'>');
+		var imgurl = $(this).attr("imgurl");
+		if(""!=imgurl){
+			$("#interimg").empty();
+			$("#interimg").append('<img alt="pic" src='+$(this).attr("imgurl")+'>');
+		}
 	}
 	
 });

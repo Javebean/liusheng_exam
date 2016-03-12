@@ -2,14 +2,19 @@ package com.liusheng.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.KeypointsDao;
 import com.liusheng.entities.Keypoints;
+import com.liusheng.entities.SimpleSelection;
 
 @Repository
 @Transactional
@@ -94,6 +99,7 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Keypoints> getAllkp() {
+		//废弃
 		try{
 			String hql ="from Keypoints";
 			return getSession().createQuery(hql).list();
@@ -124,6 +130,42 @@ public class KeypointsDaoImpl implements KeypointsDao {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getSimpleAllkp() {
+		try{
+			String hql = "select distinct keypointId,keypoint from SimpleSelection";
+			return getSession().createQuery(hql).list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getFillBlankAllkp() {
+		try{
+			String hql = "select distinct keypointId,keypoint from FillBlank";
+			return getSession().createQuery(hql).list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getInterlocaionAllkp() {
+		try{
+			String hql = "select distinct keypointId,keypoint from Interlocution";
+			return getSession().createQuery(hql).list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

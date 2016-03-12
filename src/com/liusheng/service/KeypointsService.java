@@ -3,6 +3,8 @@ package com.liusheng.service;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +41,28 @@ public class KeypointsService {
 		return allKeypoints;
 	}
 	
-	public List<Keypoints> getAllkp(){
-		return kDao.getAllkp();
+	public String getAllkp(){
+		List<Object[]> simpleAllkp = kDao.getSimpleAllkp();
+		List<Object[]> fillBlankAllkp = kDao.getFillBlankAllkp();
+		List<Object[]> interlocaionAllkp = kDao.getInterlocaionAllkp();
+		
+		JSONArray array = new JSONArray();
+		array.put(getJsonStr(simpleAllkp));
+		array.put(getJsonStr(fillBlankAllkp));
+		array.put(getJsonStr(interlocaionAllkp));
+		return array.toString();
+	}
+	
+	private JSONArray getJsonStr(List<Object[]> list){
+		JSONArray arr = new JSONArray();
+		JSONObject obj = null;
+		for(Object[] o : list){
+			obj = new JSONObject();
+			obj.put("keypointId", o[0].toString());
+			obj.put("keypoint", o[1].toString());
+			arr.put(obj);
+		}
+		return arr;
 	}
 	
 	public int getkpPages(int items){

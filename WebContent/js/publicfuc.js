@@ -69,16 +69,18 @@ var getAllkp = function(){
 
 /*出题的知识点*/
 var getAllkp_createExam = function(){
-	var html="";
-	$.get("getallkp",function(data){
-		$.each(data,function(index){
-			//checkbox+知识点+输入框
-			html+='<input type="checkbox" name="'+this.id+'">'+this.keypoint+'&nbsp;&nbsp;&nbsp;';
-			if((index+1)%6==0){
-				html+="<br/><br/>";
-			}
+	$.getJSON("getallkp",function(data){
+		//checkbox+知识点+输入框
+		$.each(data,function(index0){
+			var html="";
+			$.each(this,function(index){
+				html+='<input type="checkbox" name="'+this.keypointId+'">'+this.keypoint+'&nbsp;&nbsp;&nbsp;';
+				if((index+1)%6==0){
+					html+="<br/><br/>";
+				}
+			});
+			$(".allkp").eq(index0).append(html);
 		});
-		$(".allkp").append(html);
 	});
 }
 
