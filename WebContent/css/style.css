@@ -81,3 +81,7 @@ label.btn-primary input[type="file"] {
 	font-size: 25px;
 	
 }
+
+.hand-point{
+	cursor: pointer;
+}
