@@ -110,7 +110,7 @@ var loadMessages = function(start){
 			 $.each(data,function(){
 				$("tbody.abstract").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>已审核</td>"
 				+"<td>"
-				+"<button type='button' class='btn btn-primary showinfo' kp='"+this.keypoint+"' pr='"+this.problem+"'>查看</button>"
+				+"<button type='button' class='btn btn-primary showinfo' kp='"+this.keypoint+"' pr='"+this.problem+"' as='"+this.answerText+"'>查看</button>"
 				+"&nbsp;&nbsp;<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
 				+"</td></tr>");
 			}); 
