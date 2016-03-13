@@ -47,7 +47,7 @@ var deleteItem = function (url,dId){
 
 /*查询知识点，在colorbox 的pop up中*/
 var getAllkp = function(){
-	$.get("getallkp",function(data){
+	$.get("getallkpfromkp",function(data){
 		var html = "";
 		$.each(data,function(index){
 			if(index%3==0){

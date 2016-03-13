@@ -59,6 +59,11 @@ public class KeywordAction {
 		return kservice.getAllkp();
 	}
 	
+	@RequestMapping(value="/getallkpfromkp")
+	public List<Keypoints> getAllkeyPointfromkp(){
+		return kservice.getkeyfromkeypoint();
+	}
+	
 	@RequestMapping("/updatekey/{id}")
 	public CommonResult updateKey(@PathVariable String id,@RequestParam String key){
 		key = utf(key);

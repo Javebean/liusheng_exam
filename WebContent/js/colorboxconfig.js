@@ -87,9 +87,7 @@
 			$("#kp"+kpId).attr("checked","checked");
 			
 			var imgurl = $(this).attr("imgurl");
-			
-			if(imgurl!=null&&""!=imgurl){
-				
+			if(imgurl!="null"&&""!=imgurl){
 				$("#inter_img").empty();
 				$("#inter_img").append('<img alt="pic" src='+imgurl+'>');
 			}else{

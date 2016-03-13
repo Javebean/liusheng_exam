@@ -3,10 +3,9 @@ package com.liusheng.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,9 @@ import com.liusheng.util.NumberUtil;
 
 @Service
 public class SimpleSelectService {
-
+	
+	private Logger log = Logger.getLogger(SimpleSelectService.class);
+	
 	@Autowired
 	private SimpleSelectDao ssDao;
 	@Autowired
@@ -58,6 +59,7 @@ public class SimpleSelectService {
 		}else{
 			//解析excel中的
 			int kpid = kpservice.getKeypointByName(keypoint);
+			log.info("是否查到相同的知识点："+kpid);
 			if(kpid!=-1){
 				ss.setKeypointId(kpid+"");
 			}else{

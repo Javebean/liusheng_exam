@@ -41,6 +41,11 @@ public class KeypointsService {
 		return allKeypoints;
 	}
 	
+	public List<Keypoints> getkeyfromkeypoint(){
+		List<Keypoints> allkp = kDao.getAllkp();
+		return allkp;
+	}
+	
 	public String getAllkp(){
 		List<Object[]> simpleAllkp = kDao.getSimpleAllkp();
 		List<Object[]> fillBlankAllkp = kDao.getFillBlankAllkp();
