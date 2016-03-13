@@ -86,7 +86,7 @@ var getAllkp_createExam = function(){
 
 var getAllkp_upload = function(){
 	var html="";
-	$.get("getallkp",function(data){
+	$.get("getallkpfromkp",function(data){
 		$.each(data,function(){
 			//checkbox+知识点+输入框
 			html+='<input type="radio" name="keypointId" value="'+this.id+','+this.keypoint+'">'+this.keypoint+"&nbsp;&nbsp;";

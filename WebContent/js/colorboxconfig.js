@@ -91,6 +91,7 @@
 				$("#inter_img").empty();
 				$("#inter_img").append('<img alt="pic" src='+imgurl+'>');
 			}else{
+				$("#inter_img").empty();
 				$("#inter_img").append('该题无图');
 				
 			}
