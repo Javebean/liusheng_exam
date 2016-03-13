@@ -1,20 +1,35 @@
 package com.liusheng.util;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
+import com.liusheng.entities.Interlocution;
+
 
 public class CreateWord_Inter {
-	public static void cinter(XWPFDocument doc, Map<String, Boolean> info)
+	public static void cinter(XWPFDocument doc,List<Interlocution> createInter)
 			throws InvalidFormatException, IOException {
+		Map<String,Boolean> info = null;
+		if(createInter.size()>0){
+			info = new HashMap<String, Boolean>();
+			for(Interlocution i :createInter){
+				String pro = i.getProblem();
+				String imgurl = i.getImgUrl();
+				info.put(pro, imgurl==null?true:false);
+			}
+			
+		}
+		
+		
+		
 		XWPFParagraph para = doc.createParagraph();
 		XWPFRun runtitle = para.createRun();
 		String text = "三、问答题(每小题10分，共60分)";

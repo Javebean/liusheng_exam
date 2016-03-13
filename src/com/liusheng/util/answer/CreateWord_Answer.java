@@ -3,15 +3,14 @@ package com.liusheng.util.answer;
 import java.math.BigInteger;
 import java.util.Map;
 
-import org.apache.poi.xwpf.usermodel.BreakType;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 import com.liusheng.util.Constant;
 import com.liusheng.util.WordUtil;
@@ -84,7 +83,7 @@ public class CreateWord_Answer {
 		     
 		     
 		     /*填空答案表格*/
-		        XWPFTable filltable = doc.createTable(11,2);
+		        XWPFTable filltable = doc.createTable(fillAnswer.length+1,2);
 			     //column width in Twentieths of a Point
 			     for(int i = 0; i < filltable.getNumberOfRows(); i++){
 			         XWPFTableRow row = filltable.getRow(i);
@@ -119,7 +118,7 @@ public class CreateWord_Answer {
 			         }
 			     }
 			     
-			     /*填空题答案*/
+			     /*问答题答案*/
 			     XWPFParagraph intertitle = doc.createParagraph();
 			     XWPFRun interrun = intertitle.createRun();
 			     String inter_title = "三、问答题(每小题10分，共60分)";

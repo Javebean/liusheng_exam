@@ -111,7 +111,11 @@
 			}).get();
 			var param = {"simple":JSON.stringify(a),"fill":JSON.stringify(b),"inter":JSON.stringify(c)};
 			$.get("cratexam",param,function(data){
-				console.log(data);
+				if("success"==data){
+					$(".load").addClass("hidden");
+					$(".tipmes").text("出题成功，请到相应目录查看试卷！");
+				}
+				
 			});
 		});
 	})

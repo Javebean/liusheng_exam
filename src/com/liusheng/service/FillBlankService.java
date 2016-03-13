@@ -102,19 +102,18 @@ public class FillBlankService {
 		int nums=0;//记录空格数量
 		List<FillBlank> result = new ArrayList<FillBlank>();
 		for(;i<10;i++){
+			if(i!=0&&i%arrLen==0){
+				Collections.shuffle(Arrays.asList(kpId));
+			}
 			fb = fillDao.createFillBlankByKid(kpId[i%arrLen]);
 			if(null!=fb){
 				result.add(fb);
-				if(i%arrLen==0&&i!=0){
-					Collections.shuffle(Arrays.asList(kpId));
-				}
 				nums+=fb.getFillNums();
 				if(nums>=10){
 					//如果空大于等于10了。结束循环
 					break;
 				}
 			}
-			
 		}
 		return result;
 		

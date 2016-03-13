@@ -112,14 +112,16 @@ public class SimpleSelectService {
 		int i=0;
 		int arrLen = arr.length;
 		for(;i<10;i++){
+			//第一遍出题完重新洗牌
+			if(i!=0&&i%arrLen==0){
+				Collections.shuffle(Arrays.asList(arr));
+			}
+			
 			ss = ssDao.createSimpleByKid(arr[i%arrLen]);
 			if(ss!=null){
 				list.add(ss);
 			}
 			
-			if(i%arrLen==0&&i!=0){
-				Collections.shuffle(Arrays.asList(arr));
-			}
 			
 		}
 		return list;
@@ -159,7 +161,7 @@ public class SimpleSelectService {
 			iArr[i] = (String) fillArr.get(i);
 		}
 		List<Interlocution> createInter = iservice.createInter(iArr);
-		Map<String,Boolean> interInfo = null;
+		/*Map<String,Boolean> interInfo = null;
 		if(createInter.size()>0){
 			interInfo = new HashMap<String, Boolean>();
 			for(Interlocution i :createInter){
@@ -168,10 +170,10 @@ public class SimpleSelectService {
 				interInfo.put(pro, imgurl==null?true:false);
 			}
 			
-		}
+		}*/
 		
 		try {
-			CreateWord.createExam(createSimple, createFill, interInfo);
+			CreateWord.createExam(createSimple, createFill, createInter);
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();

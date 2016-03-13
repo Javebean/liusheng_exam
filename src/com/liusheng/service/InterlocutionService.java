@@ -136,12 +136,12 @@ public class InterlocutionService {
 		int nums =5; //问答题的数量
 		List<Interlocution> result = new ArrayList<Interlocution>();
 		for(;i<nums;i++){
+			if(i%arrLen==0&&i!=0){
+				Collections.shuffle(Arrays.asList(kpids));
+			}
 			il = iDao.createInterlocaionByKid(kpids[i%arrLen]);
 			if(null!=il){
 				result.add(il);
-			}
-			if(i%arrLen==0&&i!=0){
-				Collections.shuffle(Arrays.asList(kpids));
 			}
 			
 		}
