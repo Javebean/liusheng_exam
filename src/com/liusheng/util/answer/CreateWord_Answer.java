@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
@@ -25,6 +26,8 @@ import com.liusheng.util.WordUtil;
 
 public class CreateWord_Answer {
 
+	private static  Logger log = Logger.getLogger(CreateWord_Answer.class);
+	
 	public static void canswerpage(XWPFDocument doc,String [] simAnswer,String []fillAnswer,List<Interlocution> interInfo,ServletContext context){
 		XWPFParagraph answerTitle = doc.createParagraph();
 		XWPFRun answerTitleRun = answerTitle.createRun();
@@ -132,9 +135,13 @@ public class CreateWord_Answer {
 			     String inter_title = "三、问答题(每小题10分，共60分)";
 			     WordUtil.setTextAndStyle(interrun, "SimHei", Constant.XIAOSI_FONTSIZE, null, inter_title, null, true);
 			     interrun.addCarriageReturn();
+			     
+			    log.info("答题纸上的问答题数量："+interInfo.size());
+			    int proNum = 1;
 			    for(Interlocution m : interInfo){
-			    	XWPFRun key = intertitle.createRun();
-			    	WordUtil.setTextAndStyle(key, "SimSun", Constant.WUHAO_FONTSIZE, null, m.getProblem(), null, true);
+			    	XWPFParagraph problem = doc.createParagraph();
+			    	XWPFRun key = problem.createRun();
+			    	WordUtil.setTextAndStyle(key, "SimSun", Constant.WUHAO_FONTSIZE, null,proNum+++"、 "+ m.getProblem(), null, true);
 			    	key.addCarriageReturn();
 			    	//答题纸问答题如果有图片的话，
 			    	if(null!=m.getImgUrl()){
@@ -157,8 +164,8 @@ public class CreateWord_Answer {
 							}
 						}
 			    	
-			    	
-			    	XWPFRun value	 = intertitle.createRun();
+			    	XWPFParagraph answer = doc.createParagraph();
+			    	XWPFRun value	 = answer.createRun();
 			    	WordUtil.setTextAndStyle(value, "SimSun", Constant.WUHAO_FONTSIZE, null, "答："+m.getAnswer(), null, false);
 			    	value.addCarriageReturn();
 			    	
