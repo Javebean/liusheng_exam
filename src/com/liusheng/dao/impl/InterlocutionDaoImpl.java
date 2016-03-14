@@ -104,7 +104,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	@Override
 	public Interlocution createInterlocaionByKid(String kpId) {
 		try {
-			String hql = "from Interlocution where keypointId = ? order by rand()";
+			String hql = "from Interlocution where keypointId = ? and checkStatus=1 order by rand()";
 			return (Interlocution) getSession().createQuery(hql)
 					.setString(0, kpId).setMaxResults(1)
 					.uniqueResult();

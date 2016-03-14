@@ -1,33 +1,41 @@
 package com.liusheng.util;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.liusheng.entities.Interlocution;
 
-
 public class CreateWord_Inter {
-	public static void cinter(XWPFDocument doc,List<Interlocution> createInter)
+	
+
+	public static void cinter(XWPFDocument doc,List<Interlocution> createInter,ServletContext context)
 			throws InvalidFormatException, IOException {
-		Map<String,Boolean> info = null;
+		
+		Map<String,String> info = null;
 		if(createInter.size()>0){
-			info = new HashMap<String, Boolean>();
+			info = new HashMap<String, String>();
 			for(Interlocution i :createInter){
 				String pro = i.getProblem();
 				String imgurl = i.getImgUrl();
-				info.put(pro, imgurl==null?true:false);
+				info.put(pro, imgurl);
 			}
 			
 		}
-		
 		
 		
 		XWPFParagraph para = doc.createParagraph();
@@ -38,59 +46,27 @@ public class CreateWord_Inter {
 		runtitle.addBreak();
 		int index = 1;
 		if(info!=null){
-			for (Map.Entry<String, Boolean> m : info.entrySet()) {
+			for (Map.Entry<String, String> m : info.entrySet()) {
 				XWPFParagraph p_para = doc.createParagraph();
 				XWPFRun run = p_para.createRun();
 				String text1 = index++ + "、" + m.getKey();
 				WordUtil.setTextAndStyle(run, "SimSun", Constant.WUHAO_FONTSIZE,
 						null, text1, null, true);
 				run.addCarriageReturn();
-				if(m.getValue()){
+				if(null!=m.getValue()){
 					XWPFParagraph pic_para = doc.createParagraph();
 					pic_para.setAlignment(ParagraphAlignment.CENTER);
 					XWPFRun picrun = pic_para.createRun();
 					//暂时注释掉
-					/*String path = "D:\\Java_workspace\\examination\\WebContent\\file\\pic.png";
+					
+					String path = context.getRealPath("")+"\\"+m.getValue();
 				picrun.addPicture(new FileInputStream(path),
-						getSuffix(path), "xxx", Units.toEMU(300),
-						Units.toEMU(298));*/
+						WordUtil.getSuffix(path), "xxx", Units.toEMU(300),
+						Units.toEMU(298));
 				}
 			}
 			
 		}
 	}
 
-	private static int getSuffix(String imgFile) {
-		int format = 0;
-		if (imgFile.endsWith(".emf"))
-			format = XWPFDocument.PICTURE_TYPE_EMF;
-		else if (imgFile.endsWith(".wmf"))
-			format = XWPFDocument.PICTURE_TYPE_WMF;
-		else if (imgFile.endsWith(".pict"))
-			format = XWPFDocument.PICTURE_TYPE_PICT;
-		else if (imgFile.endsWith(".jpeg") || imgFile.endsWith(".jpg"))
-			format = XWPFDocument.PICTURE_TYPE_JPEG;
-		else if (imgFile.endsWith(".png"))
-			format = XWPFDocument.PICTURE_TYPE_PNG;
-		else if (imgFile.endsWith(".dib"))
-			format = XWPFDocument.PICTURE_TYPE_DIB;
-		else if (imgFile.endsWith(".gif"))
-			format = XWPFDocument.PICTURE_TYPE_GIF;
-		else if (imgFile.endsWith(".tiff"))
-			format = XWPFDocument.PICTURE_TYPE_TIFF;
-		else if (imgFile.endsWith(".eps"))
-			format = XWPFDocument.PICTURE_TYPE_EPS;
-		else if (imgFile.endsWith(".bmp"))
-			format = XWPFDocument.PICTURE_TYPE_BMP;
-		else if (imgFile.endsWith(".wpg"))
-			format = XWPFDocument.PICTURE_TYPE_WPG;
-		else {
-			System.err
-					.println("Unsupported picture: "
-							+ imgFile
-							+ ". Expected emf|wmf|pict|jpeg|png|dib|gif|tiff|eps|bmp|wpg");
-
-		}
-		return format;
-	}
 }

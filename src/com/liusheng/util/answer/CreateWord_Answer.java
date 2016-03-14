@@ -1,8 +1,15 @@
 package com.liusheng.util.answer;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
-import java.util.Map;
+import java.util.List;
 
+import javax.servlet.ServletContext;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -12,12 +19,13 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
+import com.liusheng.entities.Interlocution;
 import com.liusheng.util.Constant;
 import com.liusheng.util.WordUtil;
 
 public class CreateWord_Answer {
 
-	public static void canswerpage(XWPFDocument doc,String [] simAnswer,String []fillAnswer,Map<String,String> interAnswer){
+	public static void canswerpage(XWPFDocument doc,String [] simAnswer,String []fillAnswer,List<Interlocution> interInfo,ServletContext context){
 		XWPFParagraph answerTitle = doc.createParagraph();
 		XWPFRun answerTitleRun = answerTitle.createRun();
 		WordUtil.setTextAndStyle(answerTitleRun, "SimHei", Constant.ERHAO_FONTSIZE, null, "参考答案及评分标准（B卷）", null, true);
@@ -124,12 +132,34 @@ public class CreateWord_Answer {
 			     String inter_title = "三、问答题(每小题10分，共60分)";
 			     WordUtil.setTextAndStyle(interrun, "SimHei", Constant.XIAOSI_FONTSIZE, null, inter_title, null, true);
 			     interrun.addCarriageReturn();
-			    for(Map.Entry<String, String> m : interAnswer.entrySet()){
+			    for(Interlocution m : interInfo){
 			    	XWPFRun key = intertitle.createRun();
-			    	WordUtil.setTextAndStyle(key, "SimSun", Constant.WUHAO_FONTSIZE, null, m.getKey(), null, true);
+			    	WordUtil.setTextAndStyle(key, "SimSun", Constant.WUHAO_FONTSIZE, null, m.getProblem(), null, true);
 			    	key.addCarriageReturn();
+			    	//答题纸问答题如果有图片的话，
+			    	if(null!=m.getImgUrl()){
+						XWPFParagraph pic_para = doc.createParagraph();
+						pic_para.setAlignment(ParagraphAlignment.CENTER);
+						XWPFRun picrun = pic_para.createRun();
+						
+						String path = context.getRealPath("")+"\\"+m.getImgUrl();
+						try {
+							
+							picrun.addPicture(new FileInputStream(path),
+									WordUtil.getSuffix(path), "xxx", Units.toEMU(300),
+									Units.toEMU(298));
+							} catch (InvalidFormatException e) {
+								e.printStackTrace();
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+			    	
+			    	
 			    	XWPFRun value	 = intertitle.createRun();
-			    	WordUtil.setTextAndStyle(value, "SimSun", Constant.WUHAO_FONTSIZE, null, "答："+m.getValue(), null, false);
+			    	WordUtil.setTextAndStyle(value, "SimSun", Constant.WUHAO_FONTSIZE, null, "答："+m.getAnswer(), null, false);
 			    	value.addCarriageReturn();
 			    	
 			    }

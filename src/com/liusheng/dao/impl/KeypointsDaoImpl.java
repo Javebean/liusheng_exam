@@ -2,19 +2,14 @@ package com.liusheng.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.KeypointsDao;
 import com.liusheng.entities.Keypoints;
-import com.liusheng.entities.SimpleSelection;
 
 @Repository
 @Transactional
@@ -136,7 +131,7 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	@Override
 	public List<Object[]> getSimpleAllkp() {
 		try{
-			String hql = "select distinct keypointId,keypoint from SimpleSelection";
+			String hql = "select distinct keypointId,keypoint from SimpleSelection where checkStatus=1";
 			return getSession().createQuery(hql).list();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -148,7 +143,7 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	@Override
 	public List<Object[]> getFillBlankAllkp() {
 		try{
-			String hql = "select distinct keypointId,keypoint from FillBlank";
+			String hql = "select distinct keypointId,keypoint from FillBlank where checkStatus=1";
 			return getSession().createQuery(hql).list();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -160,7 +155,7 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	@Override
 	public List<Object[]> getInterlocaionAllkp() {
 		try{
-			String hql = "select distinct keypointId,keypoint from Interlocution";
+			String hql = "select distinct keypointId,keypoint from Interlocution where checkStatus=1";
 			return getSession().createQuery(hql).list();
 		}catch(Exception e){
 			e.printStackTrace();

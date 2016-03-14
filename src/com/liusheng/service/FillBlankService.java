@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,14 @@ import com.liusheng.entities.Keypoints;
 import com.liusheng.util.NumberUtil;
 @Service
 public class FillBlankService {
+	private Logger log = Logger.getLogger(FillBlankService.class);
+	
 	@Autowired
 	private FillBlankDao fillDao;
 	@Autowired
 	private KeypointsService kpservice;
 	
 	public boolean addOneFillBlank(FillBlank fb) {
-		
 		//keypoint实际上是【id,知识点】组合
 		String keypointId = fb.getKeypointId();
 		String keypoint = fb.getKeypoint();
@@ -94,6 +96,7 @@ public class FillBlankService {
 	}
 	
 	public List<FillBlank> createFillBlank(String kpId[]){
+		log.info("要出填空题知识点:"+Arrays.toString(kpId));
 		Collections.shuffle(Arrays.asList(kpId));
 		
 		int arrLen = kpId.length;
@@ -106,6 +109,7 @@ public class FillBlankService {
 				Collections.shuffle(Arrays.asList(kpId));
 			}
 			fb = fillDao.createFillBlankByKid(kpId[i%arrLen]);
+			log.info("查到的填空题:"+fb);
 			if(null!=fb){
 				result.add(fb);
 				nums+=fb.getFillNums();

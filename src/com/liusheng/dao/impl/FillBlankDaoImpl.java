@@ -116,7 +116,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public FillBlank createFillBlankByKid(String kpId) {
 		try {
-			String hql = "from FillBlank where keypointId =? order by rand()";
+			String hql = "from FillBlank where keypointId =? and checkStatus =1 order by rand()";
 			return  (FillBlank) getSession().createQuery(hql).setString(0, kpId)
 					.setMaxResults(1)
 					.uniqueResult();

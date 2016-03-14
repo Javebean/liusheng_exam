@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.apache.poi.xwpf.usermodel.BreakType;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
@@ -31,7 +33,7 @@ public class CreateWord {
  * 2.fillblankInfo : 题目
  * 3.interInfo   key 题目，value 是否有图片
  */
-    public static void createExam(List<SimpleSelection> simpleInfo,List<FillBlank> fillblankInfo, List<Interlocution> interInfo) throws Exception {
+    public static void createExam(List<SimpleSelection> simpleInfo,List<FillBlank> fillblankInfo, List<Interlocution> interInfo,ServletContext context) throws Exception {
 		XWPFDocument doc = new XWPFDocument();
         XWPFParagraph title = doc.createParagraph();
         //设置文本的对齐方式
@@ -424,7 +426,7 @@ public class CreateWord {
         
 
         //问答
-        CreateWord_Inter.cinter(doc, interInfo);
+        CreateWord_Inter.cinter(doc, interInfo,context);
         
         /*******************************************/
         XWPFParagraph breakpage2 = doc.createParagraph();
@@ -474,14 +476,14 @@ public class CreateWord {
         }
         
         
-        Map<String,String> interAnswer = new LinkedHashMap<String, String>();
+       //Map<String,String> interAnswer = new LinkedHashMap<String, String>();
         
         //List<Interlocution> interInfo
-        for(Interlocution inter : interInfo){
+        /*for(Interlocution inter : interInfo){
         	interAnswer.put(inter.getProblem(), inter.getAnswer());
-        }
+        }*/
         
-        CreateWord_Answer.canswerpage(doc,simAnswer,fillAnswer,interAnswer);
+        CreateWord_Answer.canswerpage(doc,simAnswer,fillAnswer,interInfo,context);
 
         FileOutputStream out = new FileOutputStream("h://simple.docx");
         doc.write(out);

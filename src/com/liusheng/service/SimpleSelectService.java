@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,7 +132,8 @@ public class SimpleSelectService {
 	}
 	
 	//
-	public String createexamService(String simple,String fill,String inter){
+	public String createexamService(String simple,String fill,String inter,ServletContext context){
+		log.info("出题各类题目的id" +simple+"--"+fill+"--"+inter);
 		//单选题
 		JSONArray simpleArr = new JSONArray(simple);
 			int simpleLen = simpleArr.length();
@@ -156,11 +159,11 @@ public class SimpleSelectService {
 		List<FillBlank> createFill = fservice.createFillBlank(fillKpIdArr);
 		
 		//问答题
-		JSONArray interArr = new JSONArray(fill);
+		JSONArray interArr = new JSONArray(inter);
 		int interLen = interArr.length();
 		String iArr[] = new String[interLen];//存放kpid的数组
 		for(int i=0;i<interLen;i++){
-			iArr[i] = (String) fillArr.get(i);
+			iArr[i] = (String) interArr.get(i);
 		}
 		List<Interlocution> createInter = iservice.createInter(iArr);
 		/*Map<String,Boolean> interInfo = null;
@@ -175,7 +178,7 @@ public class SimpleSelectService {
 		}*/
 		
 		try {
-			CreateWord.createExam(createSimple, createFill, createInter);
+			CreateWord.createExam(createSimple, createFill, createInter,context);
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();

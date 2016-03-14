@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +25,7 @@ public class InterlocutionService {
 	@Autowired
 	private InterlocutionDao iDao;
 
+	private Logger log = Logger.getLogger(InterlocutionService.class);
 	@Autowired
 	private KeypointsService kpservice;
 	public boolean addOneInterlocution(Interlocution il, MultipartFile mf,ServletContext context) {
@@ -129,6 +131,7 @@ public class InterlocutionService {
 		 * 1.查询知识点1 kid 的集合 daoImpl里面写的 2.从中随机选择一定数量的题目
 		 * 
 		 * */
+		log.info("要出的问答题知识点Id:"+Arrays.toString(kpids));
 		Collections.shuffle(Arrays.asList(kpids));
 		int arrLen = kpids.length;
 		int i=0;
@@ -140,6 +143,7 @@ public class InterlocutionService {
 				Collections.shuffle(Arrays.asList(kpids));
 			}
 			il = iDao.createInterlocaionByKid(kpids[i%arrLen]);
+			log.info("查到的问答题目:"+il);
 			if(null!=il){
 				result.add(il);
 			}
