@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.liusheng.entities.SimpleSelection;
@@ -34,10 +35,10 @@ public class SimpleSelectAcion {
 	}
 	
 	
-	@RequestMapping("/agreeques/{id}")
-	public boolean agreeQues(@PathVariable int id){
-		log.info("审核通过题目的id "+id);
-		return service.checkOneSimpleSelection(id);
+	@RequestMapping("/agreeques")
+	public boolean agreeQues(int agreeId,String question,String option,String keypoint,String optionSy,String keypointId){
+		log.info("审核通过题目的id "+agreeId);
+		return service.checkOneSimpleSelection(agreeId,question, option, keypoint,optionSy,keypointId);
 	}
 	
 	@RequestMapping("/deletesim/{id}")

@@ -1,5 +1,6 @@
 package com.liusheng.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -91,8 +92,17 @@ public class SimpleSelectService {
 		return ssDao.getAllSimpleSelection(start, itemNums,state);
 	}
 
-	public boolean checkOneSimpleSelection(int id) {
-		return ssDao.checkOneSimpleSelection(id);
+	public boolean checkOneSimpleSelection(int agreeId,String question,String option,String keypoint,String optionSy,String keypointId) {
+		keypointId = keypointId.substring(2);
+		try {
+			question = new String(question.getBytes("iso8859-1"),"utf-8");
+			option = new String(option.getBytes("iso8859-1"),"utf-8");
+			keypoint = new String(keypoint.getBytes("iso8859-1"),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return ssDao.checkOneSimpleSelection(agreeId,question, option, keypoint,optionSy,keypointId);
 	}
 	
 	public int getsimplecount(int items){

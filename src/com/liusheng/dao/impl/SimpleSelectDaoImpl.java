@@ -85,11 +85,12 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	}
 
 	@Override
-	public boolean checkOneSimpleSelection(int id) {
+	public boolean checkOneSimpleSelection(int agreeId,String question,String option,String keypoint,String optionSy,String keypointId) {
 		try {
-			String hql = "update SimpleSelection set checkStatus =? where id = ?";
-			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS)
-					.setInteger(1, id).executeUpdate();
+			String hql = "update SimpleSelection set checkStatus =?,problem =?,answerText=?,answer=?,keypointId=?,keypoint=? where id = ?";
+			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS).setString(1, question).setString(2, option).setString(3, optionSy)
+					.setString(4, keypointId).setString(5, keypoint)
+					.setInteger(6, agreeId).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

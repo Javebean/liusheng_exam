@@ -15,7 +15,7 @@ public interface SimpleSelectDao {
 	/*state 审核状态*/
 	public List<SimpleSelection> getAllSimpleSelection(int start,int itemNums,int state);
 	
-	public boolean checkOneSimpleSelection(int id);
+	public boolean checkOneSimpleSelection(int agreeId,String question,String option,String keypoint,String optionSy,String keypointId);
 	
 	public SimpleSelection createSimpleByKid(String kpId);
 	

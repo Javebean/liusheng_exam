@@ -163,7 +163,13 @@ var loadMessages = function(start){
 		 getAllkp();
 		 /*审核通过*/
 		 $("#agree").click(function(){
-			 agreeQues("agreeques",$(this).attr("agreeId"));
+			 var question = $("textarea[symbol=question]").val();
+			 var optionSy = $("input[name=answer]:checked").attr("id");
+			 var option = $("input[name=answer]:checked").next().text();
+			 var keypointId = $("input[name=keypoint]:checked").attr("id");
+			 var keypoint = $("input[name=keypoint]:checked").next().text();
+			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"optionSy":optionSy,"option":option,"keypoint":keypoint,"keypointId":keypointId};
+			 agreeQues("agreeques",param);
 		 });
 		 
 	})

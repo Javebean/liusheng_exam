@@ -100,8 +100,8 @@ var getAllkp_upload = function(){
 
 
 /*审核通过题目*/
-var agreeQues = function(url,id){
-	$.get(url+"/"+id,function(data){
+var agreeQues = function(url,param){
+	$.get(url,param,function(data){
 			$.colorbox.close();
 			$.confirm({
 				title : "提示",
