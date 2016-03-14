@@ -156,7 +156,12 @@ var items =10;
 		 
 		 /*审核通过*/
 		 $("#agree").click(function(){
-			 agreeQues("agreeil",$(this).attr("agreeId"));
+			 var question = $("textarea[symbol=question]").val();
+			 var answer = $("textarea[symbol=answer]").val();
+			 var keypointId = $("input[name=keypoint]:checked").attr("id");
+			 var keypoint = $("input[name=keypoint]:checked").next().text();
+			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"answer":answer,"keypoint":keypoint,"keypointId":keypointId};
+			 agreeQues("agreeil",param);
 		 });
 	})
 </script>

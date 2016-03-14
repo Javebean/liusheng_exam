@@ -115,7 +115,6 @@ var agreeQues = function(url,param){
 			});
 		
 	});
-	
 }
 
 

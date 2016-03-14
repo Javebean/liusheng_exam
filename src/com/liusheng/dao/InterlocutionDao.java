@@ -17,7 +17,7 @@ public interface InterlocutionDao {
 
 	public List<Interlocution> getAllInterlocution(int start, int itemNums,int state);
 
-	public boolean checkOneInterlocution(int id);
+	public boolean checkOneInterlocution(int agreeId,String question,String answer,String keypoint,String keypointId);
 	
 	public Interlocution createInterlocaionByKid(String kpId);
 	

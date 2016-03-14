@@ -45,9 +45,9 @@ public class FillBlankAction {
 		return fservice.deleteOneFillBlank(id);
 	}
 	
-	@RequestMapping("/agreefb/{id}")
-	public boolean checkOneFillBlank(@PathVariable int id) {
-		return fservice.checkOneFillBlank(id);
+	@RequestMapping("/agreefb")
+	public boolean checkOneFillBlank(int agreeId,String question,String keypoint,String keypointId) {
+		return fservice.checkOneFillBlank(agreeId,question,keypoint,keypointId);
 	}
 
 }

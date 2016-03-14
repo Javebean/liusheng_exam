@@ -89,11 +89,13 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	}
 
 	@Override
-	public boolean checkOneInterlocution(int id) {
+	public boolean checkOneInterlocution(int agreeId,String question,String answer,String keypoint,String keypointId) {
 		try {
-			String hql = "update Interlocution set checkStatus =? where id = ?";
+			String hql = "update Interlocution set checkStatus =?,problem=?,answer=?,keypointId=?,keypoint=? where id = ?";
 			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS)
-					.setInteger(1, id).executeUpdate();
+					.setString(1, question).setString(2, answer).setString(3, keypointId)
+						.setString(4, keypoint)
+					.setInteger(5, agreeId).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

@@ -59,8 +59,8 @@ public class InterAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/agreeil/{id}")
-	public boolean checkOneInterlocution(@PathVariable int id){
-		return service.checkOneInterlocution(id);
+	@RequestMapping(value = "/agreeil")
+	public boolean checkOneInterlocution(int agreeId,String question,String answer,String keypoint,String keypointId){
+		return service.checkOneInterlocution(agreeId, question, answer, keypoint, keypointId);
 	}
 }

@@ -168,7 +168,7 @@ $("button.showinfo").colorbox({
 		$("#show_kp").text(kp);
 		
 		var imgurl = $(this).attr("imgurl");
-		if(""!=imgurl){
+		if(imgurl!="null"&&""!=imgurl){
 			$("#interimg").empty();
 			$("#interimg").append('<img alt="pic" src='+$(this).attr("imgurl")+'>');
 		}

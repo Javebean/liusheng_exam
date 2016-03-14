@@ -2,6 +2,7 @@ package com.liusheng.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -122,8 +123,17 @@ public class InterlocutionService {
 		return pages;
 	}
 	
-	public boolean checkOneInterlocution(int id) {
-		return iDao.checkOneInterlocution(id);
+	public boolean checkOneInterlocution(int agreeId,String question,String answer,String keypoint,String keypointId) {
+		keypointId = keypointId.substring(2);
+		try {
+			question = new String(question.getBytes("iso8859-1"),"utf-8");
+			answer = new String(answer.getBytes("iso8859-1"),"utf-8");
+			keypoint = new String(keypoint.getBytes("iso8859-1"),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return iDao.checkOneInterlocution(agreeId,question,answer, keypoint, keypointId);
 	}
 
 	public List<Interlocution> createInter(String [] kpids) {

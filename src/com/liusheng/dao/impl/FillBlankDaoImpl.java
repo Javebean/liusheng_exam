@@ -1,6 +1,8 @@
 package com.liusheng.dao.impl;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -87,11 +89,23 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	}
 
 	@Override
-	public boolean checkOneFillBlank(int id) {
+	public boolean checkOneFillBlank(int agreeId,String question,String keypoint,String keypointId) {
 		try {
-			String hql = "update FillBlank set checkStatus =? where id = ?";
+			Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
+			Matcher matcher = reg.matcher(question);
+			StringBuilder answer = new StringBuilder();
+			while(matcher.find()){
+				answer.append(matcher.group(2));
+				answer.append(",");
+			}
+			//删掉最后一个逗号“，”
+			answer.deleteCharAt(answer.length()-1);
+			
+			String hql = "update FillBlank set checkStatus =? ,problem=? ,keypointId=?,keypoint=?,answer=? where id = ?";
 			getSession().createQuery(hql).setInteger(0, Constant.CHECK_SUCCESS)
-					.setInteger(1, id).executeUpdate();
+						.setString(1, question).setString(2, keypointId).setString(3, keypoint)
+						.setString(4, answer.toString())
+					.setInteger(5, agreeId).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

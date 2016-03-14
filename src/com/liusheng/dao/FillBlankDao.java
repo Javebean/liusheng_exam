@@ -19,7 +19,7 @@ public interface FillBlankDao {
 	
 	public long getFillBlankCount();
 
-	public boolean checkOneFillBlank(int id);
+	public boolean checkOneFillBlank(int agreeId,String question,String keypoint,String keypointId);
 	
 	public List<FillBlankAnswer> getFBAnswer(int fbId);
 	

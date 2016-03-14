@@ -143,7 +143,11 @@ var items = 10;
 		 getAllkp();
 		 /*审核通过*/
 		 $("#agree").click(function(){
-			 agreeQues("agreefb",$(this).attr("agreeId"));
+			 var question = $("textarea[symbol=question]").val();
+			 var keypointId = $("input[name=keypoint]:checked").attr("id");
+			 var keypoint = $("input[name=keypoint]:checked").next().text();
+			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"keypoint":keypoint,"keypointId":keypointId};
+			 agreeQues("agreefb",param);
 		 });
 	})
 </script>
