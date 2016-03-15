@@ -74,7 +74,7 @@ var getAllkp_createExam = function(){
 		$.each(data,function(index0){
 			var html="";
 			$.each(this,function(index){
-				html+='<input type="checkbox" name="'+this.keypointId+'">'+this.keypoint+'&nbsp;&nbsp;&nbsp;';
+				html+='<div style="width:150px;float:left;"><input type="checkbox" name="'+this.keypointId+'">'+this.keypoint+'&nbsp;&nbsp;&nbsp;</div>';
 				if((index+1)%6==0){
 					html+="<br/><br/>";
 				}

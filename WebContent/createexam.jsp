@@ -80,9 +80,9 @@
 			$(".load").removeClass("hidden");
 			$(".tipmes").text("");
 			//检查单选 填空 问答 一共选择的数量
-			var length1 = $(".allkp").eq(0).children("input:checked").length;
-			var length2 = $(".allkp").eq(1).children("input:checked").length;
-			var length3 = $(".allkp").eq(2).children("input:checked").length;
+			var length1 = $(".allkp").eq(0).find("input:checked").length;
+			var length2 = $(".allkp").eq(1).find("input:checked").length;
+			var length3 = $(".allkp").eq(2).find("input:checked").length;
 			if(length1==0){
 				$(".load").addClass("hidden");
 				$(".tipmes").text("请勾选单选题出题知识点");
@@ -100,13 +100,13 @@
 			}
 			
 			//输入框里面填的数字之和不能大于所给的题目数量
-			var a = $(".allkp").eq(0).children("input:checked").map(function(){
+			var a = $(".allkp").eq(0).find("input:checked").map(function(){
 				return this.name;
 			}).get();
-			var b = $(".allkp").eq(1).children("input:checked").map(function(){
+			var b = $(".allkp").eq(1).find("input:checked").map(function(){
 				return this.name;
 			}).get();
-			var c = $(".allkp").eq(2).children("input:checked").map(function(){
+			var c = $(".allkp").eq(2).find("input:checked").map(function(){
 				return this.name;
 			}).get();
 			var param = {"simple":JSON.stringify(a),"fill":JSON.stringify(b),"inter":JSON.stringify(c)};
