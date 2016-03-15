@@ -188,6 +188,12 @@
 		});
 		return false;
 	});
+	
+	
+	//导航active
+	$(function(){
+		$("#collapseTwo").find("li").eq(0).addClass("sub-active");
+	});
 </script>
 </body>
 </html>

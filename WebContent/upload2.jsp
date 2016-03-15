@@ -82,7 +82,7 @@
 				         <button id ="submit2" class ="btn btn-danger">确认上传</button>
 				      </div>
 				      <img alt="loading" src="images/loading.gif" class="col-sm-1 loading hidden">
-				      <p class="tipmes col-sm-2"></p>
+				      <p class="tipmes col-sm-4"></p>
 				   </div>
 				</form>
 			</div>
@@ -92,9 +92,29 @@
 	getAllkp_upload();
 	
 	$(function(){
+		//导航active
+		$("#collapseTwo").find("li").eq(1).addClass("sub-active");
+		
 		$("#submit2").click(function(){
 			$(".loading").removeClass("hidden");
-			$.post("addfb",$("#uploadFillBlank").serializeArray(),function(data){
+		
+			var pro = $("textarea[name=problem]").val();
+			var reg =/<.+?>/;
+			var b = reg.test(pro);
+			if(!b){
+				$(".loading").addClass("hidden");
+				$(".tipmes").text("请检查题目格式是否符合上传格式！");
+				return false;
+			}
+			
+			var len = $("input[name=keypointId]:checked").length;
+			if(len==0){
+				$(".loading").addClass("hidden");
+				$(".tipmes").text("请选择知识点！");
+				return false;
+			}
+			
+			 $.post("addfb",$("#uploadFillBlank").serializeArray(),function(data){
 				if(data){
 					//添加填空题成功
 					$(".loading").addClass("hidden");
@@ -102,7 +122,7 @@
 				}else{
 					$(".tipmes").text("上传失败");
 				}
-			});
+			}); 
 			return false;
 		});
 	})

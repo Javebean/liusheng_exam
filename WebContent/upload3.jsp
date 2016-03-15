@@ -96,6 +96,9 @@
 				      <div class="col-sm-1">
 				         <input type="submit" id ="submit2" class ="btn btn-danger" value="确认上传">
 				      </div>
+				      
+				      <img alt="loading" src="images/loading.gif" class="col-sm-1 loading hidden">
+				      <p class="tipmes col-sm-4"></p>
 				   </div>
 				</form>
 				
@@ -117,11 +120,37 @@
 	    }
 	}
 	$(function(){
+		//导航active	
+		$("#collapseTwo").find("li").eq(2).addClass("sub-active");
+		
 		//加载所属知识点
 		getAllkp_upload();
 		
 		$("#imgInp").change(function(){
 		    readURL(this);
+		});
+		
+		//上传
+		$("#submit2").click(function(){
+			var pro = $("textarea[name=problem]").val();
+			var answer = $("textarea[name=answer]").val();
+			if(""==$.trim(pro)){
+				$(".loading").addClass("hidden");
+				$(".tipmes").text("请填写问答题题目！");
+				return false;
+			}
+			if(""==$.trim(answer)){
+				$(".loading").addClass("hidden");
+				$(".tipmes").text("请填写问答题答案！");
+				return false;
+			}
+			var len = $("input[name=keypointId]:checked").length;
+			if(len==0){
+				$(".loading").addClass("hidden");
+				$(".tipmes").text("请选择知识点！");
+				return false;
+			}
+			
 		});
 		
 	})

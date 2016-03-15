@@ -147,7 +147,9 @@ var items =10;
 		});
  }
 	 $(function(){
-		
+		//导航active
+		$("#collapseOne").find("li").eq(2).addClass("sub-active");
+		 
 		/* init */
 		 loadMessages(1);
 		 pagebutton("getinterpages",items);

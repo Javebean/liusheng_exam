@@ -120,6 +120,9 @@ var items = 10;
  }
 
 	 $(function(){
+		//导航active
+		$("#collapseOne").find("li").eq(1).addClass("sub-active");
+		 
 		/* init */
 		 loadMessages(1);
 		 pagebutton("getfbpages",items);

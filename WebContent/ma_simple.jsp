@@ -154,6 +154,8 @@ var loadMessages = function(start){
 	});
 }
 	 $(function(){
+		//导航active
+		$("#collapseOne").find("li").eq(0).addClass("sub-active");
 		
 		/* init */
 		 loadMessages(1);

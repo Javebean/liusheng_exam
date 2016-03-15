@@ -48,7 +48,7 @@ public class FillBlankService {
 		fb.setNumber(NumberUtil.createNum());
 		
 		String problem = fb.getProblem();
-		Pattern reg = Pattern.compile("(<)(\\W+?)(>)");
+		Pattern reg = Pattern.compile("(<)(.+?)(>)");
 		Matcher matcher = reg.matcher(problem);
 		StringBuilder answer = new StringBuilder();
 		int fillnum = 0;
@@ -58,7 +58,7 @@ public class FillBlankService {
 			answer.append(",");
 		}
 		//删掉最后一个逗号“，”
-		
+		log.info("上传填空题后，被截取的答案。。。"+answer.toString());
 		answer.deleteCharAt(answer.length()-1);
 		fb.setFillNums(fillnum);
 		fb.setAnswer(answer.toString());
