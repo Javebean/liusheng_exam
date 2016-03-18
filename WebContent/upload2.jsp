@@ -99,6 +99,7 @@
 			$(".loading").removeClass("hidden");
 		
 			var pro = $("textarea[name=problem]").val();
+			console.log(pro);
 			var reg =/<.+?>/;
 			var b = reg.test(pro);
 			if(!b){
@@ -115,13 +116,17 @@
 			}
 			
 			 $.post("addfb",$("#uploadFillBlank").serializeArray(),function(data){
-				if(data){
+				data = $.parseJSON(data);
+				$(".loading").addClass("hidden");
+				$(".tipmes").text(data.status);
+				
+				/*  if(data){
 					//添加填空题成功
 					$(".loading").addClass("hidden");
 					$(".tipmes").text("上传成功");
 				}else{
 					$(".tipmes").text("上传失败");
-				}
+				} */
 			}); 
 			return false;
 		});

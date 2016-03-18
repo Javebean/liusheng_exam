@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class FillBlankService {
 	@Autowired
 	private KeypointsService kpservice;
 	
-	public boolean addOneFillBlank(FillBlank fb) {
+	public String addOneFillBlank(FillBlank fb) {
 		//keypoint实际上是【id,知识点】组合
 		String keypointId = fb.getKeypointId();
 		String keypoint = fb.getKeypoint();
@@ -47,7 +48,37 @@ public class FillBlankService {
 		}
 		fb.setNumber(NumberUtil.createNum());
 		
+		JSONObject obj = new JSONObject();
+		
 		String problem = fb.getProblem();
+		//检测所提交的字符串时候符合格式要求
+		char[] charArray = problem.toCharArray();
+		int ans=0;
+		for(char c : charArray){
+			if(ans==0 && c=='>'){
+				obj.put("status", "上传题目格式不符合条件");
+				return obj.toString();
+			}
+			
+			if(c=='<'){
+				ans++;
+			}else if(c=='>'){
+				ans--;
+			}
+			if(ans>=2||ans<=-2){
+				obj.put("status", "上传题目格式不符合条件");
+				return obj.toString();
+			}
+		}
+		if(ans!=0){
+			obj.put("status", "上传题目格式不符合条件");
+			return obj.toString();
+		}
+		
+		
+		
+		
+		//因为这样会把<>>这种也解析成功
 		Pattern reg = Pattern.compile("(<)(.+?)(>)");
 		Matcher matcher = reg.matcher(problem);
 		StringBuilder answer = new StringBuilder();
@@ -62,7 +93,10 @@ public class FillBlankService {
 		answer.deleteCharAt(answer.length()-1);
 		fb.setFillNums(fillnum);
 		fb.setAnswer(answer.toString());
-		return fillDao.addOneFillBlank(fb);
+		boolean b =  fillDao.addOneFillBlank(fb);
+		
+		obj.put("status", b?"上传成功":"上传失败");
+		return obj.toString();
 	}
 
 	public boolean deleteOneFillBlank(int id) {

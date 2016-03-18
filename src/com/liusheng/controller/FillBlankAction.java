@@ -34,9 +34,9 @@ public class FillBlankAction {
 		return fservice.getFBAnswer(fbId);
 	}
 
-	@RequestMapping("/addfb")
-	public boolean addFillblank(FillBlank fb) {
-		boolean b = fservice.addOneFillBlank(fb);
+	@RequestMapping(value="/addfb",produces="text/html;charset=utf-8")
+	public String addFillblank(FillBlank fb) {
+		String b = fservice.addOneFillBlank(fb);
 		return b;
 	}
 	
