@@ -178,7 +178,10 @@ var items = 10;
 						text:r.msg,
 						confirmButton : "确认",
 						confirmButtonClass: "btn-danger",
-						cancelButtonClass: "hidden"
+						cancelButtonClass: "hidden",
+						confirm: function() {
+							window.location.reload();  
+						}
 					});
 					
 			});
