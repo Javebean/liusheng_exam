@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>计算机网路出卷系统</title>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/publicfuc.js"></script>
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
