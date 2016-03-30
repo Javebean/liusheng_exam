@@ -81,7 +81,7 @@ public class KeypointsDaoImpl implements KeypointsDao {
 	@Override
 	public List<Keypoints> getAllKeypoints(int start, int items) {
 		try {
-			String hql = "from Keypoints";
+			String hql = "from Keypoints order by id desc";
 			List<Keypoints> kp = getSession().createQuery(hql)
 					.setFirstResult(start).setMaxResults(items).list();
 			return kp;

@@ -74,7 +74,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public List<SimpleSelection> getAllSimpleSelection(int start, int itemNums,int state) {
 		try {
-			String hql = "from SimpleSelection where checkStatus =?";
+			String hql = "from SimpleSelection where checkStatus =? order by id desc";
 			List<SimpleSelection> list = getSession().createQuery(hql).setInteger(0, state)
 					.setFirstResult(start).setMaxResults(itemNums).list();
 			return list;

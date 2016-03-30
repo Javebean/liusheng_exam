@@ -78,7 +78,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	public List<Interlocution> getAllInterlocution(int start, int itemNums,int state) {
 		List<Interlocution> list = null;
 		try {
-			String hql = "from Interlocution where checkStatus =?";
+			String hql = "from Interlocution where checkStatus =? order by id desc";
 			list = getSession().createQuery(hql).setInteger(0, state).setFirstResult(start)
 					.setMaxResults(itemNums).list();
 		} catch (Exception e) {

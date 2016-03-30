@@ -78,7 +78,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public List<FillBlank> getAllFillBlank(int start, int itemNums,int state) {
 		try {
-			String hql = "from FillBlank where checkStatus =?";
+			String hql = "from FillBlank where checkStatus =? order by id desc";
 			List<FillBlank> list = getSession().createQuery(hql).setInteger(0, state)
 					.setFirstResult(start).setMaxResults(itemNums).list();
 			return list;
