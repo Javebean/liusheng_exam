@@ -1,6 +1,5 @@
 package com.liusheng.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -22,21 +21,20 @@ public class KeywordAction {
 	@Autowired
 	private KeypointsService kservice;
 	
-	private String utf(String s){
+	/*private String utf(String s){
 		String str = "";
 		try {
 			str =  new String(s.getBytes("iso8859-1"),"utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return str;
-	}
+		return str;	
+	}*/
 	
 	
 	@RequestMapping(value="/addkey")
 	public CommonResult addKey(@RequestParam(value="keyname") String keyName){
-		keyName = utf(keyName);
-		log.info("知识点 :： "+keyName);
+		log.info("keyword "+keyName);
 		kservice.addKeypoints(new Keypoints(keyName,NumberUtil.createNum()));
 		return new CommonResult(new Result(0, "增加知识点成功！"), null);
 		
@@ -65,8 +63,7 @@ public class KeywordAction {
 	}
 	
 	@RequestMapping("/updatekey/{id}")
-	public CommonResult updateKey(@PathVariable String id,@RequestParam String key){
-		key = utf(key);
+	public CommonResult updateKey(@PathVariable String id, String key){
 		log.info("更新知识点   id:"+id+" key"+key);
 		Keypoints kp = new Keypoints(key,NumberUtil.createNum());
 		kp.setId(Integer.parseInt(id));
