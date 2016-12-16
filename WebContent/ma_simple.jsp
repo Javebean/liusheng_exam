@@ -61,7 +61,7 @@
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody class="abstract">
+						<tbody class="abstract" id='abstract'>
 						</tbody>
 						
 					</table>
@@ -135,16 +135,16 @@ var loadMessages = function(start){
 		dataType:"json",
 		//data:{"start":0,"itemNums":10},
 		success:function(data){
-			$("tbody.abstract").empty();
+			var html = "";
 			 $.each(data,function(){
-				$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
+				 html += "<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
 				+"<td>"
 				+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
 				+"<i class='hidden' option1='"+this.optionA+"' option2='"+this.optionB+"' option3='"+this.optionC+"' option4='"+this.optionD+"'></i>"
 				+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
-				+"</td></tr>");
+				+"</td></tr>";
 			}); 
-			 
+			 document.getElementById('abstract').innerHTML = html;
 			$.getScript("js/colorboxconfig.js");
 			
 		},
