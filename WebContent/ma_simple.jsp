@@ -135,15 +135,22 @@ var loadMessages = function(start){
 		dataType:"json",
 		//data:{"start":0,"itemNums":10},
 		success:function(data){
-			var html = "";
-			 $.each(data,function(){
-				 html += "<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.optionA+"</td><td>未审核</td>"
+			if(isEmpty(data)){
+				console.log('no data has has found');
+				return;
+			}
+			
+			 var html = "";
+			 for(var i=0,len=data.length;i<len;i++){
+				 var obj = data[i];
+				 html += "<tr><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.optionA+"</td><td>未审核</td>"
 				+"<td>"
-				+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+this.answer+"' kpId='"+this.keypointId+"' qId='"+this.id+"'>审核</button>&nbsp;&nbsp;"
-				+"<i class='hidden' option1='"+this.optionA+"' option2='"+this.optionB+"' option3='"+this.optionC+"' option4='"+this.optionD+"'></i>"
-				+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+this.id+"'>删除</button>"
+				+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+obj.answer+"' kpId='"+obj.keypointId+"' qId='"+obj.id+"'>审核</button>&nbsp;&nbsp;"
+				+"<i class='hidden' option1='"+obj.optionA+"' option2='"+obj.optionB+"' option3='"+obj.optionC+"' option4='"+obj.optionD+"'></i>"
+				+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+obj.id+"'>删除</button>"
 				+"</td></tr>";
-			}); 
+				 
+			 }
 			 document.getElementById('abstract').innerHTML = html;
 			$.getScript("js/colorboxconfig.js");
 			

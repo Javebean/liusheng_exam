@@ -61,7 +61,7 @@
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody class="abstract">
+						<tbody id="abstract">
 						</tbody>
 						
 					</table>
@@ -128,16 +128,22 @@ var items =10;
 			dataType:"json",
 			//data:{"start":0,"itemNums":10},
 			success:function(data){
-				 $("tbody.abstract").empty();
-				 $.each(data,function(){
-					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.problem+"</td><td>"+this.answer+"</td><td>未审核</td>"
-					+"<td>"
-					+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+this.keypointId+"' qId='"+this.id+"' imgurl='"+this.imgUrl+"'>审核</button>&nbsp;&nbsp;"
-					+"<i class='hidden'></i>"
-					+"<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+this.id+"'>删除</button>"
-					+"</td></tr>");
-				}); 
-				 
+				if(isEmpty(data)){
+					console.log('no data has has found');
+					return;
+				}
+				
+				 var html = "";
+				 for(var i=0,len=data.length;i<len;i++){
+					 var obj = data[i];
+					 html+="<tr><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.answer+"</td><td>未审核</td>"
+						+"<td>"
+						+"<button type='button' name='confirm3' class='btn btn-primary' kpId='"+obj.keypointId+"' qId='"+obj.id+"' imgurl='"+obj.imgUrl+"'>审核</button>&nbsp;&nbsp;"
+						+"<i class='hidden'></i>"
+						+"<button type='button' name='delete' class='btn btn-danger' ky='inter' tid='"+obj.id+"'>删除</button>"
+						+"</td></tr>";
+				 }
+				document.getElementById('abstract').innerHTML = html; 
 				$.getScript("js/colorboxconfig.js");
 				
 			},

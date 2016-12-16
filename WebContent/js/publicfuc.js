@@ -26,6 +26,56 @@ var deleteCookie = function(name,value){
 	
 }
 
+/**
+ * Tools
+ */
+var isEmpty =  function(str){
+	return str=="" || str==null || str=="null" || str==undefined;
+}
+
+
+var isNotEmpty =  function(str){
+	return str!="" && str!=null && str!="null" && str!=undefined;
+}
+
+
+/**
+ * native ajax
+ */
+function nativeAjax(type,url,ajaxdone,param){
+	param = (typeof param === 'undefined') ? '' : param;
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onload =ajaxdone;
+	xmlhttp.open(type,url,true);
+	if(type=='get' || type=='GET'){
+		xmlhttp.send();
+		
+	} else if(type=='post' || type=='POST'){
+		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp.send(param);
+	}
+	
+}
+
+/**
+ * param progressEvent
+ */
+var getResult = function(e){
+	return e.currentTarget.responseText;
+}
+
+
+/**
+ * parser jsonstr to jsonobject
+ */
+var jsonParse = function(mystr){
+	var res=eval('('+mystr+')');
+	return res;
+}
+
+
+
+
 var deleteItem = function (url,dId){
 	$.ajax({
 		url:url+"/"+dId,
