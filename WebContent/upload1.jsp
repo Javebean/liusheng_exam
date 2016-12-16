@@ -57,7 +57,7 @@
 				</div>
 				
 				<hr>
-				<h4 class="sub-header">手动上传</h4>
+				<h4 class="sub-header">手动上传（例：TCP/IP 的网络层含有四个重要的协议，分别为________。）</h4>
 				
 				<form class="form-horizontal" role="form" id="uploadSimple" method="post">
 				   <div class="form-group">
