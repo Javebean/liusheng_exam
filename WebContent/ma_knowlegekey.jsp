@@ -69,7 +69,7 @@
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody class="abstract">
+						<tbody class="abstract" id='abstract'>
 						</tbody>
 						
 					</table>
@@ -99,7 +99,7 @@
 			<div class="form-group">
 		      <label for="firstname" class="col-sm-2 control-label">知识点：</label>
 		      <div class="col-sm-8">
-		         <input type="text" class="form-control" id="updateKp">
+		         <input type="text" width="80%" class="form-control" id="updateKp">
 	     	  </div>
 	   		</div>
 			<div class="form-group">
@@ -125,15 +125,16 @@ var items = 10;
 			dataType:"json",
 			//data:{"start":0,"itemNums":10},
 			success:function(data){
-				 $("tbody.abstract").empty();
+				 var html = "";
 				 $.each(data,function(){
-					$(".table tbody").append("<tr><td>"+this.number+"</td><td>"+this.keypoint+"</td>"
+					html += "<tr><td>"+this.number+"</td><td>"+this.keypoint+"</td>"
 					+"<td>"
 					+"<button type='button' name='updateKey' class='btn btn-primary' tid='"+this.id+"'>修改</button>&nbsp;&nbsp;"
 					+"<button type='button' name='delete' class='btn btn-danger' ky='kp' tid='"+this.id+"'>删除</button>"
-					+"</td></tr>");
+					+"</td></tr>";
 				}); 
 				 
+				document.getElementById('abstract').innerHTML = html;
 				$.getScript("js/colorboxconfig.js");
 				
 			},
@@ -167,7 +168,6 @@ var items = 10;
 		$("#updateKey").click(function(){
 			var itId = $(this).attr("name");
 			var key = $("#updateKp").val();
-			
 			$.get("updatekey/"+itId+"?key="+key,function(data){
 				/*关闭colorbox*/
 				$.colorbox.close();

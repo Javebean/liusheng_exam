@@ -1,6 +1,6 @@
 package com.liusheng.util;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,25 +13,44 @@ import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class AnalyzeExcel {
 	static Logger log = Logger.getLogger(AnalyzeExcel.class);
-	public static List<List<String>> analyzeExcel(int sheetAt, String filepath) {
+	public static List<List<String>> analyzeExcel(int sheetAt, String filepath) throws InvalidFormatException {
 		List<List<String>> result = null;
+		NPOIFSFileSystem fs = null;
+		Iterator<Row> rowIterator = null;
+		OPCPackage pkg = null;
 		try {
-			FileInputStream fileInputStream = new FileInputStream(filepath);
+			//FileInputStream fileInputStream = new FileInputStream(filepath);
 			// Get the workbook instance for XLS file
-			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+			//HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 
-			// Get first sheet from the workbook
-			HSSFSheet sheet = workbook.getSheetAt(sheetAt);
-			/* HSSFSheet sheet = workbook.getSheet("people"); */
+			//////////
+			if (filepath.endsWith(".xls")) {
+				fs = new NPOIFSFileSystem(new File(filepath));
+				// Get the workbook instance for XLS file
+				HSSFWorkbook workbook = new HSSFWorkbook(fs.getRoot(),true);
+				// Get first sheet from the workbook
+				HSSFSheet sheet = workbook.getSheetAt(sheetAt);
+				/* HSSFSheet sheet = workbook.getSheet("people"); */
+				rowIterator = sheet.iterator();
+			} else if (filepath.endsWith(".xlsx")) {
+				pkg = OPCPackage.open(new File(filepath));
+				XSSFWorkbook workbookx = new XSSFWorkbook(pkg);
+				// Get first sheet from the workbook
+				XSSFSheet sheetAt2 = workbookx.getSheetAt(sheetAt);
+				rowIterator = sheetAt2.iterator();
+			}
+			
 
-			// Get iterator to all the rows in current sheet
-			Iterator<Row> rowIterator = sheet.iterator();
-			/* HSSFRow row1 = sheet.getRow(2); */
 
 			result = new ArrayList<List<String>>();
 
@@ -66,9 +85,9 @@ public class AnalyzeExcel {
 				out.write(data);
 				out.close();
 			}*/
-			processImages(workbook);
+			//processImages(workbook);
 
-			fileInputStream.close();
+			//fileInputStream.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

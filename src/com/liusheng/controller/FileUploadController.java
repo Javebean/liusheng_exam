@@ -61,7 +61,7 @@ public class FileUploadController {
 						.lastIndexOf(".") + 1);
 				logger.info("上传文件的后缀名：" + suffix);
 
-				if ("xls".equals(suffix)) {
+				if ("xls".equals(suffix) || "xlsx".equals(suffix)) {
 					String filename = UUID.randomUUID().toString();
 					byte[] bytes = file.getBytes();
 
