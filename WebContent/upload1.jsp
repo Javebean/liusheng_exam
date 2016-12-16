@@ -63,39 +63,39 @@
 				   <div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="2" placeholder="请输入题目" name="problem"></textarea>
+				         <textarea  class="form-control required" rows="2" placeholder="请输入题目" name="problem"></textarea>
 				      </div>
 				   </div>
 				   <div class="form-group">
 				      <label for="optionA" class="col-sm-1 control-label">A:</label>
 				      <div class="col-sm-5">
-				         <input type="text" class="form-control" id="optionA" 
+				         <input type="text" class="form-control required" id="optionA" 
 				            placeholder="请输入选项A" name="optionA">
 				      </div>
 				      <label for="optionB" class="col-sm-1 control-label">B:</label>
 				      <div class="col-sm-5">
-				         <input type="text" class="form-control" id="optionB" 
+				         <input type="text" class="form-control required" id="optionB" 
 				            placeholder="请输入选项B" name="optionB">
 				      </div>
 				   </div>
 				   <div class="form-group">
 				      <label for="optionC" class="col-sm-1 control-label">C:</label>
 				      <div class="col-sm-5">
-				         <input type="text" class="form-control" id="optionC" 
+				         <input type="text" class="form-control required" id="optionC" 
 				            placeholder="请输入选项C" name="optionC">
 				      </div>
 				      <label for="optionD" class="col-sm-1 control-label">D:</label>
 				      <div class="col-sm-5">
-				         <input type="text" class="form-control" id="optionD" 
+				         <input type="text" class="form-control required" id="optionD" 
 				            placeholder="请输入选项D" name="optionD">
 				      </div>
 				   </div>
 				   
-				   <div class="form-group">
+				   <div class="form-group" id='answer_radio'>
 				      <label  class="col-sm-2 control-label">正确答案：</label>
 				      <div class="col-sm-2">
 				          <label class="checkbox-inline">
-	      						<input type="radio" name="answer" 
+	      						<input type="radio" name="answer" checked="checked"
 	         					  value="A"> 选项 A
    						  </label>
 				      </div>
@@ -121,14 +121,12 @@
 				 
 				   <div class="form-group">
 				      <label for="firstname" class="col-xs-1 control-label">所属知识点：</label>
-				      
-				      <div class="allkp">
-				      </div>
+				      <select id='allkp' class="form-control" name='keypointId'>
+				      </select>
 				   </div>
 				   
 				   <div>
 				         <button  id ="submit2" class ="btn btn-danger">确认上传</button>
-				         <img alt="loading" src="images/loading.gif" class="hidden loading">
 				         <span class="msg"></span>
 				   </div>
 				   
@@ -141,47 +139,36 @@
 <script type="text/javascript">
 	//得到所有知识点
 	getAllkp_upload();
+	var res;
 	$("#submit2").click(function(){
-		$("img.loading").removeClass("hidden");
-		$(".msg").text("");
+		$("span.msg").text("");
 		
-		//检查题目和选项
-		var flag = false;
-		$("#uploadSimple :input:not(:button)").each(function(){
-			var v = $(this).val();
-			if(v==""){
-				$("img.loading").addClass("hidden");
-				$(".msg").text("请填写题目或者选项");
-				flag =true;
+		//检查题目
+		$('#uploadSimple').find(".required").removeClass('focus-red');
+		$('#uploadSimple').find(".required").each(function(){
+			var value = $(this).val();
+			if(isEmpty(value)){
+				$(this).addClass('focus-red');
+				$("span.msg").text("该项必填");
+				res = false;
+				return false;
+			}else{
+				res = true;
 			}
-			
 		});
-		if(flag){
-			return false;
+		
+		if(!res){
+			return res;
 		}
 		
-		//检查答案与知识点
-		var flag2 = 0;
-		$("input[type=radio]").each(function(){
-			var v = $(this).prop("checked");
-			if(v){
-				flag2++;
-			}
-			
-		});
-		if(flag2!=2){
-			$("img.loading").addClass("hidden");
-			$(".msg").text("请检查答案以及知识点");
-			return false;
-		}
-		
-		
-		$.post("addsimpleselect",$("#uploadSimple").serializeArray(),function(data){
+		var param = $("#uploadSimple").serializeArray();
+		var e = document.getElementById("allkp");
+		param.push({name:'keypoint',value:e.options[e.selectedIndex].text});
+		$.post("addsimpleselect",param,function(data){
+			console.log(data);
 			if(data){
-				$("img.loading").addClass("hidden");
-				$(".msg").text("上传成功");
-				$("input[type=text],textarea").val("");
-				$("input[type=radio]").prop("checked",false);
+				$("#uploadSimple").find("input[type=text],textarea").val("");
+				$("span.msg").text("上传成功");
 			}else{
 				alert("上传失败");
 			}

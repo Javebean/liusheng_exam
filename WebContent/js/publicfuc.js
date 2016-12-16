@@ -4,7 +4,7 @@
 var setCookie = function (name,value)
 {
     var exp = new Date();
-    exp.setTime(exp.getTime() + 60*60*1000);
+    exp.setTime(exp.getTime() + 60*60*10000);
     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 }
 
@@ -135,13 +135,16 @@ var getAllkp_createExam = function(){
 }
 
 var getAllkp_upload = function(){
-	var html="";
+	var html='';
 	$.get("getallkpfromkp",function(data){
-		$.each(data,function(){
-			//checkbox+知识点+输入框
-			html+='<input type="radio" name="keypointId" value="'+this.id+','+this.keypoint+'">'+this.keypoint+"&nbsp;&nbsp;";
-		});
-		$(".allkp").append(html);
+		if(isEmpty(data)){
+			return;
+		}
+		for(var i=0,len=data.length;i<len;i++){
+			var obj = data[i];
+			html += '<option value='+obj.id+'>'+obj.keypoint+'</option>';
+		}
+		document.getElementById('allkp').innerHTML = html;
 	});
 }
 

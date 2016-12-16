@@ -52,14 +52,10 @@ public class SimpleSelectService {
 		}
 		ss.setAnswerText(answerText);
 		
-		//网页传过来的keypointId,实际上这【id，知识点】这种组合
+		//网页传过来的keypointId,keypoint
 		String keypointId = ss.getKeypointId();
 		String keypoint = ss.getKeypoint();
-		if(null!=keypointId && !"".equals(keypointId)){
-			String[] split = keypointId.split(",");
-			ss.setKeypoint(split[1]);
-			ss.setKeypointId(split[0]);
-		}else{
+		if(null!=keypointId || "".equals(keypointId)){
 			//解析excel中的
 			int kpid = kpservice.getKeypointByName(keypoint);
 			log.info("是否查到相同的知识点："+kpid);

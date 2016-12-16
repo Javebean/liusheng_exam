@@ -34,6 +34,7 @@
 </style>
 </head>
 <body>
+<!-- 综合上传 被我删掉了 -->
 	<%@include file="public/navbar.html"%>
 	<div class="container-fluid">
 		<div class="row">
