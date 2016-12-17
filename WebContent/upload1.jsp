@@ -127,7 +127,7 @@
 				   
 				   <div>
 				         <button  id ="submit2" class ="btn btn-danger">确认上传</button>
-				         <span class="msg"></span>
+				         <span class="msg" id='message'></span>
 				   </div>
 				   
 				</form>
@@ -141,7 +141,7 @@
 	getAllkp_upload();
 	var res;
 	$("#submit2").click(function(){
-		$("span.msg").text("");
+		$("#message").text("");
 		
 		//检查题目
 		$('#uploadSimple').find(".required").removeClass('focus-red');
@@ -149,7 +149,7 @@
 			var value = $(this).val();
 			if(isEmpty(value)){
 				$(this).addClass('focus-red');
-				$("span.msg").text("该项必填");
+				$("#message").text("该项必填");
 				res = false;
 				return false;
 			}else{
@@ -168,7 +168,7 @@
 			console.log(data);
 			if(data){
 				$("#uploadSimple").find("input[type=text],textarea").val("");
-				$("span.msg").text("上传成功");
+				$("#message").text("上传成功");
 			}else{
 				alert("上传失败");
 			}

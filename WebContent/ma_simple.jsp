@@ -51,17 +51,17 @@
 				   <li><a href="ma_simple_audited.jsp">已审核</a></li>
 				</ul>
 				<div class="table-responsive">
-					<table class="table table-striped">
+					<table class="table table-striped" id='opera_table'>
 						<thead>
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
-								<th>选项</th>
+								<th>答案</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody class="abstract" id='abstract'>
+						<tbody id='abstract'>
 						</tbody>
 						
 					</table>
@@ -86,7 +86,7 @@
 				<tr><td>题目：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea symbol="question" class="form-control" rows="2"></textarea>
+						<textarea id="question" class="form-control" rows="2"></textarea>
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
@@ -100,17 +100,20 @@
 				</tr>
 				<tr><td>选项：</td></tr>
 				<tr>
-					<td colspan="2"><input type="radio" name="answer" id="A" />A：<label for="A"></label></td>
-					<td colspan="2"><input type="radio" name="answer" id="B" />B：<label for="B"></label></td>
+					<td colspan="2"><input type="radio" class='answer' name="answer" id="A" />A：<label for="A" id='la'></label></td>
+					<td colspan="2"><input type="radio"  class='answer' name="answer" id="B" />B：<label for="B" id='lb'></label></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="radio" name="answer" id="C" />C：<label for="C"></label></td>
-					<td colspan="2"><input type="radio" name="answer" id="D" />D：<label for="D"></label></td>
+					<td colspan="2"><input type="radio" class='answer' name="answer" id="C" />C：<label for="C" id='lc'></label></td>
+					<td colspan="2"><input type="radio" class='answer' name="answer" id="D" />D：<label for="D" id='ld'></label></td>
 				</tr>
 				
 				<tr><td>&nbsp;</td></tr>
-				<tr id="kpArea">
+				<tr>
 					<td colspan="4">所属知识点：</td>
+				</tr>
+				<tr>
+					<td><select id="kpArea" class="form-control"></select> </td>
 				</tr>
 				
 			</tbody>
@@ -143,11 +146,12 @@ var loadMessages = function(start){
 			 var html = "";
 			 for(var i=0,len=data.length;i<len;i++){
 				 var obj = data[i];
-				 html += "<tr><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.optionA+"</td><td>未审核</td>"
+				 html += "<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>"+obj.answer+"</td><td>未审核</td>"
+				 +"<td class='hidden opa'>"+obj.optionA+"</td><td class='hidden opb'>"+obj.optionB+"</td>"
+				 +"<td class='hidden opc'>"+obj.optionC+"</td><td class='hidden opd'>"+obj.optionD+"</td>"
 				+"<td>"
-				+"<button type='button' name='confirm1' class='btn btn-primary' aw ='"+obj.answer+"' kpId='"+obj.keypointId+"' qId='"+obj.id+"'>审核</button>&nbsp;&nbsp;"
-				+"<i class='hidden' option1='"+obj.optionA+"' option2='"+obj.optionB+"' option3='"+obj.optionC+"' option4='"+obj.optionD+"'></i>"
-				+"<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+obj.id+"'>删除</button>"
+				+"<button type='button' class='btn btn-primary' aw ='"+obj.answer+"' kpId='"+obj.keypointId+"'>审核</button>&nbsp;&nbsp;"
+				+"<button type='button' class='btn btn-danger'>删除</button>"
 				+"</td></tr>";
 				 
 			 }
@@ -172,16 +176,84 @@ var loadMessages = function(start){
 		 getAllkp();
 		 /*审核通过*/
 		 $("#agree").click(function(){
-			 var question = $("textarea[symbol=question]").val();
-			 var optionSy = $("input[name=answer]:checked").attr("id");
-			 var option = $("input[name=answer]:checked").next().text();
-			 var keypointId = $("input[name=keypoint]:checked").attr("id");
-			 var keypoint = $("input[name=keypoint]:checked").next().text();
+			 var question = $("#question").val();
+			 var $check_answer = $("input.answer:checked");
+			 var optionSy = $check_answer.attr("id");
+			 var option = $check_answer.next().text();
+			 
+			 var e = document.getElementById("kpArea");
+			 var keypoint = e.options[e.selectedIndex].text;
+			 var keypointId = e.value;
 			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"optionSy":optionSy,"option":option,"keypoint":keypoint,"keypointId":keypointId};
 			 agreeQues("agreeques",param);
 		 });
 		 
 	})
+	
+	
+	//弹出colorbox
+		$('#abstract').on('click','tr',function(e){
+			var tar = e.target;
+			var ele = e.currentTarget;
+			var qid = ele.id;
+			if(tar.className=='btn btn-primary'){//审核
+				$.colorbox({
+					transition : "elastic", // fade,none,elastic
+					width : "55%",
+					height : "88%",
+					inline : true,
+					href : "#cboxLoadedContent",
+					opacity : 0.5,
+					scrolling : true,
+					overlayClose : false,
+					close : "关闭",
+					onComplete:function(){
+						var text = $(ele).find('td.problem').text();
+						$("#question").val(text);
+						
+						//回显答案
+						var aw = $(tar).attr("aw");
+						$('#'+aw).attr("checked","checked");
+						
+						//回显知识点 kpId在审核的按钮上，所以能获取到
+						var kpId = $(tar).attr("kpId");
+						document.getElementById('kpArea').value= kpId;
+						
+						//回显四个选项
+						var opa = $(ele).find('td.opa').text();
+						$('#la').text(opa);
+						var opb = $(ele).find('td.opb').text();
+						$('#lb').text(opb);
+						var opc = $(ele).find('td.opc').text();
+						$('#lc').text(opc);
+						var opd = $(ele).find('td.opd').text();
+						$('#ld').text(opd);
+						
+						//获取题目id
+						$("#agree").attr("agreeId",qid);
+						
+					}
+				});
+			} else if(tar.className = 'btn btn-danger'){
+				$.confirm({
+					title : "提示",
+					text:"确认删除？",
+					confirm : function(button) {
+						nativeAjax('get','deletesim/'+qid,function(e){
+							var res = getResult(e);
+							if(res){
+								ele.innerHTML = '';
+							}
+						});
+					},
+					
+					confirmButton : "确认",
+					cancelButton : "取消",
+					confirmButtonClass: "btn-danger",
+					cancelButtonClass: "btn-default"
+				});
+			}
+		});
 </script>
 
 </body>

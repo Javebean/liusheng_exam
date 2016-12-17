@@ -88,7 +88,7 @@
 		      <h3 class="panel-title text-center">题目详细</h3>
 		   </div>
 		   <table class="table">
-		      <tr><th>题目：</th><th id="show_pr"></th></tr>
+		      <tr><th width="30%">题目：</th><th width="70%" id="question"></th></tr>
 		      <tr><td>所属知识点：</td><td id="show_kp"></td></tr>
 		   </table>
 		</div>
@@ -111,10 +111,10 @@ var items = 10;
 				 var html = "";
 				 for(var i=0,len=data.length;i<len;i++){
 					 var obj = data[i];
-					 html+="<tr><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>已审核</td>"
+					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>已审核</td>"
 						+"<td>"
-						+"<button type='button' class='btn btn-primary showinfo' as ='"+obj.answerText+"' kp='"+obj.keypoint+"' pr='"+obj.problem+"'>查看</button>"
-						+"&nbsp;&nbsp;<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+obj.id+"'>删除</button>"
+						+"<button type='button' class='btn btn-primary' as ='"+obj.answerText+"' kp='"+obj.keypoint+"' pr='"+obj.problem+"'>查看</button>"
+						+"&nbsp;&nbsp;<button type='button' class='btn btn-danger'>删除</button>"
 						+"</td></tr>";
 				 }
 				document.getElementById('abstract').innerHTML = html;				 
@@ -134,6 +134,54 @@ var items = 10;
 		 loadMessages(1);
 		 pagebutton("getfbpages",items);
 	})
+	
+	//弹出colorbox
+		$('#abstract').on('click','tr',function(e){
+			var tar = e.target;
+			var ele = e.currentTarget;
+			var qid = ele.id;
+			if(tar.className=='btn btn-primary'){//审核
+				$.colorbox({
+					transition : "elastic", // fade,none,elastic
+					width : "55%",
+					height : "82%",
+					inline : true,
+					href : "#cboxLoadedContent",
+					opacity : 0.5,
+					overlayClose : false,
+					close : "关闭",
+					onComplete:function(){
+						var text = $(ele).find('td.problem').text();
+						console.log(text);
+						$("#question").text(text);
+						/*回显知识点*/
+						document.getElementById('show_kp').innerHTML = $(tar).attr('kp');
+						/*获取题目id*/
+						$("#agree").attr("agreeId",qid);
+					}
+						
+				});
+			} else if(tar.className = 'btn btn-danger'){
+				$.confirm({
+					title : "提示",
+					text:"确认删除？",
+					confirm : function(button) {
+						nativeAjax('get','deletefb/'+qid,function(e){
+							var res = getResult(e);
+							if(res){
+								ele.innerHTML = '';
+							}
+						});
+					},
+					
+					confirmButton : "确认",
+					cancelButton : "取消",
+					confirmButtonClass: "btn-danger",
+					cancelButtonClass: "btn-default"
+				});
+			}
+		});
+	
 </script>
 
 </body>

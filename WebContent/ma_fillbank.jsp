@@ -85,13 +85,18 @@
 				<tr><td>题目：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea symbol="question" class="form-control" rows="2"></textarea>
+						<textarea id="question" class="form-control" rows="2"></textarea>
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr><td>&nbsp;</td></tr>
-				<tr id="kpArea">
+				<tr>
 					<td colspan="4">所属知识点：</td>
+				</tr>
+				<tr>
+					<td>
+						<select id="kpArea" class="form-control" ></select>
+					</td>
 				</tr>
 			</tbody>
 			<tfoot>
@@ -122,10 +127,10 @@ var items = 10;
 				 var html = "";
 				 for(var i=0,len=data.length;i<len;i++){
 					 var obj = data[i];
-					 html+="<tr><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>未审核</td>"
+					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>未审核</td>"
 						+"<td>"
-						+"<button type='button' name='confirm2' class='btn btn-primary' kpId='"+obj.keypointId+"' qId='"+obj.id+"'>审核</button>&nbsp;&nbsp;"
-						+"<button type='button' name='delete' class='btn btn-danger' ky='fill' tid='"+obj.id+"'>删除</button>"
+						+"<button type='button' class='btn btn-primary' kpId='"+obj.keypointId+"'>审核</button>&nbsp;&nbsp;"
+						+"<button type='button' class='btn btn-danger'>删除</button>"
 						+"</td></tr>";
 				 }
 				document.getElementById('abstract').innerHTML = html;	
@@ -150,13 +155,59 @@ var items = 10;
 		 getAllkp();
 		 /*审核通过*/
 		 $("#agree").click(function(){
-			 var question = $("textarea[symbol=question]").val();
+			 var question = $("#question").val();
 			 var keypointId = $("input[name=keypoint]:checked").attr("id");
 			 var keypoint = $("input[name=keypoint]:checked").next().text();
 			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"keypoint":keypoint,"keypointId":keypointId};
 			 agreeQues("agreefb",param);
 		 });
 	})
+	
+	//弹出colorbox
+		$('#abstract').on('click','tr',function(e){
+			var tar = e.target;
+			var ele = e.currentTarget;
+			var qid = ele.id;
+			if(tar.className=='btn btn-primary'){//审核
+				$.colorbox({
+					transition : "elastic", // fade,none,elastic
+					width : "55%",
+					height : "82%",
+					inline : true,
+					href : "#cboxLoadedContent",
+					opacity : 0.5,
+					overlayClose : false,
+					close : "关闭",
+					onComplete:function(){
+						var text = $(ele).find('td.problem').text();
+						$("#question").val(text);
+						/*回显知识点*/
+						document.getElementById('kpArea').value = $(tar).attr('kpId');
+						/*获取题目id*/
+						$("#agree").attr("agreeId",qid);
+					}
+						
+				});
+			} else if(tar.className = 'btn btn-danger'){
+				$.confirm({
+					title : "提示",
+					text:"确认删除？",
+					confirm : function(button) {
+						nativeAjax('get','deletefb/'+qid,function(e){
+							var res = getResult(e);
+							if(res){
+								ele.innerHTML = '';
+							}
+						});
+					},
+					
+					confirmButton : "确认",
+					cancelButton : "取消",
+					confirmButtonClass: "btn-danger",
+					cancelButtonClass: "btn-default"
+				});
+			}
+		});
 </script>
 
 </body>

@@ -99,21 +99,15 @@ var deleteItem = function (url,dId){
 var getAllkp = function(){
 	$.get("getallkpfromkp",function(data){
 		var html = "";
-		$.each(data,function(index){
-			if(index%3==0){
-				html+="<tr>";
-			}
-			html+='<td><input type="radio" name="keypoint" id="kp'+this.id+'" /><label for="kp'+this.id+'">'+this.keypoint+'</label></td>';
-			if(index%3==2){
-				html+="</tr>";
-			}
-			
-		});
-		var s = html.substring(html.length-2,html.length-1);
-		if(s=="d"){
-			html+="</tr>";
+		if(isEmpty(data)){
+			return;
 		}
-		$("#kpArea").after(html);
+		for(var i=0,len=data.length;i<len;i++){
+			var obj = data[i];
+			html += '<option value='+obj.id+'>'+obj.keypoint+'</option>';
+		}
+		document.getElementById('kpArea').innerHTML = html;
+		
 	});
 }
 
@@ -133,24 +127,6 @@ var getAllkp_createExam = function(){
 		});
 	});
 }
-
-var getAllkp_upload = function(){
-	var html='';
-	$.get("getallkpfromkp",function(data){
-		if(isEmpty(data)){
-			return;
-		}
-		for(var i=0,len=data.length;i<len;i++){
-			var obj = data[i];
-			html += '<option value='+obj.id+'>'+obj.keypoint+'</option>';
-		}
-		document.getElementById('allkp').innerHTML = html;
-	});
-}
-
-
-
-
 
 /*审核通过题目*/
 var agreeQues = function(url,param){

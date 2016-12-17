@@ -1,6 +1,5 @@
 package com.liusheng.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,16 +37,18 @@ public class SimpleSelectService {
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
 		ss.setNumber(NumberUtil.createNum());
-		String answer = ss.getAnswer();
+		
+		String answer = ss.getAnswer().toUpperCase();
+		ss.setAnswer(answer);
 		//根据答案标号 abcd,选择正确的答案
 		String answerText=null;
-		if("A".equalsIgnoreCase(answer)){
+		if("A".equals(answer)){
 			answerText = ss.getOptionA();
-		}else if("B".equalsIgnoreCase(answer)){
+		}else if("B".equals(answer)){
 			answerText = ss.getOptionB();
-		}else if("C".equalsIgnoreCase(answer)){
+		}else if("C".equals(answer)){
 			answerText = ss.getOptionC();
-		}else if("D".equalsIgnoreCase(answer)){
+		}else if("D".equals(answer)){
 			answerText = ss.getOptionD();
 		}
 		ss.setAnswerText(answerText);
@@ -89,15 +90,6 @@ public class SimpleSelectService {
 	}
 
 	public boolean checkOneSimpleSelection(int agreeId,String question,String option,String keypoint,String optionSy,String keypointId) {
-		keypointId = keypointId.substring(2);
-		try {
-			question = new String(question.getBytes("iso8859-1"),"utf-8");
-			option = new String(option.getBytes("iso8859-1"),"utf-8");
-			keypoint = new String(keypoint.getBytes("iso8859-1"),"utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
 		return ssDao.checkOneSimpleSelection(agreeId,question, option, keypoint,optionSy,keypointId);
 	}
 	

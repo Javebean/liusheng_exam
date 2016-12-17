@@ -114,10 +114,10 @@ var loadMessages = function(start){
 			 var html = "";
 			 for(var i=0,len=data.length;i<len;i++){
 				 var obj = data[i];
-				 html+="<tr><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.optionA+"</td><td>已审核</td>"
+				 html+="<tr  id='"+obj.id+"'><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.optionA+"</td><td>已审核</td>"
 					+"<td>"
-					+"<button type='button' class='btn btn-primary showinfo' kp='"+obj.keypoint+"' pr='"+obj.problem+"' as='"+obj.answerText+"'>查看</button>"
-					+"&nbsp;&nbsp;<button type='button' name='delete' class='btn btn-danger' ky='sim' tid='"+obj.id+"'>删除</button>"
+					+"<button type='button' class='btn btn-primary' kp='"+obj.keypoint+"' pr='"+obj.problem+"' as='"+obj.answerText+"'>查看</button>"
+					+"&nbsp;&nbsp;<button type='button' class='btn btn-danger'>删除</button>"
 					+"</td></tr>";
 			 }
 			document.getElementById('abstract').innerHTML = html;  
@@ -136,6 +136,59 @@ var loadMessages = function(start){
 		 loadMessages(1);
 		 pagebutton("getsimpages",items);
 	})
+	
+	//弹出colorbox
+		$('#abstract').on('click','tr',function(e){
+			var tar = e.target;
+			var ele = e.currentTarget;
+			var qid = ele.id;
+			if(tar.className=='btn btn-primary'){//审核
+				$.colorbox({
+					transition : "elastic", // fade,none,elastic
+					width : "55%",
+					height : "88%",
+					inline : true,
+					href : "#cboxLoadedContent",
+					opacity : 0.5,
+					scrolling : true,
+					overlayClose : false,
+					close : "关闭",
+					onComplete:function(){
+						var pr = $(tar).attr("pr");
+						var as = $(tar).attr("as");
+						var kp = $(tar).attr("kp");
+						$("#show_pr").text(pr);
+						$("#show_as").text(as);
+						$("#show_kp").text(kp);
+						
+						var imgurl = $(this).attr("imgurl");
+						if(isNotEmpty(imgurl)){
+							document.getElementById('interimg').innerHTML = '<img alt="pic" src='+$(this).attr("imgurl")+'>';
+						}
+					}
+					
+				});
+			} else if(tar.className = 'btn btn-danger'){
+				$.confirm({
+					title : "提示",
+					text:"确认删除？",
+					confirm : function(button) {
+						nativeAjax('get','deletesim/'+qid,function(e){
+							var res = getResult(e);
+							if(res){
+								ele.innerHTML = '';
+							}
+						});
+					},
+					
+					confirmButton : "确认",
+					cancelButton : "取消",
+					confirmButtonClass: "btn-danger",
+					cancelButtonClass: "btn-default"
+				});
+			}
+		});
+	
 </script>
 
 </body>
