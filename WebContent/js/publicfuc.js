@@ -74,27 +74,6 @@ var jsonParse = function(mystr){
 }
 
 
-
-
-var deleteItem = function (url,dId){
-	$.ajax({
-		url:url+"/"+dId,
-		type:"get",
-		dataType:"json",
-		success:function (data){
-			if(data){
-				window.location.reload();
-			}else{
-				alert("删除失败！");
-			}
-		},
-		error:function(){
-			alert("删除失败！");
-		} 
-		
-	});
-}
-
 /*查询知识点，在colorbox 的pop up中*/
 var getAllkp = function(){
 	$.get("getallkpfromkp",function(data){
@@ -150,10 +129,10 @@ var agreeQues = function(url,param){
 //分页按钮
 var pagebutton = function(pageNumUrl,items){
 	var curpage =1;
-	$(".pageButton").click(function(){
-		//再去查一共多少页
-		var name = $(this).attr("name");
-		$.get(pageNumUrl,{"items":items},function(pageNums){
+	$('#pager').on('click','a',function(e){
+		var name = e.currentTarget.getAttribute('name');
+		nativeAjax('get',pageNumUrl+'?items='+items,function(e){
+			var pageNums = getResult(e);
 			if(name=="sy"){
 				curpage = 1;
 			}else if(name=="syy"){
@@ -165,7 +144,6 @@ var pagebutton = function(pageNumUrl,items){
 			}
 			loadMessages(curpage);
 			$("#showCurrnetPage").text(curpage+"/"+pageNums);
-			
 		});
 	});
 	

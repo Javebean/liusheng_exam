@@ -65,7 +65,7 @@
 						
 					</table>
 					
-					<ul class="pager">
+					<ul id="pager" class="pager">
 			 			<li><a class ="pageButton hand-point" name="sy">首页</a></li>
 			 			<li><a class ="pageButton hand-point" name="syy">上一页</a></li>
 			 			<li><a class ="pageButton hand-point" name="xyy">下一页</a></li>
