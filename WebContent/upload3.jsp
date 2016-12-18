@@ -88,8 +88,8 @@
 				   <div class="form-group">
 				      <label for="firstname" class="col-xs-1 control-label">所属知识点：</label>
 				      
-				      <div class="allkp">
-				      </div>
+				       <select id='kpArea' style="width: 20%;" class="form-control" name='keypointId'>
+				      </select>
 				   </div>
 				 
 				   <div class="form-group">
@@ -124,7 +124,7 @@
 		$("#collapseTwo").find("li").eq(2).addClass("sub-active");
 		
 		//加载所属知识点
-		getAllkp_upload();
+		getAllkp();
 		
 		$("#imgInp").change(function(){
 		    readURL(this);

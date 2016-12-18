@@ -121,7 +121,7 @@
 				 
 				   <div class="form-group">
 				      <label for="firstname" class="col-xs-1 control-label">所属知识点：</label>
-				      <select id='allkp' class="form-control" name='keypointId'>
+				      <select id='kpArea' style="width: 20%;" class="form-control" name='keypointId'>
 				      </select>
 				   </div>
 				   
@@ -138,7 +138,7 @@
 	</div>
 <script type="text/javascript">
 	//得到所有知识点
-	getAllkp_upload();
+	getAllkp();
 	var res;
 	$("#submit2").click(function(){
 		$("#message").text("");
@@ -162,7 +162,7 @@
 		}
 		
 		var param = $("#uploadSimple").serializeArray();
-		var e = document.getElementById("allkp");
+		var e = document.getElementById("kpArea");
 		param.push({name:'keypoint',value:e.options[e.selectedIndex].text});
 		$.post("addsimpleselect",param,function(data){
 			console.log(data);
