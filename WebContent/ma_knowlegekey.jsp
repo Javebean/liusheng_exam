@@ -127,16 +127,14 @@ var items = 10;
 			success:function(data){
 				 var html = "";
 				 $.each(data,function(){
-					html += "<tr><td>"+this.number+"</td><td>"+this.keypoint+"</td>"
+					html += "<tr id='"+this.id+"'><td>"+this.number+"</td><td class='keypoint'>"+this.keypoint+"</td>"
 					+"<td>"
-					+"<button type='button' name='updateKey' class='btn btn-primary' tid='"+this.id+"'>修改</button>&nbsp;&nbsp;"
-					+"<button type='button' name='delete' class='btn btn-danger' ky='kp' tid='"+this.id+"'>删除</button>"
+					+"<button type='button' class='btn btn-primary'>修改</button>&nbsp;&nbsp;"
+					+"<button type='button' class='btn btn-danger'>删除</button>"
 					+"</td></tr>";
 				}); 
 				 
 				document.getElementById('abstract').innerHTML = html;
-				$.getScript("js/colorboxconfig.js");
-				
 			},
 			error:function(data,d1,d2){
 				console.log(data,d1,d2);
@@ -188,6 +186,50 @@ var items = 10;
 			return false;
 		});
 	})
+	
+	//弹出colorbox
+		$('#abstract').on('click','tr',function(e){
+			var tar = e.target;
+			var ele = e.currentTarget;
+			var qid = ele.id;
+			if(tar.className=='btn btn-primary'){//审核
+				$.colorbox({
+					transition : "elastic", // fade,none,elastic
+					width : "50%",
+					height : "30%",
+					inline : true,
+					href : "#cboxLoadedContent",
+					opacity : 0.5,
+					scrolling : true,
+					overlayClose : false,
+					close : "关闭",
+					onComplete:function(){
+				        $("#updateKp").val($(ele).find('td.keypoint').text());
+				        $("#updateKey").attr("name",qid);
+				    }
+				});
+			
+			} else if(tar.className = 'btn btn-danger'){
+				$.confirm({
+					title : "提示",
+					text:"确认删除？",
+					confirm : function(button) {
+						nativeAjax('get','deletekey/'+qid,function(e){
+							var res = getResult(e);
+							if(res){
+								ele.innerHTML = '';
+							}
+						});
+					},
+					
+					confirmButton : "确认",
+					cancelButton : "取消",
+					confirmButtonClass: "btn-danger",
+					cancelButtonClass: "btn-default"
+				});
+			}
+		});
+	
 </script>
 
 </body>

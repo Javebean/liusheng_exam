@@ -146,8 +146,6 @@ var items =10;
 						+"</td></tr>";
 				 }
 				document.getElementById('abstract').innerHTML = html; 
-				$.getScript("js/colorboxconfig.js");
-				
 			},
 			error:function(data,d1,d2){
 				console.log(data,d1,d2);
