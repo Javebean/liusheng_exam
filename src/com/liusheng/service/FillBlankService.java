@@ -31,11 +31,7 @@ public class FillBlankService {
 		//keypoint实际上是【id,知识点】组合
 		String keypointId = fb.getKeypointId();
 		String keypoint = fb.getKeypoint();
-		if(null!=keypointId && !"".equals(keypointId)){
-			String[] split = keypointId.split(",");
-			fb.setKeypoint(split[1]);
-			fb.setKeypointId(split[0]);
-		}else{
+		if(null!=keypointId || "".equals(keypointId)){
 			//解析excel中的
 			int kpid = kpservice.getKeypointByName(keypoint);
 			if(kpid!=-1){

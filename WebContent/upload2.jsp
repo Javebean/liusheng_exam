@@ -66,7 +66,7 @@
 				   <div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="2" placeholder="请输入题目" name="problem"></textarea>
+				         <textarea id='question' class="form-control" rows="2" placeholder="请输入题目" name="problem"></textarea>
 				      </div>
 				   </div>
 				   
@@ -96,37 +96,26 @@
 		$("#collapseTwo").find("li").eq(1).addClass("sub-active");
 		
 		$("#submit2").click(function(){
-			$(".loading").removeClass("hidden");
+			$("img.loading").removeClass("hidden");
 		
 			var pro = $("textarea[name=problem]").val();
 			console.log(pro);
 			var reg =/<.+?>/;
 			var b = reg.test(pro);
 			if(!b){
-				$(".loading").addClass("hidden");
-				$(".tipmes").text("请检查题目格式是否符合上传格式！");
+				$("img.loading").addClass("hidden");
+				$("p.tipmes").text("请检查题目格式是否符合上传格式！");
 				return false;
 			}
 			
-			var len = $("input[name=keypointId]:checked").length;
-			if(len==0){
-				$(".loading").addClass("hidden");
-				$(".tipmes").text("请选择知识点！");
-				return false;
-			}
-			
-			 $.post("addfb",$("#uploadFillBlank").serializeArray(),function(data){
+			var param = $("#uploadFillBlank").serializeArray();
+			var sele = document.getElementById('kpArea');
+			param.push({'name':'keypoint',value:sele.options[sele.selectedIndex].text});
+			 $.post("addfb",param,function(data){
+				 $('#question').val('');
 				data = $.parseJSON(data);
-				$(".loading").addClass("hidden");
-				$(".tipmes").text(data.status);
-				
-				/*  if(data){
-					//添加填空题成功
-					$(".loading").addClass("hidden");
-					$(".tipmes").text("上传成功");
-				}else{
-					$(".tipmes").text("上传失败");
-				} */
+				$("img.loading").addClass("hidden");
+				$("p.tipmes").text(data.status);
 			}); 
 			return false;
 		});
