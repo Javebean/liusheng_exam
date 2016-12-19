@@ -86,7 +86,7 @@
 				<tr><td>题目：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea id="question" class="form-control" rows="2"></textarea>
+						<textarea id="question" class="form-control" rows="5" style="resize: none;"></textarea>
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
@@ -98,7 +98,7 @@
 				<tr><td>答案：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea class="form-control" rows="2" id="answer"></textarea>
+						<textarea class="form-control" rows="5" id="answer" style="resize: none;"></textarea>
 					</td>
 				</tr>
 				
