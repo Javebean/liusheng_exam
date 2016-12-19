@@ -40,7 +40,7 @@ public class InterAction {
 	
 	@ResponseBody
 	@RequestMapping("/addinter")
-	public String addInterlocation(Interlocution il, MultipartFile file) {
+	public String addInterlocation(Interlocution il,  MultipartFile file) {
 		boolean b = service.addOneInterlocution(il, file,context);
 		JSONObject obj = new JSONObject();
 		obj.put("code", b?0:1);
@@ -55,7 +55,7 @@ public class InterAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "/agreeil")
-	public boolean checkOneInterlocution(int agreeId,String question,String answer,String keypoint,String keypointId){
-		return service.checkOneInterlocution(agreeId, question, answer, keypoint, keypointId);
+	public boolean checkOneInterlocution(Interlocution il){
+		return service.checkOneInterlocution(il);
 	}
 }

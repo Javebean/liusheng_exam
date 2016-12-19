@@ -209,7 +209,7 @@ var items = 10;
 				    }
 				});
 			
-			} else if(tar.className = 'btn btn-danger'){
+			} else if(tar.className == 'btn btn-danger'){
 				$.confirm({
 					title : "提示",
 					text:"确认删除？",

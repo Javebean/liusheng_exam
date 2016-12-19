@@ -98,7 +98,7 @@
 				<tr><td>答案：</td></tr>
 				<tr>
 					<td colspan="4">
-						<textarea class="form-control" rows="5" id="answer" style="resize: none;"></textarea>
+						<textarea class="form-control" rows="7" id="answer" style="resize: none;"></textarea>
 					</td>
 				</tr>
 				
@@ -139,7 +139,7 @@ var items =10;
 				 var html = "";
 				 for(var i=0,len=data.length;i<len;i++){
 					 var obj = data[i];
-					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td class='answer'>"+obj.answer+"</td><td>未审核</td>"
+					 html+="<tr id='"+obj.id+"' imgurl="+obj.imgUrl+" ><td class='number'>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td class='answer'>"+obj.answer+"</td><td>未审核</td>"
 						+"<td>"
 						+"<button type='button' class='btn btn-primary' kpId='"+obj.keypointId+"' imgurl='"+obj.imgUrl+"'>审核</button>&nbsp;&nbsp;"
 						+"<button type='button' class='btn btn-danger'>删除</button>"
@@ -161,16 +161,6 @@ var items =10;
 		 pagebutton("getinterpages",items);
 		 /*查询知识点*/
 		 getAllkp();
-		 
-		 /*审核通过*/
-		 $("#agree").click(function(){
-			 var question = $("#question").val();
-			 var answer = $("#answer").val();
-			 var keypointId = $("input[name=keypoint]:checked").attr("id");
-			 var keypoint = $("input[name=keypoint]:checked").next().text();
-			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"answer":answer,"keypoint":keypoint,"keypointId":keypointId};
-			 agreeQues("agreeil",param);
-		 });
 	})
 	
 	//弹出colorbox
@@ -195,20 +185,30 @@ var items =10;
 						var text2 = $(ele).find('td.answer').text();
 						$("#answer").val(text2);
 						/*回显知识点*/
-						document.getElementById('kpArea').value=$(tar).attr("kpId");
+						var kparea = document.getElementById('kpArea');
+						kparea.value = $(tar).attr('kpId');
 						
-						var imgurl = $(this).attr("imgurl");
+						var imgurl = $(ele).attr("imgurl");
 						if(isEmpty(imgurl)){
 							document.getElementById('inter_img').innerHTML ='该题无图';
 						} else {
-							document.getElementById('inter_img').innerHTML ='<img alt="pic" src='+imgurl+'>';
+							document.getElementById('inter_img').innerHTML ='<img alt="pic" src=pic/'+imgurl+'>';
 						}
 						
-						/*获取题目id*/
-						$("#agree").attr("agreeId",qid);
+						 /*审核通过*/
+						 $("#agree").click(function(){
+							 var question = $("#question").val();
+							 var answer = $("#answer").val();
+							 var num = $(ele).find('td.number').text();
+							 var keypointId = kparea.value;
+							 var keypoint = kparea.options[kparea.selectedIndex].text;
+							 var param = {"number":num,"id":qid,"problem":question,"answer":answer,"keypoint":keypoint,"keypointId":keypointId,"imgUrl":imgurl};
+							 agreeQues("agreeil",param);
+						 });
+						
 					}
 				});
-			} else if(tar.className = 'btn btn-danger'){
+			} else if(tar.className == 'btn btn-danger'){
 				$.confirm({
 					title : "提示",
 					text:"确认删除？",

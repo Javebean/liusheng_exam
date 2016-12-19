@@ -26,7 +26,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	@Override
 	public boolean addOneInterlocution(Interlocution il) {
 		try {
-			getSession().save(il);
+			getSession().saveOrUpdate(il);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
