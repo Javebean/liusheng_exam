@@ -29,7 +29,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public boolean addOneFillBlank(FillBlank fb) {
 		try {
-			getSession().save(fb);
+			getSession().saveOrUpdate(fb);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

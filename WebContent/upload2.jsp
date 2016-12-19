@@ -112,10 +112,12 @@
 			var sele = document.getElementById('kpArea');
 			param.push({'name':'keypoint',value:sele.options[sele.selectedIndex].text});
 			 $.post("addfb",param,function(data){
-				 $('#question').val('');
-				data = $.parseJSON(data);
+				 var res=eval('('+data+')');
+				 if(res.code!=1){
+					$('#question').val('');
+				 }
 				$("img.loading").addClass("hidden");
-				$("p.tipmes").text(data.status);
+				$("p.tipmes").text(res.status);
 			}); 
 			return false;
 		});

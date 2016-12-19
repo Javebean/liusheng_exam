@@ -1,6 +1,5 @@
 package com.liusheng.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,10 +27,14 @@ public class FillBlankService {
 	private KeypointsService kpservice;
 	
 	public String addOneFillBlank(FillBlank fb) {
-		//keypoint实际上是【id,知识点】组合
 		String keypointId = fb.getKeypointId();
 		String keypoint = fb.getKeypoint();
-		if(null!=keypointId || "".equals(keypointId)){
+		//说明是更新数据
+		if(0!=fb.getId()){
+			fb.setCheckStatus(1);
+		}
+		
+		if(null==keypointId || "".equals(keypointId)){
 			//解析excel中的
 			int kpid = kpservice.getKeypointByName(keypoint);
 			if(kpid!=-1){
@@ -52,6 +55,7 @@ public class FillBlankService {
 		int ans=0;
 		for(char c : charArray){
 			if(ans==0 && c=='>'){
+				obj.put("code", 1);
 				obj.put("status", "上传题目格式不符合条件");
 				return obj.toString();
 			}
@@ -62,31 +66,45 @@ public class FillBlankService {
 				ans--;
 			}
 			if(ans>=2||ans<=-2){
+				obj.put("code", 1);
 				obj.put("status", "上传题目格式不符合条件");
 				return obj.toString();
 			}
 		}
 		if(ans!=0){
+			obj.put("code", 1);
 			obj.put("status", "上传题目格式不符合条件");
 			return obj.toString();
 		}
 		
 		
 		
-		
-		//因为这样会把<>>这种也解析成功
-		Pattern reg = Pattern.compile("(<)(.+?)(>)");
+		//因为这样会把<>>这种也解析成功,所以加了上面的判断
+		Pattern reg = Pattern.compile("(<)(.*?)(>)");
 		Matcher matcher = reg.matcher(problem);
-		StringBuilder answer = new StringBuilder();
+		StringBuilder answer = new StringBuilder(100);
 		int fillnum = 0;
+		boolean isbreak =false;
 		while(matcher.find()){
 			fillnum++;
-			answer.append(matcher.group(2));
+			String group = matcher.group(2);
+			if(group==null || group.isEmpty()){
+				isbreak = true;
+				break;
+			}
+			answer.append(group);
 			answer.append(",");
 		}
+		
+		//如果有一个空中没有答案，就只有<>,格式不合格
+		if(isbreak){
+			obj.put("code", 1);
+			obj.put("status", "上传题目格式不符合条件");
+			return obj.toString();
+		}
 		//删掉最后一个逗号“，”
-		log.info("上传填空题后，被截取的答案。。。"+answer.toString());
 		answer.deleteCharAt(answer.length()-1);
+		log.info("上传填空题后，被截取的答案。。。"+answer.toString());
 		fb.setFillNums(fillnum);
 		fb.setAnswer(answer.toString());
 		boolean b =  fillDao.addOneFillBlank(fb);
@@ -119,15 +137,6 @@ public class FillBlankService {
 	}
 
 	public boolean checkOneFillBlank(int agreeId,String question,String keypoint,String keypointId) {
-		keypointId = keypointId.substring(2);
-		try {
-			question = new String(question.getBytes("iso8859-1"),"utf-8");
-			keypoint = new String(keypoint.getBytes("iso8859-1"),"utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		
 		return fillDao.checkOneFillBlank(agreeId,question,keypoint,keypointId);
 	}
 	

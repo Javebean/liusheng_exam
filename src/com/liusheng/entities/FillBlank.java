@@ -107,6 +107,14 @@ public class FillBlank {
 	public FillBlank() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "FillBlank [id=" + id + ", number=" + number + ", problem="
+				+ problem + ", keypointId=" + keypointId + ", checkStatus="
+				+ checkStatus + ", fillNums=" + fillNums + ", keypoint="
+				+ keypoint + ", answer=" + answer + "]";
+	}
 	
 
 	

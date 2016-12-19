@@ -152,14 +152,7 @@ var items = 10;
 		 pagebutton("getfbpages",items);
 		 /*查询知识点*/
 		 getAllkp();
-		 /*审核通过*/
-		 $("#agree").click(function(){
-			 var question = $("#question").val();
-			 var keypointId = $("input[name=keypoint]:checked").attr("id");
-			 var keypoint = $("input[name=keypoint]:checked").next().text();
-			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"keypoint":keypoint,"keypointId":keypointId};
-			 agreeQues("agreefb",param);
-		 });
+		
 	})
 	
 	//弹出colorbox
@@ -181,9 +174,16 @@ var items = 10;
 						var text = $(ele).find('td.problem').text();
 						$("#question").val(text);
 						/*回显知识点*/
-						document.getElementById('kpArea').value = $(tar).attr('kpId');
-						/*获取题目id*/
-						$("#agree").attr("agreeId",qid);
+						var kparea = document.getElementById('kpArea');
+						kparea.value = $(tar).attr('kpId');
+						 /*审核通过*/
+						 $("#agree").click(function(){
+							 var problem = $("#question").val();
+							 var keypointId = kparea.value;
+							 var keypoint = kparea.options[kparea.selectedIndex].text;
+							 var param = {"id":qid,"problem":problem,"keypoint":keypoint,"keypointId":keypointId};
+							 agreeQues("addfb",param);
+						 });
 					}
 						
 				});

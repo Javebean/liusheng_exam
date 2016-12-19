@@ -1,11 +1,11 @@
 package com.liusheng.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.liusheng.entities.Interlocution;
 import com.liusheng.service.InterlocutionService;
-import com.liusheng.util.NumberUtil;
 
 @Controller
 public class InterAction {
@@ -39,17 +38,13 @@ public class InterAction {
 		return service.geteInterLocutionPageNums(items);
 	}
 	
+	@ResponseBody
 	@RequestMapping("/addinter")
-	public String addInterlocation(Interlocution il, MultipartFile file,Map<String,String>map) {
+	public String addInterlocation(Interlocution il, MultipartFile file) {
 		boolean b = service.addOneInterlocution(il, file,context);
-		String text = null;
-		if (b) {
-			text = "上传成功";
-		} else {
-			text = "上传失败";
-		}
-		map.put("message", text);
-		return "redirect:uploadState.jsp";
+		JSONObject obj = new JSONObject();
+		obj.put("code", b?0:1);
+		return obj.toString();
 	}
 	
 	@ResponseBody

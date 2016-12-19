@@ -59,11 +59,11 @@
 				
 				<hr>
 				<h4 class="sub-header">手动上传</h4>
-				<form class="form-horizontal" role="form" id="uploadInter" enctype="multipart/form-data" action="addinter" method="post">
+				<form class="form-horizontal">
 					<div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">题目：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="2" placeholder="请输入题目" name="problem"></textarea>
+				         <textarea class="form-control" rows="2" placeholder="请输入题目" id="problem"></textarea>
 				      </div>
 				   </div>
 				   <h5 class="sub-header">图片上传（如果该题没有图片则不用上传）</h5>
@@ -71,7 +71,7 @@
     				</div>
     				<br>
     				<label class="btn btn-primary col-sm-1 col-sm-offset-4">
-    					<input type="file" id="imgInp" name="file"/>
+    					<input type="file" id="imgInp" name="file" accept="image/png, image/jpeg, image/gif"/>
     					<span>上传图片</span>
 					</label>
     				<br>
@@ -81,7 +81,7 @@
 				   <div class="form-group">
 				      <label for="firstname" class="col-sm-1 control-label">答案：</label>
 				      <div class="col-sm-11">
-				         <textarea class="form-control" rows="4" placeholder="请输入答案" name="answer"></textarea>
+				         <textarea class="form-control" rows="4" placeholder="请输入答案" id="answer"></textarea>
 				      </div>
 				   </div>
 				    
@@ -132,24 +132,45 @@
 		
 		//上传
 		$("#submit2").click(function(){
-			var pro = $("textarea[name=problem]").val();
-			var answer = $("textarea[name=answer]").val();
+			var pro = $("#problem").val();
+			var answer = $("#answer").val();
 			if(""==$.trim(pro)){
-				$(".loading").addClass("hidden");
-				$(".tipmes").text("请填写问答题题目！");
+				$("img.loading").addClass("hidden");
+				$("p.tipmes").text("请填写问答题题目！");
 				return false;
 			}
 			if(""==$.trim(answer)){
-				$(".loading").addClass("hidden");
-				$(".tipmes").text("请填写问答题答案！");
+				$("img.loading").addClass("hidden");
+				$("p.tipmes").text("请填写问答题答案！");
 				return false;
 			}
-			var len = $("input[name=keypointId]:checked").length;
-			if(len==0){
-				$(".loading").addClass("hidden");
-				$(".tipmes").text("请选择知识点！");
-				return false;
-			}
+			
+			 var formData = new FormData();
+			 formData.append("problem", pro);
+			 formData.append("answer", answer);
+			 var kpArea = document.getElementById('kpArea');
+			 
+			 formData.append("keypoint", kpArea.options[kpArea.selectedIndex].text);
+			 formData.append("keypointId", kpArea.value);
+			 formData.append("file", document.getElementById('imgInp').files[0]);
+             $.ajax({
+                 url: 'addinter',
+                 type: 'POST',
+                 data: formData,
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: function (data) {
+                     var res = jsonParse(data);
+                     if(res.code==0){
+                    	 $("p.tipmes").text("添加成功");
+                    	 $("#problem").val('');
+             			 $("#answer").val('');
+                     }
+                 }
+             });
+             return false;
+			
 			
 		});
 		

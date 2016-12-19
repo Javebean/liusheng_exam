@@ -3,6 +3,9 @@ package com.liusheng.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,6 +38,17 @@ public class InterlocutionService {
 		il.setNumber(NumberUtil.createNum());
 		if (null != mf) {
 			String baseUrl = context.getRealPath("") + "\\uploadfile\\";
+			
+			Path path = Paths.get(baseUrl);
+			if(Files.notExists(path)){
+				try {
+					Files.createDirectories(path);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 			String imgUrl = "";
 			String fileName = mf.getOriginalFilename();
 			if (!"".equalsIgnoreCase(fileName)) {
@@ -69,21 +83,12 @@ public class InterlocutionService {
 
 			}
 			il.setImgUrl(imgUrl);
-			//id,知识点的组合
-			String keypointId = il.getKeypointId();
-			String[] split = keypointId.split(",");
-			il.setKeypointId(split[0]);
-			il.setKeypoint(split[1]);
 			return iDao.addOneInterlocution(il);
 		}else{
 			//网页传过来的keypointId,实际上这【id，知识点】这种组合
 			String keypointId = il.getKeypointId();
 			String keypoint = il.getKeypoint();
-			if(null!=keypointId && !"".equals(keypointId)){
-				String[] split = keypointId.split(",");
-				il.setKeypoint(split[1]);
-				il.setKeypointId(split[0]);
-			}else{
+			if(null==keypointId || keypointId.isEmpty()){
 				//解析excel中的
 				int kpid = kpservice.getKeypointByName(keypoint);
 				if(kpid!=-1){
