@@ -156,7 +156,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 	@Override
 	public long getFillBlankCount() {
 		try{
-			String hql ="select count(id) from FillBlank";
+			String hql ="select count(id) from FillBlank  where checkStatus = 1";
 			Long count = (Long) getSession().createQuery(hql).uniqueResult();
 			return count;
 		}catch(Exception e){

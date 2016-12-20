@@ -17,6 +17,8 @@ public class CreateExam {
 	 * 1.知识点id放进数组
 	 * 2.随机再对数组进行排序
 	 * 
+	 * 2016-12-20 
+	 * 对知识点（汉字）数组进行随机排序
 	 */
 	@Autowired
 	private ServletContext context;

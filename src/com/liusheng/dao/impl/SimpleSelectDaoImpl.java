@@ -115,7 +115,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public long getSimpleSelectionCount() {
 		try {
-			String hql = "select count(id) from SimpleSelection";
+			String hql = "select count(id) from SimpleSelection where checkStatus = 1";
 			Long count = (Long) getSession().createQuery(hql).uniqueResult();
 			return count;
 		} catch (Exception e) {

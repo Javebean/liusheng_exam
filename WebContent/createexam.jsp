@@ -77,48 +77,42 @@
 <script type="text/javascript">
 	$(function(){
 		getAllkp_createExam();
-		 $("#select1").on("changed.bs.select", function(e, clickedIndex, newValue, oldValue) {
-	  		var selectedD = $(this).find('option').eq(clickedIndex).text();
-	  		var selected4 = $(this).find('option').eq(clickedIndex).val();
-	  		console.log('selectedD33: ' + selected4 + '  newValue: ' + newValue + ' oldValue: ' + oldValue);
+		
+		var sim_kp;
+		var fill_kp;
+		var il_kp;
+		
+		//https://silviomoreto.github.io/bootstrap-select/options/#events
+		 $("#select1").on("hidden.bs.select", function() {
+	  		 sim_kp = $(this).prevAll('button').get(0).getAttribute('title');
+		 });
+		 $("#select2").on("hidden.bs.select", function() {
+	  		 fill_kp = $(this).prevAll('button').get(0).getAttribute('title');
+		 });
+		 $("#select3").on("hidden.bs.select", function() {
+	  		 il_kp = $(this).prevAll('button').get(0).getAttribute('title');
 		 });
 		 $("#createExam").click(function(){
 			$(".load").removeClass("hidden");
 			$(".tipmes").text("");
 			//检查单选 填空 问答 一共选择的数量
-
-			
-			
-			var length1 = $(".allkp").eq(0).find("input:checked").length;
-			var length2 = $(".allkp").eq(1).find("input:checked").length;
-			var length3 = $(".allkp").eq(2).find("input:checked").length;
-			if(length1==0){
-				$(".load").addClass("hidden");
-				$(".tipmes").text("请勾选单选题出题知识点");
+			if(isEmpty(sim_kp)){
+				$("img.load").addClass("hidden");
+				$("p.tipmes").text("请勾选单选题出题知识点");
 				return false;
 			}
-			if(length2==0){
-				$(".load").addClass("hidden");
-				$(".tipmes").text("请勾选填空题出题知识点");
+			if(isEmpty(fill_kp)){
+				$("img.load").addClass("hidden");
+				$("p.tipmes").text("请勾选填空题出题知识点");
 				return false;
 			}
-			if(length3==0){
-				$(".load").addClass("hidden");
-				$(".tipmes").text("请勾选问答题出题知识点");
+			if(isEmpty(il_kp)){
+				$("img.load").addClass("hidden");
+				$("p.tipmes").text("请勾选问答题出题知识点");
 				return false;
 			}
 			
-			//输入框里面填的数字之和不能大于所给的题目数量
-			var a = $(".allkp").eq(0).find("input:checked").map(function(){
-				return this.name;
-			}).get();
-			var b = $(".allkp").eq(1).find("input:checked").map(function(){
-				return this.name;
-			}).get();
-			var c = $(".allkp").eq(2).find("input:checked").map(function(){
-				return this.name;
-			}).get();
-			var param = {"simple":JSON.stringify(a),"fill":JSON.stringify(b),"inter":JSON.stringify(c)};
+			var param = {"simple":sim_kp,"fill":fill_kp,"inter":il_kp};
 			$.get("cratexam",param,function(data){
 				if("success"==data){
 					$(".load").addClass("hidden");

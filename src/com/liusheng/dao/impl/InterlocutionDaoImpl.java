@@ -119,7 +119,7 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 	@Override
 	public long getInterlocaionCount() {
 		try {
-			String hql = "select count(id) from Interlocution";
+			String hql = "select count(id) from Interlocution where checkStatus = 1";
 			Long count = (Long) getSession().createQuery(hql).uniqueResult();
 			return count;
 		} catch (Exception e) {
