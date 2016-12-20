@@ -88,7 +88,7 @@
 	</div>
 <div style="display: none;">
 	<div id="cboxLoadedContent" >
-		<form class="form-horizontal" role="form">
+		<form class="form-horizontal" role="form" style="width: 90%;">
 						
 			<div class="form-group">
 			  <div class="col-sm-3"></div>
@@ -96,20 +96,15 @@
 			  <div class="col-sm-5"></div>
 	   		</div>
 
-			<div class="form-group">
+			<div class="form-group" style="margin-bottom: 50px;">
 		      <label for="firstname" class="col-sm-2 control-label">知识点：</label>
 		      <div class="col-sm-8">
-		         <input type="text" width="80%" class="form-control" id="updateKp">
+		         <input type="text" width="50%" class="form-control" id="updateKp">
 	     	  </div>
 	   		</div>
+	   		
 			<div class="form-group">
-		      <div class="col-sm-5">
-	     	  </div>
-		      <div class="col-sm-2">
-		      		<button class="btn btn-danger" id="updateKey" name="">修改</button>
-	     	  </div>
-		      <div class="col-sm-5">
-	     	  </div>
+		      		<button class="btn btn-danger col-sm-4 col-sm-offset-4" id="updateKey" name="">修改</button>
 	   		</div>
 		</form>
    </div>
@@ -196,7 +191,7 @@ var items = 10;
 				$.colorbox({
 					transition : "elastic", // fade,none,elastic
 					width : "50%",
-					height : "30%",
+					height : "40%",
 					inline : true,
 					href : "#cboxLoadedContent",
 					opacity : 0.5,
