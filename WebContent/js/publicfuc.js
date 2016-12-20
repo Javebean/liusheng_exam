@@ -92,18 +92,17 @@ var getAllkp = function(){
 
 /*出题的知识点*/
 var getAllkp_createExam = function(){
-	$.getJSON("getallkp",function(data){
-		//checkbox+知识点+输入框
-		$.each(data,function(index0){
-			var html="";
-			$.each(this,function(index){
-				html+='<div style="width:150px;float:left;"><input type="checkbox" name="'+this.keypointId+'">'+this.keypoint+'&nbsp;&nbsp;&nbsp;</div>';
-				if((index+1)%6==0){
-					html+="<br/><br/>";
-				}
-			});
-			$(".allkp").eq(index0).append(html);
-		});
+	$.get("getallkpfromkp",function(data){
+		var html = "";
+		if(isEmpty(data)){
+			return;
+		}
+		for(var i=0,len=data.length;i<len;i++){
+			var obj = data[i];
+			html += '<option>'+obj.keypoint+'</option>';
+		}
+		$('select').append(html);
+		$('select').selectpicker('refresh');
 	});
 }
 

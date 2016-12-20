@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <!-- <link rel="icon" href="../../favicon.ico"> -->
-
+<link href="css/bootstrap-select.min.css" rel='stylesheet' type='text/css' />
 <title>计算机网路出卷系统</title>
 <%@include file="public/public.html"%>
 <%@include file="public/public_1.html"%>
@@ -48,22 +48,22 @@
 				<div class="page-header">
 					 <h4>1.选择单选题要出的知识点：（共10题）</h4>
 				</div>
-				<div class="allkp">
-				</div>
+				<select class="selectpicker" multiple>
+				</select>
 				
 				<hr>
 				<div class="page-header">
 					 <h4>2.选择填空题要出的知识点：（共10个空）</h4>
 				</div>
-				<div class="allkp">
-				</div>
+				<select class="selectpicker" multiple>
+				</select>
 			
 				<hr>
 				<div class="page-header">
 					 <h4>3.选择问答题要出的知识点：（共6题）</h4>
 				</div>
-				<div class="allkp">
-				</div>
+				<select class="selectpicker" multiple>
+				</select>
 				<hr>
 				<div class="col-xs-4 col-xs-offset-4">
 					<button type="button" id="createExam" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -73,10 +73,11 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		getAllkp_createExam();
-		$("#createExam").click(function(){
+		/* $("#createExam").click(function(){
 			$(".load").removeClass("hidden");
 			$(".tipmes").text("");
 			//检查单选 填空 问答 一共选择的数量
@@ -117,9 +118,8 @@
 				}
 				
 			});
-		});
+		}); */
 	})
-
 </script>
 </body>
 </html>
