@@ -182,7 +182,7 @@ var items = 10;
 							 var keypointId = kparea.value;
 							 var keypoint = kparea.options[kparea.selectedIndex].text;
 							 var param = {"id":qid,"problem":problem,"keypoint":keypoint,"keypointId":keypointId};
-							 agreeQues("addfb",param);
+							 agreeQues("addfb",param,ele);
 						 });
 					}
 						

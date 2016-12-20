@@ -108,8 +108,9 @@ var getAllkp_createExam = function(){
 }
 
 /*审核通过题目*/
-var agreeQues = function(url,param){
+var agreeQues = function(url,param,ele){
 	$.get(url,param,function(data){
+		$('div.confirmation-modal,div.modal-backdrop').removeClass('hidden');
 			$.colorbox.close();
 			$.confirm({
 				title : "提示",
@@ -118,9 +119,19 @@ var agreeQues = function(url,param){
 				confirmButtonClass: "btn-danger",
 				cancelButtonClass: "hidden",
 				confirm:function(){
-					window.location.reload();
+					if(ele){
+						ele.innerHTML = '';
+					}
 				}
 			});
+			
+			setTimeout(closeConfirm, 2000);
+			function closeConfirm(){
+				$('div.confirmation-modal,div.modal-backdrop').addClass('hidden');
+				if(ele){
+					ele.innerHTML = '';
+				}
+			}
 		
 	});
 }

@@ -146,7 +146,7 @@ var loadMessages = function(start){
 			 var html = "";
 			 for(var i=0,len=data.length;i<len;i++){
 				 var obj = data[i];
-				 html += "<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>"+obj.answer+"</td><td>未审核</td>"
+				 html += "<tr id='"+obj.id+"'><td class='number'>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>"+obj.answer+"</td><td>未审核</td>"
 				 +"<td class='hidden opa'>"+obj.optionA+"</td><td class='hidden opb'>"+obj.optionB+"</td>"
 				 +"<td class='hidden opc'>"+obj.optionC+"</td><td class='hidden opd'>"+obj.optionD+"</td>"
 				+"<td>"
@@ -172,19 +172,7 @@ var loadMessages = function(start){
 		
 		 /*查询知识点*/
 		 getAllkp();
-		 /*审核通过*/
-		 $("#agree").click(function(){
-			 var question = $("#question").val();
-			 var $check_answer = $("input.answer:checked");
-			 var optionSy = $check_answer.attr("id");
-			 var option = $check_answer.next().text();
-			 
-			 var e = document.getElementById("kpArea");
-			 var keypoint = e.options[e.selectedIndex].text;
-			 var keypointId = e.value;
-			 var param = {"agreeId":$(this).attr("agreeId"),"question":question,"optionSy":optionSy,"option":option,"keypoint":keypoint,"keypointId":keypointId};
-			 agreeQues("agreeques",param);
-		 });
+		
 		 
 	})
 	
@@ -229,6 +217,26 @@ var loadMessages = function(start){
 						
 						//获取题目id
 						$("#agree").attr("agreeId",qid);
+						
+						 /*审核通过*/
+						 $("#agree").click(function(){
+							 var num = $(ele).find('td.number').text();
+							 var problem = $("#question").val();
+							 var $check_answer = $("input.answer:checked");
+							 var optionSy = $check_answer.attr("id");
+							 var option = $check_answer.next().text();
+							 
+							 var e = document.getElementById("kpArea");
+							 var keypoint = e.options[e.selectedIndex].text;
+							 var keypointId = e.value;
+							 var param = {"id":qid,"number":num,"problem":problem,"answer":optionSy,"option":option,"keypoint":keypoint,"keypointId":keypointId};
+							 param.optionA = opa;
+							 param.optionB = opb;
+							 param.optionC = opc;
+							 param.optionD = opd;
+							 agreeQues("addsimpleselect",param,ele);
+						 });
+						
 						
 					}
 				});

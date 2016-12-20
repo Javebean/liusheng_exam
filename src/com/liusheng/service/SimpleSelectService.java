@@ -61,13 +61,15 @@ public class SimpleSelectService {
 			int kpid = kpservice.getKeypointByName(keypoint);
 			log.info("是否查到相同的知识点："+kpid);
 			if(kpid!=-1){
-				ss.setKeypointId(kpid+"");
+				ss.setKeypointId(String.valueOf(kpid));
 			}else{
-				Keypoints k = new Keypoints(ss.getKeypoint(), NumberUtil.createNum());
-				kpservice.addKeypoints(k);
-				ss.setKeypointId(k.getId()+"");
+				return false;
 			}
 			
+		}
+		
+		if(ss.getId()!=0){
+			ss.setCheckStatus(1);
 		}
 		
 		return ssDao.addOneSimpleSelection(ss);

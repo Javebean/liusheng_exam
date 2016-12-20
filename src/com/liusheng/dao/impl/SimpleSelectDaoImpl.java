@@ -26,7 +26,7 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 	@Override
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
 		try {
-			getSession().save(ss);
+			getSession().saveOrUpdate(ss);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

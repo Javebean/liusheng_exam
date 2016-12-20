@@ -203,7 +203,7 @@ var items =10;
 							 var keypointId = kparea.value;
 							 var keypoint = kparea.options[kparea.selectedIndex].text;
 							 var param = {"number":num,"id":qid,"problem":question,"answer":answer,"keypoint":keypoint,"keypointId":keypointId,"imgUrl":imgurl};
-							 agreeQues("agreeil",param);
+							 agreeQues("agreeil",param,ele);
 						 });
 						
 					}
