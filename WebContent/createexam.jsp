@@ -48,21 +48,21 @@
 				<div class="page-header">
 					 <h4>1.选择单选题要出的知识点：（共10题）</h4>
 				</div>
-				<select class="selectpicker" multiple>
+				<select class="selectpicker" multiple id='select1'>
 				</select>
 				
 				<hr>
 				<div class="page-header">
 					 <h4>2.选择填空题要出的知识点：（共10个空）</h4>
 				</div>
-				<select class="selectpicker" multiple>
+				<select class="selectpicker" multiple id='select2'>
 				</select>
 			
 				<hr>
 				<div class="page-header">
 					 <h4>3.选择问答题要出的知识点：（共6题）</h4>
 				</div>
-				<select class="selectpicker" multiple>
+				<select class="selectpicker" multiple id='select3'>
 				</select>
 				<hr>
 				<div class="col-xs-4 col-xs-offset-4">
@@ -77,10 +77,18 @@
 <script type="text/javascript">
 	$(function(){
 		getAllkp_createExam();
-		/* $("#createExam").click(function(){
+		 $("#select1").on("changed.bs.select", function(e, clickedIndex, newValue, oldValue) {
+	  		var selectedD = $(this).find('option').eq(clickedIndex).text();
+	  		var selected4 = $(this).find('option').eq(clickedIndex).val();
+	  		console.log('selectedD33: ' + selected4 + '  newValue: ' + newValue + ' oldValue: ' + oldValue);
+		 });
+		 $("#createExam").click(function(){
 			$(".load").removeClass("hidden");
 			$(".tipmes").text("");
 			//检查单选 填空 问答 一共选择的数量
+
+			
+			
 			var length1 = $(".allkp").eq(0).find("input:checked").length;
 			var length2 = $(".allkp").eq(1).find("input:checked").length;
 			var length3 = $(".allkp").eq(2).find("input:checked").length;
@@ -118,7 +126,7 @@
 				}
 				
 			});
-		}); */
+		}); 
 	})
 </script>
 </body>

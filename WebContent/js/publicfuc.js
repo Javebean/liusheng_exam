@@ -99,7 +99,7 @@ var getAllkp_createExam = function(){
 		}
 		for(var i=0,len=data.length;i<len;i++){
 			var obj = data[i];
-			html += '<option>'+obj.keypoint+'</option>';
+			html += '<option value='+obj.id+'>'+obj.keypoint+'</option>';
 		}
 		$('select').append(html);
 		$('select').selectpicker('refresh');
