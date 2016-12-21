@@ -49,11 +49,9 @@
    					<br><span class="msg">请在题目中的要填空的词两边使用&nbsp;“&lt;&gt;”&nbsp;标记！</span>
 				</div>
 				<div class="table-responsive">
-					<form method="POST" enctype="multipart/form-data" action="upload">
-						<input type="file" class="form-control" name="file" required="required"> <br />
-						<input type="hidden" name="type" value="2">
-						<input type="submit" class ="btn btn-danger" value="确认上传">
-					</form>
+						<input  id='excel' type="file" class="form-control" required="required"> <br />
+						<button id='submit' class ="btn btn-danger">确认上传</button>
+						<img alt="loading" src="images/loading.gif" class="col-sm-1 loading" id='excelloading '>
 				</div>
 				
 				<hr>
@@ -94,6 +92,41 @@
 	$(function(){
 		//导航active
 		$("#collapseTwo").find("li").eq(1).addClass("sub-active");
+		
+		//上传excel
+		$("#submit").click(function(){
+			 $("p.tipmes").text("");
+        	 $("#excelloading").removeClass('hidden');
+			 var formData = new FormData();
+			 formData.append("file", document.getElementById('excel').files[0]);
+			 formData.append("type", 2);
+             $.ajax({
+                 url: 'upload',
+                 type: 'POST',
+                 data: formData,
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: function (data) {
+                     var res = jsonParse(data);
+                     if(res.code==0){
+                    	 $("p.tipmes").text("添加成功");
+                    	 $("#excelloading").addClass('hidden');
+                     }
+                 }
+             });
+             return false;
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		$("#submit2").click(function(){
 			$("img.loading").removeClass("hidden");
