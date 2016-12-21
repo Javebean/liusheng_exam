@@ -56,7 +56,7 @@
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
-								<th>选项</th>
+								<th>知识点</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -114,7 +114,7 @@ var loadMessages = function(start){
 			 var html = "";
 			 for(var i=0,len=data.length;i<len;i++){
 				 var obj = data[i];
-				 html+="<tr  id='"+obj.id+"'><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.optionA+"</td><td>已审核</td>"
+				 html+="<tr  id='"+obj.id+"'><td>"+obj.number+"</td><td>"+obj.problem+"</td><td>"+obj.keypoint+"</td><td>已审核</td>"
 					+"<td>"
 					+"<button type='button' class='btn btn-primary' kp='"+obj.keypoint+"' pr='"+obj.problem+"' as='"+obj.answerText+"'>查看</button>"
 					+"&nbsp;&nbsp;<button type='button' class='btn btn-danger'>删除</button>"

@@ -118,7 +118,7 @@ var items = 10;
 				 var html = "";
 				 for(var i=0,len=data.length;i<len;i++){
 					 var obj = data[i];
-					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td class='answer'>"+obj.answer+"</td><td>已审核</td>"
+					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td class='answer'>"+obj.answer+"</td><td>"+obj.keypoint+"</td><td>已审核</td>"
 						+"<td>"
 						+"<button type='button' class='btn btn-primary' kp='"+obj.keypoint+"' as='"+obj.answer+"' pr='"+obj.problem+"' imgurl='"+obj.imgUrl+"'>查看</button>"
 						+"&nbsp;&nbsp;<button type='button' class='btn btn-danger'>删除</button>"

@@ -56,7 +56,7 @@
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
-								<th>答案</th>
+								<th>知识点</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -146,7 +146,7 @@ var loadMessages = function(start){
 			 var html = "";
 			 for(var i=0,len=data.length;i<len;i++){
 				 var obj = data[i];
-				 html += "<tr id='"+obj.id+"'><td class='number'>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>"+obj.answer+"</td><td>未审核</td>"
+				 html += "<tr id='"+obj.id+"'><td class='number'>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>"+obj.keypoint+"</td><td>未审核</td>"
 				 +"<td class='hidden opa'>"+obj.optionA+"</td><td class='hidden opb'>"+obj.optionB+"</td>"
 				 +"<td class='hidden opc'>"+obj.optionC+"</td><td class='hidden opd'>"+obj.optionD+"</td>"
 				+"<td>"

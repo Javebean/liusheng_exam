@@ -56,6 +56,7 @@
 							<tr>
 								<th>题目编号</th>
 								<th>题目</th>
+								<th>知识点</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -127,7 +128,7 @@ var items = 10;
 				 var html = "";
 				 for(var i=0,len=data.length;i<len;i++){
 					 var obj = data[i];
-					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>未审核</td>"
+					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td>"+obj.keypoint+"</td><td>未审核</td>"
 						+"<td>"
 						+"<button type='button' class='btn btn-primary' kpId='"+obj.keypointId+"'>审核</button>&nbsp;&nbsp;"
 						+"<button type='button' class='btn btn-danger'>删除</button>"
