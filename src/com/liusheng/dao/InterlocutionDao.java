@@ -1,5 +1,6 @@
 package com.liusheng.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.liusheng.entities.Interlocution;
@@ -28,6 +29,6 @@ public interface InterlocutionDao {
 	//查询属于该知识点的单选题的数量
 	public long getInterlocaionCount(String kpId );
 
-	public Object[] getInterlocaionCountByName(String name[]);
+	public List<BigDecimal> getInterlocaionCountByName(String name[]);
 	
 }

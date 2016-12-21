@@ -1,5 +1,6 @@
 package com.liusheng.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.liusheng.entities.SimpleSelection;
@@ -26,6 +27,6 @@ public interface SimpleSelectDao {
 	//查询属于该知识点的单选题的数量
 	public long getSimpleSelectionCount(String kpId );
 	
-	public Object[] getSimpleSelectionCountByName(String name[]);
+	public List<BigDecimal> getSimpleSelectionCountByName(String name[]);
 	
 }

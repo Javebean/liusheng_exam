@@ -1,5 +1,6 @@
 package com.liusheng.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -138,19 +139,18 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object[] getSimpleSelectionCountByName(String name[]) {
+	public List<BigDecimal> getSimpleSelectionCountByName(String name[]) {
 		StringBuilder sb = new StringBuilder(1024);
 		sb.append("select");
 		for(String n : name){
 			sb.append(" sum(case when KEYPOINT = '"+n+"' then 1 else 0 end),");
 		}
 		sb = sb.deleteCharAt(sb.lastIndexOf(","));
-		sb.append(" from SIMPLE_SELECTION where CHECK_STATUS = '"+Constant.CHECK_SUCCESS+"'");
-		Object[] res = (Object[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
-		if(res[0]==null){
-			return null;
-		}
+		sb.append(" from SIMPLE_SELECTION where CHECK_STATUS = "+Constant.CHECK_SUCCESS);
+		//BigDecimal[] res = (BigDecimal[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
+		List<BigDecimal> res = getSession().createSQLQuery(sb.toString()).list();
 		return res;
 	}
 

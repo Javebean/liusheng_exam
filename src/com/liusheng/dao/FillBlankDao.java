@@ -1,10 +1,10 @@
 package com.liusheng.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
-import com.liusheng.entities.Interlocution;
 
 public interface FillBlankDao {
 
@@ -31,6 +31,6 @@ public interface FillBlankDao {
 	//查询属于该知识点的单选题的数量
 	public long getFillBlankCount(String kpId );
 	
-	public Object[] getFillBlankCountByName(String name[]);
+	public List<BigDecimal> getFillBlankCountByName(String name[]);
 	
 }

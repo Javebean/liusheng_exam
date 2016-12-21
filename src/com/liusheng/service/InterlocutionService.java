@@ -35,7 +35,7 @@ public class InterlocutionService {
 		il.setNumber(NumberUtil.createNum());
 			if (null != mf) {
 				//String baseUrl = context.getRealPath("") + "\\uploadfile\\";
-				String baseUrl = "H:/apache-tomcat-8.0.9-windows-x86/temp_pic/";
+				String baseUrl = "D:/liu_exam/temp_pic/";
 				Path path = Paths.get(baseUrl);
 				if(Files.notExists(path)){
 					try {

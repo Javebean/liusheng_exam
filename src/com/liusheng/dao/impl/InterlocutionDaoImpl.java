@@ -1,5 +1,6 @@
 package com.liusheng.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -142,19 +143,17 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object[] getInterlocaionCountByName(String name[]) {
+	public List<BigDecimal> getInterlocaionCountByName(String name[]) {
 		StringBuilder sb = new StringBuilder(1024);
 		sb.append("select");
 		for(String n : name){
 			sb.append(" sum(case when KEYPOINT = '"+n+"' then 1 else 0 end),");
 		}
 		sb = sb.deleteCharAt(sb.lastIndexOf(","));
-		sb.append(" from INTERLOCUTION where CHECK_STATUS = '"+Constant.CHECK_SUCCESS+"'");
-		Object[] res = (Object[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
-		if(res[0]==null){
-			return null;
-		}
+		sb.append(" from INTERLOCUTION where CHECK_STATUS = "+Constant.CHECK_SUCCESS);
+		List<BigDecimal> res = getSession().createSQLQuery(sb.toString()).list();
 		return res;
 	}
 

@@ -1,5 +1,6 @@
 package com.liusheng.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -166,19 +167,17 @@ public class FillBlankDaoImpl implements FillBlankDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object[] getFillBlankCountByName(String name[]) {
+	public List<BigDecimal> getFillBlankCountByName(String name[]) {
 		StringBuilder sb = new StringBuilder(1024);
 		sb.append("select");
 		for(String n : name){
 			sb.append(" sum(case when KEYPOINT = '"+n+"' then 1 else 0 end),");
 		}
 		sb = sb.deleteCharAt(sb.lastIndexOf(","));
-		sb.append(" from FILL_BLANK where CHECK_STATUS = '"+Constant.CHECK_SUCCESS+"'");
-		Object[] res = (Object[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
-		if(res[0]==null){
-			return null;
-		}
+		sb.append(" from FILL_BLANK where CHECK_STATUS = "+Constant.CHECK_SUCCESS);
+		List<BigDecimal> res = getSession().createSQLQuery(sb.toString()).list();
 		return res;
 	}
 

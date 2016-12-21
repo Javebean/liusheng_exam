@@ -10,3 +10,6 @@
 
 # config tomcat
 
+
+上传图片的地址以及 出卷的地址， 放在properties
+

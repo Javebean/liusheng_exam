@@ -42,8 +42,11 @@ public class CreateWord_Inter {
 					XWPFRun picrun = pic_para.createRun();
 					//暂时注释掉
 					
-					String path = context.getRealPath("")+"\\"+m.getImgUrl();
-				picrun.addPicture(new FileInputStream(path),
+					//String path = context.getRealPath("")+"\\"+m.getImgUrl();
+					String path = "D:/liu_exam/temp_pic/"+m.getImgUrl();
+					
+					
+				    picrun.addPicture(new FileInputStream(path),
 						WordUtil.getSuffix(path), "xxx", Units.toEMU(300),
 						Units.toEMU(298));
 				}
