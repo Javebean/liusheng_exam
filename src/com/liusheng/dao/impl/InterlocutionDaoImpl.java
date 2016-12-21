@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.InterlocutionDao;
-import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.Interlocution;
 import com.liusheng.util.Constant;
 

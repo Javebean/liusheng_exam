@@ -49,45 +49,31 @@ public class AnalyzeExcel {
 				XSSFSheet sheetAt2 = workbookx.getSheetAt(sheetAt);
 				rowIterator = sheetAt2.iterator();
 			}
-			
-
 
 			result = new ArrayList<List<String>>();
 
-			while (rowIterator.hasNext()) {
-				Row row = rowIterator.next();
-				Iterator<Cell> cellIterator = row.cellIterator();
-
-				List<String> rowData = new ArrayList<String>();
-				while (cellIterator.hasNext()) {
-					Cell cell = cellIterator.next();
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_BOOLEAN:
-						break;
-					case Cell.CELL_TYPE_NUMERIC:
-						break;
-					case Cell.CELL_TYPE_STRING:
-						rowData.add(cell.getStringCellValue());
-						break;
+			if(rowIterator!=null){
+				while (rowIterator.hasNext()) {
+					Row row = rowIterator.next();
+					Iterator<Cell> cellIterator = row.cellIterator();
+					
+					List<String> rowData = new ArrayList<String>();
+					while (cellIterator.hasNext()) {
+						Cell cell = cellIterator.next();
+						switch (cell.getCellType()) {
+						case Cell.CELL_TYPE_BOOLEAN:
+							break;
+						case Cell.CELL_TYPE_NUMERIC:
+							break;
+						case Cell.CELL_TYPE_STRING:
+							rowData.add(cell.getStringCellValue());
+							break;
+						}
 					}
+					result.add(rowData);
 				}
-				result.add(rowData);
+				
 			}
-
-			/* get picture in excel */
-			/*List<HSSFPictureData> pictures = workbook.getAllPictures();
-
-			for (HSSFPictureData p : pictures) {
-				String ext = p.suggestFileExtension();
-				byte[] data = p.getData();
-				log.info("excel中的图片的格式为：" + ext);
-				FileOutputStream out = new FileOutputStream("e:\\excel.jpg");
-				out.write(data);
-				out.close();
-			}*/
-			//processImages(workbook);
-
-			//fileInputStream.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

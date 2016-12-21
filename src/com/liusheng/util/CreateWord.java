@@ -409,8 +409,8 @@ public class CreateWord {
   				simMap.put(pnum+++"."+s.getProblem(), list);
   			}
   			
+  			CreateWord_Simple.csimple(doc, simMap);
   		}
-        CreateWord_Simple.csimple(doc, simMap);
         
         //填空
       /*  List<String> info2 = new ArrayList<String>();

@@ -14,17 +14,17 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STLineSpacingRule;
 
 public class WordUtil {
 	 public static void setTextAndStyle(XWPFRun xr,String fontFamily,int fontSize,String fontColor,String text,UnderlinePatterns u,boolean bold){
-	    	if(fontFamily!=null)
+	    	if(Tools.notEmpty(fontFamily))
 	    		xr.setFontFamily(fontFamily);
 	    	
 	    	//xr.setFontSize(fontSize);
 	    	setChineseFontSize(xr, fontSize);
 	    	
-	    	if(fontColor!=null)
+	    	if(Tools.notEmpty(fontColor))
 	    		xr.setColor(fontColor);
 	    	if(u!=null)
 	    		xr.setUnderline(u);
-	    	if(text!=null)
+	    	if(Tools.notEmpty(text))
 	    		xr.setText(text);
 	    	
 	    	xr.setBold(bold);

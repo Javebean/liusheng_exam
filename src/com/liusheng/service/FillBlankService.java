@@ -1,8 +1,5 @@
 package com.liusheng.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +31,7 @@ public class FillBlankService {
 			fb.setCheckStatus(1);
 		}
 		
-		if(null==keypointId || "".equals(keypointId)){
+		if(Tools.isEmpty(keypointId)){
 			//解析excel中的
 			int kpid = kpservice.getKeypointByName(keypoint);
 			if(kpid!=-1){
@@ -88,7 +85,7 @@ public class FillBlankService {
 		while(matcher.find()){
 			fillnum++;
 			String group = matcher.group(2);
-			if(group==null || group.isEmpty()){
+			if(Tools.isEmpty(group)){
 				isbreak = true;
 				break;
 			}
@@ -143,33 +140,4 @@ public class FillBlankService {
 	public List<FillBlankAnswer> getFBAnswer(int fbId) {
 		return fillDao.getFBAnswer(fbId);
 	}
-	
-	public List<FillBlank> createFillBlank(String kpId[]){
-		log.info("要出填空题知识点:"+Arrays.toString(kpId));
-		Collections.shuffle(Arrays.asList(kpId));
-		
-		int arrLen = kpId.length;
-		int i=0;
-		FillBlank fb = null;
-		int nums=0;//记录空格数量
-		List<FillBlank> result = new ArrayList<FillBlank>();
-		for(;i<10;i++){
-			if(i!=0&&i%arrLen==0){
-				Collections.shuffle(Arrays.asList(kpId));
-			}
-			fb = fillDao.createFillBlankByKid(kpId[i%arrLen]);
-			log.info("查到的填空题:"+fb);
-			if(null!=fb){
-				result.add(fb);
-				nums+=fb.getFillNums();
-				if(nums>=10){
-					//如果空大于等于10了。结束循环
-					break;
-				}
-			}
-		}
-		return result;
-		
-	}
-	
 }

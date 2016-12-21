@@ -1,8 +1,5 @@
 package com.liusheng.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -49,7 +46,7 @@ public class SimpleSelectService {
 		//网页传过来的keypointId,keypoint
 		String keypointId = ss.getKeypointId();
 		String keypoint = ss.getKeypoint();
-		if(null!=keypointId || "".equals(keypointId)){
+		if(Tools.isEmpty(keypointId)){
 			//解析excel中的
 			int kpid = kpservice.getKeypointByName(keypoint);
 			log.info("是否查到相同的知识点："+kpid);
@@ -92,36 +89,6 @@ public class SimpleSelectService {
 		double count = ssDao.getSimpleSelectionCount();
 		int page = (int) Math.ceil(count/items);
 		return page;
-	}
-	
-	public List<SimpleSelection> createSimple(String []arr){
-		/**
-			arr:要出的单选题知识点id，
-			先对arr.随机排序，然后依次取题
-			然后在随机排序。在依次取题，取满10题为止
-		 * 
-		 * */
-		
-		Collections.shuffle(Arrays.asList(arr));
-		System.out.println("第一次洗牌："+Arrays.toString(arr));
-		List<SimpleSelection> list = new ArrayList<SimpleSelection>();
-		SimpleSelection ss = null;
-		int i=0;
-		int arrLen = arr.length;
-		for(;i<10;i++){
-			//第一遍出题完重新洗牌
-			if(i!=0&&i%arrLen==0){
-				Collections.shuffle(Arrays.asList(arr));
-			}
-			
-			ss = ssDao.createSimpleByKid(arr[i%arrLen]);
-			if(ss!=null){
-				list.add(ss);
-			}
-			
-			
-		}
-		return list;
 	}
 	
 }
