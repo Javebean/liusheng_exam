@@ -485,7 +485,7 @@ public class CreateWord {
         
         CreateWord_Answer.canswerpage(doc,simAnswer,fillAnswer,interInfo,context);
 
-        FileOutputStream out = new FileOutputStream("h://simple.docx");
+        FileOutputStream out = new FileOutputStream("d://simple.docx");
         doc.write(out);
         out.close();
 

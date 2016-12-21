@@ -181,5 +181,18 @@ public class FillBlankDaoImpl implements FillBlankDao {
 		}
 		return res;
 	}
+
+	@Override
+	public FillBlank getRandFillBlankByName(String kpName) {
+		try {
+			String hql = "from FillBlank where keypoint =? and checkStatus =1 order by rand()";
+			return  (FillBlank) getSession().createQuery(hql).setString(0, kpName)
+					.setMaxResults(1)
+					.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liusheng.dao.InterlocutionDao;
+import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.Interlocution;
 import com.liusheng.util.Constant;
 
@@ -155,6 +156,19 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 			return null;
 		}
 		return res;
+	}
+
+	@Override
+	public Interlocution getRandInterByName(String kpName) {
+		try {
+			String hql = "from Interlocution where keypoint =? and checkStatus =1 order by rand()";
+			return  (Interlocution) getSession().createQuery(hql).setString(0, kpName)
+					.setMaxResults(1)
+					.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

@@ -19,6 +19,8 @@ public interface SimpleSelectDao {
 	
 	public SimpleSelection createSimpleByKid(String kpId);
 	
+	public SimpleSelection getRandSimpleByName(String kpName);
+	
 	public long getSimpleSelectionCount();
 	
 	//查询属于该知识点的单选题的数量

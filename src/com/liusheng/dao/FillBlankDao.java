@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
+import com.liusheng.entities.Interlocution;
 
 public interface FillBlankDao {
 
@@ -24,6 +25,8 @@ public interface FillBlankDao {
 	public List<FillBlankAnswer> getFBAnswer(int fbId);
 	
 	public FillBlank createFillBlankByKid(String kpId);
+	
+	public FillBlank getRandFillBlankByName(String kpName);
 	
 	//查询属于该知识点的单选题的数量
 	public long getFillBlankCount(String kpId );

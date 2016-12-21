@@ -154,4 +154,17 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 		return res;
 	}
 
+	@Override
+	public SimpleSelection getRandSimpleByName(String kpName) {
+		try {
+			String hql = "from SimpleSelection where keypoint =? and checkStatus =1 order by rand()";
+			return  (SimpleSelection) getSession().createQuery(hql).setString(0, kpName)
+					.setMaxResults(1)
+					.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

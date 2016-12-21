@@ -3,6 +3,7 @@ package com.liusheng.dao;
 import java.util.List;
 
 import com.liusheng.entities.Interlocution;
+import com.liusheng.entities.SimpleSelection;
 
 
 public interface InterlocutionDao {
@@ -20,6 +21,8 @@ public interface InterlocutionDao {
 	public boolean checkOneInterlocution(int agreeId,String question,String answer,String keypoint,String keypointId);
 	
 	public Interlocution createInterlocaionByKid(String kpId);
+	
+	public Interlocution getRandInterByName(String kpName);
 	
 	public long getInterlocaionCount();
 	
