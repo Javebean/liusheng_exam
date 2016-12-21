@@ -180,7 +180,7 @@ var items = 10;
 						var kparea = document.getElementById('kpArea');
 						kparea.value = $(tar).attr('kpId');
 						 /*审核通过*/
-						 $("#agree").click(function(){
+						  $("#agree").one('click',function(){
 							 var problem = $("#question").val();
 							 var keypointId = kparea.value;
 							 var keypoint = kparea.options[kparea.selectedIndex].text;

@@ -199,10 +199,11 @@ var items =10;
 						}
 						
 						 /*审核通过*/
-						 $("#agree").click(function(){
+						 $("#agree").one('click',function(){
 							 var question = $("#question").val();
 							 var answer = $("#answer").val();
 							 var num = $(ele).find('td.number').text();
+							 console.log(num);
 							 var keypointId = kparea.value;
 							 var keypoint = kparea.options[kparea.selectedIndex].text;
 							 var param = {"number":num,"id":qid,"problem":question,"answer":answer,"keypoint":keypoint,"keypointId":keypointId,"imgUrl":imgurl};

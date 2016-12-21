@@ -221,13 +221,12 @@ var loadMessages = function(start){
 						$("#agree").attr("agreeId",qid);
 						
 						 /*审核通过*/
-						 $("#agree").click(function(){
+						  $("#agree").one('click',function(){
 							 var num = $(ele).find('td.number').text();
 							 var problem = $("#question").val();
 							 var $check_answer = $("input.answer:checked");
 							 var optionSy = $check_answer.attr("id");
 							 var option = $check_answer.next().text();
-							 
 							 var e = document.getElementById("kpArea");
 							 var keypoint = e.options[e.selectedIndex].text;
 							 var keypointId = e.value;

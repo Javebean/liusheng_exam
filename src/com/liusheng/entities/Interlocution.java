@@ -108,6 +108,14 @@ public class Interlocution {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "Interlocution [id=" + id + ", number=" + number + ", problem="
+				+ problem + ", imgUrl=" + imgUrl + ", answer=" + answer
+				+ ", keypointId=" + keypointId + ", keypoint=" + keypoint
+				+ ", checkStatus=" + checkStatus + "]";
+	}
+	
 	
 	
 }

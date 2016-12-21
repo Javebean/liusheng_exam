@@ -123,6 +123,7 @@ public class InterlocutionService {
 	
 	public boolean checkOneInterlocution(Interlocution il) {
 		il.setCheckStatus(1);
+		System.out.println(il);
 		return iDao.addOneInterlocution(il);
 	}
 
