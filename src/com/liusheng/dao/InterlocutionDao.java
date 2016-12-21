@@ -3,7 +3,6 @@ package com.liusheng.dao;
 import java.util.List;
 
 import com.liusheng.entities.Interlocution;
-import com.liusheng.entities.SimpleSelection;
 
 
 public interface InterlocutionDao {

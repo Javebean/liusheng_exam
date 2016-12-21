@@ -114,10 +114,9 @@
 			
 			var param = {"simple":sim_kp,"fill":fill_kp,"inter":il_kp};
 			$.get("cratexam",param,function(data){
-				if("success"==data){
-					$(".load").addClass("hidden");
-					$(".tipmes").text("出题成功，请到相应目录查看试卷！");
-				}
+				var obj = jsonParse(data);
+				$(".load").addClass("hidden");
+				$(".tipmes").text(obj.msg);
 				
 			});
 		}); 

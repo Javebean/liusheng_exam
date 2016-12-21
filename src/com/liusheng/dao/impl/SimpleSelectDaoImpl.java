@@ -143,10 +143,10 @@ public class SimpleSelectDaoImpl implements SimpleSelectDao {
 		StringBuilder sb = new StringBuilder(1024);
 		sb.append("select");
 		for(String n : name){
-			sb.append(" sum(case when keypoint = '"+n+"' then 1 else 0 end),");
+			sb.append(" sum(case when KEYPOINT = '"+n+"' then 1 else 0 end),");
 		}
 		sb = sb.deleteCharAt(sb.lastIndexOf(","));
-		sb.append(" from SimpleSelection where checkStatus = '"+Constant.CHECK_SUCCESS+"'");
+		sb.append(" from SIMPLE_SELECTION where CHECK_STATUS = '"+Constant.CHECK_SUCCESS+"'");
 		Object[] res = (Object[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
 		if(res[0]==null){
 			return null;

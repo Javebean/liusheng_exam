@@ -1,5 +1,6 @@
 package com.liusheng.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,11 +42,12 @@ public class CreateExamService {
 		log.info("出题各类题目的知识点：" +simple+"--"+fill+"--"+inter);
 		JSONObject result = new JSONObject();
 		//单选题检查
-		String arr[] = simple.split(",");
+		String arr[] = simple.split(", ");
 		Object[] nums = sdao.getSimpleSelectionCountByName(arr);
+		System.out.println(Arrays.toString(arr)+"--单选题--"+Arrays.toString(nums));
 		for(int i=0,len=nums.length;i<len;i++){
-			int num = (int)nums[i];
-			if(num<Constant.SIMPLE_SELECT_NUMS){
+			BigDecimal num = (BigDecimal)nums[i];
+			if(num.intValue()<Constant.SIMPLE_SELECT_NUMS){
 				result.put("code", NOT_ENOUGH);
 				result.put("msg", "单选题中,知识点：“"+arr[i]+"”的题目数量不足"+Constant.SIMPLE_SELECT_NUMS+"题");
 				return result.toString();
@@ -53,11 +55,12 @@ public class CreateExamService {
 		}
 		
 		//填空题检查
-		String arr1[] = fill.split(",");
+		String arr1[] = fill.split(", ");
 		nums = fdao.getFillBlankCountByName(arr1);
+		System.out.println(Arrays.toString(arr1)+"--多选题--"+Arrays.toString(nums));
 		for(int i=0,len=nums.length;i<len;i++){
-			int num = (int)nums[i];
-			if(num<Constant.FILL_BLANK_NUMS){
+			BigDecimal num = (BigDecimal)nums[i];
+			if(num.intValue()<Constant.FILL_BLANK_NUMS){
 				result.put("code", NOT_ENOUGH);
 				result.put("msg", "填空题中,知识点：“"+arr1[i]+"”的题目数量不足"+Constant.FILL_BLANK_NUMS+"题");
 				return result.toString();
@@ -65,11 +68,12 @@ public class CreateExamService {
 		}
 		
 		//问答题检查
-		String arr2[] = inter.split(",");
+		String arr2[] = inter.split(", ");
 		nums = idao.getInterlocaionCountByName(arr2);
+		System.out.println(Arrays.toString(arr2)+"--问答题--"+Arrays.toString(nums));
 		for(int i=0,len=nums.length;i<len;i++){
-			int num = (int)nums[i];
-			if(num<Constant.INTERLOCATION_NUMS){
+			BigDecimal num = (BigDecimal)nums[i];
+			if(num.intValue()<Constant.INTERLOCATION_NUMS){
 				result.put("code", NOT_ENOUGH);
 				result.put("msg", "问答题中,知识点：“"+arr2[i]+"”的题目数量不足"+Constant.INTERLOCATION_NUMS+"题");
 				return result.toString();
