@@ -140,6 +140,8 @@ var loadMessages = function(start){
 		success:function(data){
 			if(isEmpty(data)){
 				console.log('no data has has found');
+				document.getElementById('abstract').innerHTML = '<tr><td style="color:red;">没有题目</td></tr>';	
+				$('#pager').addClass('hidden');
 				return;
 			}
 			

@@ -111,6 +111,8 @@ var items = 10;
 			//data:{"start":0,"itemNums":10},
 			success:function(data){
 				if(isEmpty(data)){
+					document.getElementById('abstract').innerHTML = '<tr><td style="color:red;">没有题目</td></tr>';	
+					$('#pager').addClass('hidden');
 					console.log('no data has has found');
 					return;
 				}
