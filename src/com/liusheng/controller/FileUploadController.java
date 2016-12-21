@@ -27,7 +27,7 @@ import com.liusheng.service.InterlocutionService;
 import com.liusheng.service.SimpleSelectService;
 import com.liusheng.util.AnalyzeExcel;
 import com.liusheng.util.Constant;
-import com.liusheng.util.NumberUtil;
+import com.liusheng.util.Tools;
 
 @Controller
 public class FileUploadController {
@@ -95,7 +95,7 @@ public class FileUploadController {
 
 						for (List<String> result : results) {
 							SimpleSelection s = new SimpleSelection();
-							s.setNumber(NumberUtil.createNum());
+							s.setNumber(Tools.createNum());
 							s.setProblem(result.get(0));
 							s.setOptionA(result.get(1));
 							s.setOptionB(result.get(2));
