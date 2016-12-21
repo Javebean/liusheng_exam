@@ -3,6 +3,9 @@ package com.liusheng.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,7 +57,6 @@ public class FileUploadController {
 		if (!file.isEmpty()) {
 			logger.info("开始上传。。。");
 			try {
-				logger.info("上传路径为：" + context.getRealPath(""));
 				logger.info("原始名称：" + file.getOriginalFilename());
 				String originalFilename = file.getOriginalFilename();
 				String suffix = originalFilename.substring(originalFilename
@@ -65,8 +67,13 @@ public class FileUploadController {
 					String filename = UUID.randomUUID().toString();
 					byte[] bytes = file.getBytes();
 
-					String filepath = context.getRealPath("") + "/file/"
-							+ filename + "." + suffix;
+					String baseurl = Constant.UPLOAD_EXCEL_URL;
+					Path path = Paths.get(baseurl);
+					if(Files.notExists(path)){
+						Files.createDirectories(path);
+					}
+					
+					String filepath = baseurl + filename + "." + suffix;
 
 					logger.info("上传的完整路径-" + filepath);
 					BufferedOutputStream stream = new BufferedOutputStream(

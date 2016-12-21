@@ -1,7 +1,11 @@
 package com.liusheng.util;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -485,7 +489,14 @@ public class CreateWord {
         
         CreateWord_Answer.canswerpage(doc,simAnswer,fillAnswer,interInfo,context);
 
-        FileOutputStream out = new FileOutputStream("d://simple.docx");
+        String baseurl = Constant.EXAM_SAVE_URL;
+        Path path = Paths.get(baseurl);
+        if(Files.notExists(path)){
+        	Files.createDirectories(path);
+        }
+        
+        
+        FileOutputStream out = new FileOutputStream(baseurl+File.separator+"exam.docx");
         doc.write(out);
         out.close();
 

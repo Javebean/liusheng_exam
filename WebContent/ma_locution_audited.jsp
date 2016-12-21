@@ -120,7 +120,7 @@ var items = 10;
 				 var html = "";
 				 for(var i=0,len=data.length;i<len;i++){
 					 var obj = data[i];
-					 html+="<tr id='"+obj.id+"'><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td class='answer'>"+obj.answer+"</td><td>"+obj.keypoint+"</td><td>已审核</td>"
+					 html+="<tr id='"+obj.id+"' imgurl="+obj.imgUrl+"><td>"+obj.number+"</td><td class='problem'>"+obj.problem+"</td><td class='answer'>"+obj.answer+"</td><td>"+obj.keypoint+"</td><td>已审核</td>"
 						+"<td>"
 						+"<button type='button' class='btn btn-primary' kp='"+obj.keypoint+"' as='"+obj.answer+"' pr='"+obj.problem+"' imgurl='"+obj.imgUrl+"'>查看</button>"
 						+"&nbsp;&nbsp;<button type='button' class='btn btn-danger'>删除</button>"
@@ -166,11 +166,11 @@ var items = 10;
 						/*回显知识点*/
 						document.getElementById('show_kp').innerHTML=$(tar).attr("kp");
 						
-						var imgurl = $(this).attr("imgurl");
+						var imgurl = $(ele).attr("imgurl");
 						if(isEmpty(imgurl)){
 							document.getElementById('inter_img').innerHTML ='该题无图';
 						} else {
-							document.getElementById('inter_img').innerHTML ='<img alt="pic" src='+imgurl+'>';
+							document.getElementById('inter_img').innerHTML ='<img alt="pic" src=pic/'+imgurl+'>';
 						}
 						
 						/*获取题目id*/

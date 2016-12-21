@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.liusheng.dao.InterlocutionDao;
 import com.liusheng.entities.Interlocution;
+import com.liusheng.util.Constant;
 import com.liusheng.util.Tools;
 
 @Service
@@ -35,7 +36,7 @@ public class InterlocutionService {
 		il.setNumber(Tools.createNum());
 			if (null != mf) {
 				//String baseUrl = context.getRealPath("") + "\\uploadfile\\";
-				String baseUrl = "D:/liu_exam/temp_pic/";
+				String baseUrl = Constant.UPLOAD_PIC_URL;
 				Path path = Paths.get(baseUrl);
 				if(Files.notExists(path)){
 					try {
@@ -71,7 +72,7 @@ public class InterlocutionService {
 						il.setImgUrl(imgUrl);
 					}
 					try {
-						mf.transferTo(new File(baseUrl + sb));
+						mf.transferTo(new File(baseUrl +File.separator+ sb));
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {

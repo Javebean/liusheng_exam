@@ -41,9 +41,8 @@ public class CreateWord_Inter {
 					pic_para.setAlignment(ParagraphAlignment.CENTER);
 					XWPFRun picrun = pic_para.createRun();
 					//暂时注释掉
-					
 					//String path = context.getRealPath("")+"\\"+m.getImgUrl();
-					String path = "D:/liu_exam/temp_pic/"+m.getImgUrl();
+					String path = Constant.UPLOAD_PIC_URL+"/"+m.getImgUrl();
 					
 				    picrun.addPicture(new FileInputStream(path),
 						WordUtil.getSuffix(path), "xxx", Units.toEMU(300),

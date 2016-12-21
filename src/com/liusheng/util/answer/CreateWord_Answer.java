@@ -149,7 +149,8 @@ public class CreateWord_Answer {
 						pic_para.setAlignment(ParagraphAlignment.CENTER);
 						XWPFRun picrun = pic_para.createRun();
 						
-						String path = context.getRealPath("")+"\\"+m.getImgUrl();
+						String path = Constant.UPLOAD_PIC_URL+"/"+m.getImgUrl();
+						
 						try {
 							
 							picrun.addPicture(new FileInputStream(path),
