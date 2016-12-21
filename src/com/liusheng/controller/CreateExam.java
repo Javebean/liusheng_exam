@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liusheng.service.SimpleSelectService;
+import com.liusheng.service.CreateExamService;
 
 @RestController
 public class CreateExam {
 
 	@Autowired
-	private SimpleSelectService sservice;
+	private CreateExamService cservice;
 	/**
 	 * 1.知识点id放进数组
 	 * 2.随机再对数组进行排序
@@ -25,7 +25,7 @@ public class CreateExam {
 	
 	@RequestMapping("/cratexam")
 	public String createexam(String simple,String fill,String inter){
-		sservice.createexamService(simple, fill, inter,context);
+		cservice.createexamService(simple, fill, inter,context);
 		return "success";
 	}
 	

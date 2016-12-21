@@ -141,4 +141,20 @@ public class InterlocutionDaoImpl implements InterlocutionDao {
 		}
 	}
 
+	@Override
+	public Object[] getInterlocaionCountByName(String name[]) {
+		StringBuilder sb = new StringBuilder(1024);
+		sb.append("select");
+		for(String n : name){
+			sb.append(" sum(case when keypoint = '"+n+"' then 1 else 0 end),");
+		}
+		sb = sb.deleteCharAt(sb.lastIndexOf(","));
+		sb.append(" from Interlocution where checkStatus = '"+Constant.CHECK_SUCCESS+"'");
+		Object[] res = (Object[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
+		if(res[0]==null){
+			return null;
+		}
+		return res;
+	}
+
 }

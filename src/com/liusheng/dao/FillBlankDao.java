@@ -28,4 +28,6 @@ public interface FillBlankDao {
 	//查询属于该知识点的单选题的数量
 	public long getFillBlankCount(String kpId );
 	
+	public Object[] getFillBlankCountByName(String name[]);
+	
 }

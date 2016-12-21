@@ -152,6 +152,7 @@ public class FillBlankDaoImpl implements FillBlankDao {
 			return 0;
 		}
 	}
+	
 
 	@Override
 	public long getFillBlankCount() {
@@ -164,4 +165,21 @@ public class FillBlankDaoImpl implements FillBlankDao {
 			return 0;
 		}
 	}
+
+	@Override
+	public Object[] getFillBlankCountByName(String name[]) {
+		StringBuilder sb = new StringBuilder(1024);
+		sb.append("select");
+		for(String n : name){
+			sb.append(" sum(case when keypoint = '"+n+"' then 1 else 0 end),");
+		}
+		sb = sb.deleteCharAt(sb.lastIndexOf(","));
+		sb.append(" from FillBlank where checkStatus = '"+Constant.CHECK_SUCCESS+"'");
+		Object[] res = (Object[]) getSession().createSQLQuery(sb.toString()).uniqueResult();
+		if(res[0]==null){
+			return null;
+		}
+		return res;
+	}
+	
 }
