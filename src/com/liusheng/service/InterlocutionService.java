@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.liusheng.dao.InterlocutionDao;
 import com.liusheng.entities.Interlocution;
-import com.liusheng.util.NumberUtil;
+import com.liusheng.util.Tools;
 
 @Service
 public class InterlocutionService {
@@ -32,7 +32,7 @@ public class InterlocutionService {
 	private KeypointsService kpservice;
 	public boolean addOneInterlocution(Interlocution il, MultipartFile mf,ServletContext context) {
 		//增加
-		il.setNumber(NumberUtil.createNum());
+		il.setNumber(Tools.createNum());
 			if (null != mf) {
 				//String baseUrl = context.getRealPath("") + "\\uploadfile\\";
 				String baseUrl = "D:/liu_exam/temp_pic/";

@@ -16,7 +16,7 @@ import com.liusheng.dao.FillBlankDao;
 import com.liusheng.entities.FillBlank;
 import com.liusheng.entities.FillBlankAnswer;
 import com.liusheng.entities.Keypoints;
-import com.liusheng.util.NumberUtil;
+import com.liusheng.util.Tools;
 @Service
 public class FillBlankService {
 	private Logger log = Logger.getLogger(FillBlankService.class);
@@ -40,12 +40,12 @@ public class FillBlankService {
 			if(kpid!=-1){
 				fb.setKeypointId(kpid+"");
 			}else{
-				Keypoints k = new Keypoints(keypoint, NumberUtil.createNum());
+				Keypoints k = new Keypoints(keypoint, Tools.createNum());
 				kpservice.addKeypoints(k);
 				fb.setKeypointId(k.getId()+"");
 			}
 		}
-		fb.setNumber(NumberUtil.createNum());
+		fb.setNumber(Tools.createNum());
 		
 		JSONObject obj = new JSONObject();
 		

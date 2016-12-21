@@ -36,7 +36,7 @@ public class CreateWord_Inter {
 			 	WordUtil.setTextAndStyle(run, "SimSun", Constant.WUHAO_FONTSIZE,
 						null, text1, null, true);
 				run.addCarriageReturn();
-				if(null!=m.getImgUrl()){
+				if(Tools.notEmpty(m.getImgUrl())){
 					XWPFParagraph pic_para = doc.createParagraph();
 					pic_para.setAlignment(ParagraphAlignment.CENTER);
 					XWPFRun picrun = pic_para.createRun();
@@ -44,7 +44,6 @@ public class CreateWord_Inter {
 					
 					//String path = context.getRealPath("")+"\\"+m.getImgUrl();
 					String path = "D:/liu_exam/temp_pic/"+m.getImgUrl();
-					
 					
 				    picrun.addPicture(new FileInputStream(path),
 						WordUtil.getSuffix(path), "xxx", Units.toEMU(300),

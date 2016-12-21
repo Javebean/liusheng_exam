@@ -13,7 +13,7 @@ import com.liusheng.entities.CommonResult;
 import com.liusheng.entities.Keypoints;
 import com.liusheng.entities.Result;
 import com.liusheng.service.KeypointsService;
-import com.liusheng.util.NumberUtil;
+import com.liusheng.util.Tools;
 @RestController
 public class KeywordAction {
 
@@ -35,7 +35,7 @@ public class KeywordAction {
 	@RequestMapping(value="/addkey")
 	public CommonResult addKey(@RequestParam(value="keyname") String keyName){
 		log.info("keyword "+keyName);
-		kservice.addKeypoints(new Keypoints(keyName,NumberUtil.createNum()));
+		kservice.addKeypoints(new Keypoints(keyName,Tools.createNum()));
 		return new CommonResult(new Result(0, "增加知识点成功！"), null);
 		
 	}
@@ -65,7 +65,7 @@ public class KeywordAction {
 	@RequestMapping("/updatekey/{id}")
 	public CommonResult updateKey(@PathVariable String id, String key){
 		log.info("更新知识点   id:"+id+" key"+key);
-		Keypoints kp = new Keypoints(key,NumberUtil.createNum());
+		Keypoints kp = new Keypoints(key,Tools.createNum());
 		kp.setId(Integer.parseInt(id));
 		boolean b =  kservice.updateKeypoints(kp);
 		

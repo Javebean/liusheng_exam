@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.liusheng.dao.SimpleSelectDao;
 import com.liusheng.entities.SimpleSelection;
-import com.liusheng.util.NumberUtil;
+import com.liusheng.util.Tools;
 
 @Service
 public class SimpleSelectService {
@@ -29,7 +29,7 @@ public class SimpleSelectService {
 	
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
-		ss.setNumber(NumberUtil.createNum());
+		ss.setNumber(Tools.createNum());
 		
 		String answer = ss.getAnswer().toUpperCase();
 		ss.setAnswer(answer);
