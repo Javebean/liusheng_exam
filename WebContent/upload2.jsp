@@ -51,7 +51,8 @@
 				<div class="table-responsive">
 						<input  id='excel' type="file" class="form-control" required="required"> <br />
 						<button id='submit' class ="btn btn-danger">确认上传</button>
-						<img alt="loading" src="images/loading.gif" class="col-sm-1 loading" id='excelloading '>
+						<img alt="loading" src="images/loading.gif" class="col-sm-1 loading hidden" id='excelloading '>
+						<p class="tipmes" id='excelmsg'></p>
 				</div>
 				
 				<hr>
@@ -95,7 +96,7 @@
 		
 		//上传excel
 		$("#submit").click(function(){
-			 $("p.tipmes").text("");
+			 $("#excelmsg").text("");
         	 $("#excelloading").removeClass('hidden');
 			 var formData = new FormData();
 			 formData.append("file", document.getElementById('excel').files[0]);
@@ -109,22 +110,17 @@
                  processData: false,
                  success: function (data) {
                      var res = jsonParse(data);
-                     if(res.code==0){
-                    	 $("p.tipmes").text("添加成功");
-                    	 $("#excelloading").addClass('hidden');
+                    	console.log(res);
+                     if(res.code!=0){
+                    	 $("#excelmsg").text(res.msg);
+                     } else {
+                    	 $("#excelmsg").text("添加成功");
                      }
+                     $("#excelloading").addClass('hidden');
                  }
              });
              return false;
-			
-			
 		});
-		
-		
-		
-		
-		
-		
 		
 		
 		

@@ -32,6 +32,6 @@ public class CommonResult {
 	public CommonResult() {
 		super();
 		// TODO Auto-generated constructor stub
+
 	}
-	
 }

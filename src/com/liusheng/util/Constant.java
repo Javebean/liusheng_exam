@@ -23,6 +23,12 @@ public class Constant {
 	
 	public static final String FONTCOLOR = "FF0000";
 	
+	
+	
+	public static final String RESPONSE_CODE_KEY = "code"; // 返回对象里的code的key名称
+	public static final String RESPONSE_MSG_KEY = "msg"; // 返回对象里的msg的key名称
+	public static final String RESPONSE_DATA_KEY = "data"; // 返回对象里的msg的key名称
+	
 	/*单选题的数量*/
 	public static final int SIMPLE_SELECT_NUMS;
 	/*填空题填空的数量*/

@@ -26,8 +26,6 @@ public class SimpleSelectService {
 	
 	
 	public boolean addOneSimpleSelection(SimpleSelection ss) {
-		ss.setNumber(Tools.createNum());
-		
 		String answer = ss.getAnswer().toUpperCase();
 		ss.setAnswer(answer);
 		//根据答案标号 abcd,选择正确的答案
@@ -57,14 +55,18 @@ public class SimpleSelectService {
 			}
 			
 		}
-		
+		//更新
 		if(ss.getId()!=0){
 			ss.setCheckStatus(1);
+		}else{
+			ss.setNumber(Tools.createNum());
 		}
 		
 		return ssDao.addOneSimpleSelection(ss);
 	}
 
+	
+	
 	public boolean deleteOneSimpleSelection(int id) {
 		return ssDao.deleteOneSimpleSelection(id);
 	}
