@@ -49,11 +49,10 @@
    					<br><span class="msg">其中“答案”只需填写正确答案的字母，即A或B或C或D！</span>
 				</div>
 				<div class="table-responsive">
-					<form method="POST" enctype="multipart/form-data" action="upload">
-						<input type="file" class="form-control" name="file" required="required"> <br />
-						<input type="hidden" name="type" value="1">
-						<input type="submit" id ="submit" class ="btn btn-danger" value="确认上传">
-					</form>
+						<input id='excel' type="file" class="form-control" name="file" required="required"> <br />
+						<button id ="submit" class ="btn btn-danger">确认上传</button>
+						<img alt="loading" src="images/loading.gif" class="col-sm-1 loading hidden" id='excelloading '>
+						<p class="tipmes" id='excelmsg'></p>
 				</div>
 				
 				<hr>
@@ -137,6 +136,41 @@
 		</div>
 	</div>
 <script type="text/javascript">
+
+
+//上传excel
+$("#submit").click(function(){
+	 $("#excelmsg").text("");
+	 $("#excelloading").removeClass('hidden');
+	 var formData = new FormData();
+	 formData.append("file", document.getElementById('excel').files[0]);
+	 formData.append("type", 1);
+     $.ajax({
+         url: 'upload',
+         type: 'POST',
+         data: formData,
+         cache: false,
+         contentType: false,
+         processData: false,
+         success: function (data) {
+             var res = jsonParse(data);
+            	console.log(res);
+             if(res.code!=0){
+            	 $("#excelmsg").text(res.msg);
+             } else {
+            	 $("#excelmsg").text("添加成功");
+             }
+             $("#excelloading").addClass('hidden');
+         }
+     });
+     return false;
+});
+
+
+
+
+
+
 	//得到所有知识点
 	getAllkp();
 	var res;

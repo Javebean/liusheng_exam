@@ -50,11 +50,10 @@
    					<br><span class="msg">请不要在excel中上传带有图片的题目，带图片请手动在下面上传</span>
 				</div>
 				<div class="table-responsive">
-					<form method="POST" enctype="multipart/form-data" action="upload">
-						<input type="file" class="form-control" name="file" required="required"> <br />
-						<input type="hidden" name="type" value="3">
-						<input type="submit" class ="btn btn-danger" value="确认上传">
-					</form>
+						<input  id='excel'  type="file" class="form-control" name="file" required="required"> <br />
+						<button id="submit" class ="btn btn-danger" >确认上传</button>
+						<img alt="loading" src="images/loading.gif" class="col-sm-1 loading hidden" id='excelloading '>
+						<p class="tipmes" id='excelmsg'></p>
 				</div>
 				
 				<hr>
@@ -122,6 +121,39 @@
 	$(function(){
 		//导航active	
 		$("#collapseTwo").find("li").eq(2).addClass("sub-active");
+		
+		
+		
+		//上传excel
+		$("#submit").click(function(){
+			 $("#excelmsg").text("");
+        	 $("#excelloading").removeClass('hidden');
+			 var formData = new FormData();
+			 formData.append("file", document.getElementById('excel').files[0]);
+			 formData.append("type", 3);
+             $.ajax({
+                 url: 'upload',
+                 type: 'POST',
+                 data: formData,
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: function (data) {
+                     var res = jsonParse(data);
+                    	console.log(res);
+                     if(res.code!=0){
+                    	 $("#excelmsg").text(res.msg);
+                     } else {
+                    	 $("#excelmsg").text("添加成功");
+                     }
+                     $("#excelloading").addClass('hidden');
+                 }
+             });
+             return false;
+		});
+		
+		
+		
 		
 		//加载所属知识点
 		getAllkp();
