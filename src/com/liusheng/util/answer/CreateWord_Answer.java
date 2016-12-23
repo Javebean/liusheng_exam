@@ -79,7 +79,7 @@ public class CreateWord_Answer {
 		     
 		     /***************************************************/
 		     	XWPFParagraph fill = doc.createParagraph();
-		     	XWPFRun fillRun = fill.createRun();
+		     	fill.createRun();
 		     	//fillRun.addCarriageReturn();
 		     
 		     /***************************************************/

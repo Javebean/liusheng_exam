@@ -8,9 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.ddf.EscherClientAnchorRecord;
-import org.apache.poi.ddf.EscherRecord;
-import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -24,6 +21,7 @@ import org.json.JSONObject;
 
 public class AnalyzeExcel {
 	static Logger log = Logger.getLogger(AnalyzeExcel.class);
+	@SuppressWarnings("resource")
 	public static String analyzeExcel(int sheetAt, String filepath) throws InvalidFormatException {
 		
 		JSONObject excelResult = new JSONObject();
@@ -99,7 +97,7 @@ public class AnalyzeExcel {
 		return excelResult.toString();
 	}
 
-	private static void processImages(HSSFWorkbook workbook) {
+	/*private static void processImages(HSSFWorkbook workbook) {
 		EscherAggregate drawingAggregate = null;
 		HSSFSheet sheet = null;
 		List<EscherRecord> recordList = null;
@@ -117,9 +115,9 @@ public class AnalyzeExcel {
 				}
 			}
 		}
-	}
+	}*/
 
-	private static void iterateRecords(EscherRecord escherRecord, int level) {
+	/*private static void iterateRecords(EscherRecord escherRecord, int level) {
 		List<EscherRecord> recordList = null;
 		Iterator<EscherRecord> recordIter = null;
 		EscherRecord childRecord = null;
@@ -135,14 +133,14 @@ public class AnalyzeExcel {
 				iterateRecords(childRecord, ++level);
 			}
 		}
-	}
+	}*/
 
-	private static void printAnchorDetails(EscherClientAnchorRecord anchorRecord) {
+	/*private static void printAnchorDetails(EscherClientAnchorRecord anchorRecord) {
 	        log.info("图片的左上角在 列： " +anchorRecord.getCol1() +"，行："+anchorRecord.getRow1()+"----"
 	                +"坐标为： (" +anchorRecord.getDx1()+" , "+anchorRecord.getDy1()+")");
 	        
 	        
 	        log.info("图片的右上角在 列： " +anchorRecord.getCol2() +"，行："+anchorRecord.getRow2()+"----"
 	                +"坐标为： (" +anchorRecord.getDx2()+" , "+anchorRecord.getDy2()+")");
-	    }
+	    }*/
 }
